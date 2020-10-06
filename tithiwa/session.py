@@ -6,7 +6,7 @@ import os
 
 def session_generator(sessionfilename="",
                       sessiondir=os.path.join(
-                          __file__[:__file__.rfind("tithi-wa")], "tithi-wa", "sessions"),
+                          __file__[:__file__.rfind("tithiwa")], "tithiwa", "sessions"),
                       browser=None, shouldclosebrowser=False):
     shouldreturnbrowser = False
     if browser == None:
@@ -40,8 +40,8 @@ def session_generator(sessionfilename="",
 
 def session_opener(sessionfilename="00.wa",
                    sessiondir=os.path.join(
-                       __file__[:__file__.rfind("tithi-wa")],
-                       "tithi-wa", "sessions"),
+                       __file__[:__file__.rfind("tithiwa")],
+                       "tithiwa", "sessions"),
                    browser=None
                    ):
     if sessionfilename[-3:] != ".wa":
