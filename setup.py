@@ -4,12 +4,11 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="tithi-wa",
+    name="tithiwa",
     version="0.0.1",
-    description=
-    "tithi-wa - WhatsApp-bot: Automate WhatsApp with selenium in python.",
+    description="tithi-wa - WhatsApp-bot: Automate WhatsApp with selenium in python.",
     py_modules=["session"],
-    package_dir={"": "src"},
+    package_dir={"": "tithiwa"},
     long_description=long_description,
     long_description_content_type="text/markdown",
     classifiers=[
