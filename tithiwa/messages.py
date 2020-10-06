@@ -14,25 +14,17 @@ def open_chat_by_number(number, browser=None, wait=True):
         browser = webdriver.Chrome()
     browser.get("https://web.whatsapp.com/send?phone=" + number)
     try:
-        element = WebDriverWait(browser, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, "_2FVVk _2UL8j"))
+        WebDriverWait(browser, 10).until(
+            EC.presence_of_element_located((By.CLASS_NAME, '_3FRCZ'))
         )
     finally:
         return browser
 
 
 def send_message_to_number(number, message, browser=None):
-    open_chat_by_number(number, browser=browser)
+    browser = open_chat_by_number(number, browser=browser)
     print(f'Sending message "{message}" to number "{number}"...')
-    inputbox = browser.find_element_by_xpath("//*[contains(@class,'_2FVVk _2UL8j')]")
-    inputbox.click()
-    # inputbox.clear()
-    sleep(3)
-    # browser = webdriver.Chrome()
-    browser.execute_script("")
+    inputbox = browser.find_element_by_css_selector("#main footer ._3FRCZ")
+    sleep(1)
     inputbox.send_keys(message + Keys.ENTER)
-    # inputbox.send_keys(Keys.ENTER)
-    # inputbox.send_keys(Keys.ENTER)
-    # sleep(5)
-    # inputbox.send_keys(Keys.ENTER)
-    print("break")
+    return browser
