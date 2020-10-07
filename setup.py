@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="tithiwa",
-    version="0.0.4",
+    version="0.0.4.1",
     description="tithiwa - WhatsApp-bot: Automate WhatsApp with selenium in python.",
     py_modules=["session", "messages"],
     packages=find_packages(),
