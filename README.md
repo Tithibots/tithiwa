@@ -65,13 +65,9 @@ browser.quit()
 ```
 
 ## Contribution
-
-Clone this repo 
+Setup package for development
 ```buildoutcfg
 git clone https://github.com/Maskgirl/tithiwa.git
-```
-Install for development
-```buildoutcfg
 cd tithiwa
 pip install -e .
 ```
