@@ -2,8 +2,7 @@
 
 Automate Web WhatsApp with selenium.
 
-Full explained Videos on that project are coming soon. <br>
-Stay tune with my youtube channel [Noobie techs](https://www.youtube.com/c/NoobieTechsTithi_mukherjee/)
+Full explained Videos on that project are coming soon. Stay tune with my youtube channel [Noobie techs](https://www.youtube.com/c/NoobieTechsTithi_mukherjee/)
 
 ## Installation
 `
