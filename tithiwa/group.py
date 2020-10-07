@@ -10,6 +10,8 @@ from selenium.webdriver.support import expected_conditions as EC
 
 from session import open_session
 
+__all__ = ["create_group", "scrape_members_from_group", "make_group_admins"]
+
 
 def create_group(groupname, contacts, browser=None):
     shouldreturnbrowser = False
@@ -63,6 +65,7 @@ def scrape_members_from_group(groupname, browser=None):
         preactive = curractive
 
     return members
+
 
 def make_group_admins(groupname, members, browser=None):
     browser = open_session()
