@@ -53,7 +53,7 @@ browser = webdriver.Chrome()
 group.create_group("GroupName", ["contact1", "contact2", "contact2"], browser=browser)
 
 
-## 2. Scape list of group members 
+## 2. Scrape list of group members 
 membersList = group.scrape_members_from_group("GroupName", browser=browser)
 print(membersList) # ["contact1", "contact2", "contact2"]
 
