@@ -24,11 +24,22 @@ import os
 #
 # session.session_generator()
 
-import tithiwa
-tithiwa.session.session_opener()
-tithiwa.session.session_generator()
-tithiwa.messages.send_message_to_number()
-tithiwa.messages.open_chat_by_number()
+# import tithiwa
+# tithiwa.session.session_opener()
+# tithiwa.session.session_generator()
+# tithiwa.messages.send_message_to_number()
+# tithiwa.messages.open_chat_by_number()
+from selenium import webdriver
+from tithiwa import group
 
+browser = webdriver.Chrome()
 
+group.create_group("GroupName", ["contact1", "contact2", "contact2"], browser=browser)
 
+membersList = group.scrape_members_from_group("GroupName", browser=browser)
+print(membersList) # ["contact1", "contact2", "contact2"]
+
+group.make_group_admins("GroupName", ["contact1", "contact2"], browser=browser)
+
+input("Press Enter to exit.")
+browser.quit()

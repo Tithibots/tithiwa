@@ -26,7 +26,7 @@ setup(
     author="SuLagna Mukherjee",
     author_email="tithimukherjee12@gmail.com",
     install_requires=[
-        "",
+        "selenium",
     ],
     extras_require={
         "dev": [
