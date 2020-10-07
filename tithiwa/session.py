@@ -2,12 +2,17 @@ from selenium import webdriver
 from time import sleep
 import sys
 import os
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
-def session_generator(sessionfilename="",
-                      sessiondir=os.path.join(
-                          __file__[:__file__.rfind("tithiwa")], "tithiwa", "sessions"),
-                      browser=None, shouldclosebrowser=False):
+
+def generate_session(sessionfilename="",
+                     sessiondir=os.path.join(
+                         __file__[:__file__.rfind("tithiwa")], "tithiwa", "sessions"),
+                     browser=None, shouldclosebrowser=False):
     shouldreturnbrowser = False
     if browser == None:
         shouldreturnbrowser = True
@@ -38,12 +43,13 @@ def session_generator(sessionfilename="",
     browser.quit()
 
 
-def session_opener(sessionfilename="00.wa",
-                   sessiondir=os.path.join(
-                       __file__[:__file__.rfind("tithiwa")],
-                       "tithiwa", "sessions"),
-                   browser=None
-                   ):
+def open_session(sessionfilename="00.wa",
+                 sessiondir=os.path.join(
+                     __file__[:__file__.rfind("tithiwa")],
+                     "tithiwa", "sessions"),
+                 browser=None,
+                 wait=True
+                 ):
     if sessionfilename[-3:] != ".wa":
         sessionfilename += ".wa"
     session = None
@@ -75,4 +81,10 @@ def session_opener(sessionfilename="00.wa",
         session,
     )
     browser.refresh()
-    return browser
+
+    try:
+        WebDriverWait(browser, 34).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, '[data-testid=menu]'))
+        )
+    finally:
+        return browser
