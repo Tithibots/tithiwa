@@ -1,6 +1,6 @@
-# tithiwa - WhatsApp-bot
+# tithiwa - Web WhatsApp bot
 
-Automate WhatsApp with selenium in python.
+Automate Web WhatsApp with selenium.
 
 ## Installation
 `
