@@ -31,7 +31,6 @@ def generate_session(sessionfilename="",
     while "WAToken1" not in browser.execute_script(
             "return window.localStorage;"):
         continue
-    sleep(5)
     session = browser.execute_script("return window.localStorage;")
     with open(os.path.join(sessiondir, sessionfilename), "w",
               encoding="utf-8") as sessionfile:
@@ -70,7 +69,6 @@ def open_session(sessionfilename="00.wa",
     if browser == None:
         browser = webdriver.Chrome()
     browser.get("https://web.whatsapp.com/")
-    sleep(1)
     print("Injecting session...")
     browser.execute_script(
         """
@@ -81,10 +79,8 @@ def open_session(sessionfilename="00.wa",
         session,
     )
     browser.refresh()
+    return browser
 
-    try:
-        WebDriverWait(browser, 34).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, '[data-testid=menu]'))
-        )
-    finally:
-        return browser
+# generate_session("03")
+# open_session("03")
+# input("PRESS ENTER")
