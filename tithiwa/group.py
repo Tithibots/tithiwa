@@ -1,3 +1,5 @@
+__all__ = ["create_group", "scrape_members_from_group", "make_group_admins"]
+
 from selenium import webdriver
 from time import sleep
 import sys
@@ -5,33 +7,8 @@ import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
 from session import open_session
-
-__all__ = ["create_group", "scrape_members_from_group", "make_group_admins"]
-
-
-def wait_for_an_element(selector, browser):
-    element = None
-    try:
-        element = WebDriverWait(browser, 34).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, selector))
-        )
-    except:
-        pass
-    finally:
-        return element
-
-def wait_for_an_element_in_other_element(selector, element):
-    while True:
-        try:
-            relement = element.find_element(By.CSS_SELECTOR, selector)
-        except:
-            pass
-        finally:
-            return relement
+from util import *
 
 
 def create_group(groupname, contacts, browser=None):
@@ -58,13 +35,7 @@ def create_group(groupname, contacts, browser=None):
 def scrape_members_from_group(groupname, browser=None):
     members = []
     browser = open_session()
-    inputbox = wait_for_an_element('._3FRCZ', browser)
-    inputbox.send_keys(groupname)
-    wait_for_an_element('._210SC', browser)
-    inputbox.send_keys(Keys.TAB)
-    wait_for_an_element('.DP7CM', browser).click()
-    wait_for_an_element('._3lS1C', browser).click()
-    wait_for_an_element('._3FRCZ', browser).click()
+    open_group_members_list(groupname, browser)
     preactive = None
     curractive = browser.switch_to.active_element
     while True:
@@ -79,13 +50,7 @@ def scrape_members_from_group(groupname, browser=None):
 
 def make_group_admins(groupname, members, browser=None):
     browser = open_session()
-    inputbox = wait_for_an_element('._3FRCZ', browser)
-    inputbox.send_keys(groupname)
-    wait_for_an_element('._210SC', browser)
-    inputbox.send_keys(Keys.TAB)
-    wait_for_an_element('.DP7CM', browser).click()
-    wait_for_an_element('._3lS1C', browser).click()
-    wait_for_an_element('._3FRCZ', browser).click()
+    open_group_members_list(groupname, browser)
     preactive = None
     curractive = browser.switch_to.active_element
     while True:
@@ -106,8 +71,8 @@ def make_group_admins(groupname, members, browser=None):
 
 # create_group("yeh", ["Navpreet Devpuri"])
 
-# print(scrape_members_from_group("PROGRAMMING"))
-
+print(scrape_members_from_group("PROGRAMMING"))
+#
 # make_group_admins("test1", ["Navpreet Devpuri", "TiDdi"])
 
 
