@@ -11,59 +11,49 @@ pip install tithiwa
 
 ## Automations
 
+Create bot 
+```pythom
+from tithiwa import Tithiwa
+
+tithiwabot = Tithiwa()
+```
+
+
 #### 1. Session
 
 ```python
-from tithiwa import session
-
 ### No need to scan QR code every time.
 
 ## 1.  Generate session file
-session.generate_session("filename")
+tithiwabot.session.generate_session("filename")
 
 ## 2. Open session file
-browser = session.open_session("filename")
+tithiwabot.session.open_session("filename")
 
 input("Press Enter to exit.")
-browser.quit()
 ```
 
 #### 2. Chatroom 
 ```python
-from selenium import webdriver
-from tithiwa import chatroom
-
-browser = webdriver.Chrome()
-
 ## 1. Open chat
-chatroom.open_chat_by_number("919592140593", browser=browser)
+tithiwabot.chatroom.open_chat_by_number("919592140593")
 
 ## 2. Send message
-chatroom.send_message_to_number("919592140593", "Hello, from Tithiwa", browser=browser)
-
-input("Press Enter to exit.")
-browser.quit()
+tithiwabot.chatroom.send_message_to_number("919592140593", "Hello, from Tithiwa")
 ```
 #### 3. Group
 ```python
-from selenium import webdriver
-from tithiwa import group
-
-browser = webdriver.Chrome()
 
 ## 1. Create Groups
-group.create_group("GroupName", ["contact1", "contact2", "contact2"], browser=browser)
+tithiwabot.group.create_group("GroupName", ["contact1", "contact2", "contact2"])
 
 
 ## 2. Scrape list of group members 
-membersList = group.scrape_members_from_group("GroupName", browser=browser)
+membersList = tithiwabot.group.scrape_members_from_group("GroupName")
 print(membersList) # ["contact1", "contact2", "contact2"]
 
 ## 3. Make some particular group members as group admins
-group.make_group_admins("GroupName", ["contact1", "contact2"], browser=browser)
-
-input("Press Enter to exit.")
-browser.quit()
+tithiwabot.group.make_group_admins("GroupName", ["contact1", "contact2"])
 ```
 
 ## Contribution
