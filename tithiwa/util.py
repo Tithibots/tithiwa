@@ -1,4 +1,3 @@
-import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -51,16 +50,7 @@ def open_whatsapp_if_not_opened(browser):
         browser.get("https://web.whatsapp.com/")
 
 
-def create_valid_session_file_name(sessiondir):
-    n = len(os.listdir(sessiondir))
-    sessionfilename = "%02d" % n + ".wa"
-    while os.path.exists(sessionfilename):
-        n += 1
-        sessionfilename = "%02d" % n + ".wa"
-    if sessionfilename[-3:] != ".wa":
-        sessionfilename += ".wa"
 
-    return sessionfilename
 
 
 def get_last_created_session_file(sessiondir):
