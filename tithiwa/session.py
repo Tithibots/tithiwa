@@ -2,24 +2,25 @@ __all__ = ["session"]
 
 from util import *
 
-
 class Session:
 
-    def __init__(self, browser, sessiondir=None):
+    def __init__(self, browser=None, sessiondir=None):
         self.sessiondir = sessiondir
         if sessiondir == None:
             self.sessiondir = os.path.join(
                 __file__[:__file__.rfind("tithiwa")], "tithiwa", "sessions")
         self.browser = open_browser_if_not_opened(browser)
-        open_whatsapp_if_not_opened(browser)
+        open_whatsapp_if_not_opened(self.browser)
 
-    def generate_session(self, sessionfilename=None,
+    def generate_session(self, sessionfilename=None, sessiondir=None,
                          browser=None, shouldclosebrowser=False, shouldshowfilelocation=True):
         if browser == None:
             browser = self.browser
-        os.makedirs(sessiondir, exist_ok=True)
+        if sessiondir == None:
+            sessiondir = self.sessiondir
+        os.makedirs(self.sessiondir, exist_ok=True)
         if sessionfilename == None:
-            sessionfilename = create_valid_session_file_name(sessiondir)
+            sessionfilename = self._create_valid_session_file_name(sessiondir)
         print("Waiting for QR code scan...")
         while "WAToken1" not in browser.execute_script(
                 "return window.localStorage;"):
@@ -38,14 +39,14 @@ class Session:
         browser.quit()
 
     def open_session(self, sessionfilename=None,
-                     sessiondir=os.path.join(
-                         __file__[:__file__.rfind("tithiwa")],
-                         "tithiwa", "sessions"),
+                     sessiondir=None,
                      browser=None,
                      wait=True
                      ):
         if browser == None:
             browser = self.browser
+        if sessiondir == None:
+            sessiondir = self.sessiondir
         if sessionfilename == None:
             sessionfilename = get_last_created_session_file(sessiondir)
         else:
@@ -66,6 +67,8 @@ class Session:
             session,
         )
         browser.refresh()
+        if wait:
+            wait_for_an_element('._3FRCZ', browser)
         return browser
 
     def _create_valid_session_file_name(self, sessiondir):

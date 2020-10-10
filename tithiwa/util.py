@@ -82,11 +82,12 @@ def validate_session_file(sessionfilename, sessiondir):
 def open_group_members_list(groupname, browser):
     inputbox = wait_for_an_element('._3FRCZ', browser)
     inputbox.send_keys(groupname)
-    wait_for_an_element('._325lp', browser)
+    resultelement = wait_for_an_element('.MfAhJ', browser)
     inputbox.send_keys(Keys.TAB)
+    resultelement.click()
     wait_for_an_element('.DP7CM', browser).click()
     wait_for_an_element('._3lS1C', browser).click()
-    wait_for_an_element('._3FRCZ', browser).click()
+    wait_for_an_element('._9a59P ._3FRCZ', browser).click()
 
 # show_file_location("sessions")
 # open_whatsapp_if_not_opened()
