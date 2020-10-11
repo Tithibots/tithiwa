@@ -1,6 +1,8 @@
 __all__ = ["session"]
 
 from util import *
+from constants import SELECTORS
+
 
 class Session:
 
@@ -21,10 +23,11 @@ class Session:
         os.makedirs(self.sessiondir, exist_ok=True)
         if sessionfilename == None:
             sessionfilename = self._create_valid_session_file_name(sessiondir)
-        print("Waiting for QR code scan...")
+        print("Waiting for QR code scan", end="... ")
         while "WAToken1" not in browser.execute_script(
                 "return window.localStorage;"):
             continue
+        print("✔ Done")
         session = browser.execute_script("return window.localStorage;")
         sessionfilelocation = os.path.realpath(os.path.join(sessiondir, sessionfilename))
         with open(sessionfilelocation, 'w',
@@ -57,7 +60,7 @@ class Session:
                 session = eval(sessionfile.read())
             except:
                 raise IOError('"' + sessionfilename + '" is invalid file.')
-        print("Injecting session...")
+        print("Injecting session", end="... ")
         browser.execute_script(
             """
         var keys = Object.keys(arguments[0]);
@@ -68,7 +71,8 @@ class Session:
         )
         browser.refresh()
         if wait:
-            wait_for_an_element('._3FRCZ', browser)
+            wait_for_an_element(SELECTORS.MAIN_SEARCH_BAR, browser)
+        print("✔ Done")
         return browser
 
     def _create_valid_session_file_name(self, sessiondir):
