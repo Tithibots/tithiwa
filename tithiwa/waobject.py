@@ -15,18 +15,16 @@ class WaObject:
         self.browser = self._open_browser_if_not_opened()
         self._open_whatsapp_if_not_opened()
 
-    # def _handle_new_browser(self, browser):
-    #     self.shouldreturnbrowser = False
-    #     if browser == None:
-    #         self.shouldreturnbrowser = True
-    #         return self.browser
-    #     else:
-    #         return browser
-    #
-    # def _return_browser_if_new(self, browser):
-    #     if self.shouldreturnbrowser:
-    #         return browser
+    def _handle_new_browser_init(self, browser):
+        self.intitbrowser = self.browser
+        if browser != None:
+            self.browser = browser
 
+    def _handle_new_browser_del(self):
+        self.browser = self.intitbrowser
+
+    def quit(self):
+        self.browser.quit()
 
     def _open_browser_if_not_opened(self):
         if self.browser == None:

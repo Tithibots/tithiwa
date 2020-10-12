@@ -16,7 +16,7 @@ class Chatroom(WaObject):
     def __init__(self, browser=None):
         super().__init__(browser)
 
-    def open_chat_by_number(self, number,wait=True):
+    def open_chat_by_number(self, number, wait=True):
         print(f'Opening chatroom to "{number}"', end="... ")
         self.browser.get("https://web.whatsapp.com/send?phone=" + number)
         if wait:
@@ -24,7 +24,7 @@ class Chatroom(WaObject):
         print('✔ Done')
 
     def send_message_to_number(self, number, message):
-        browser = self.open_chat_by_number(number)
+        self.open_chat_by_number(number)
         print(f'Sending message "{message}" to number "{number}"...', end="... ")
         inputbox = self._wait_for_an_element_to_be_clickable(SELECTORS.MESSAGE_INPUT_BOX)
         inputbox.send_keys(message + Keys.ENTER)
