@@ -9,66 +9,56 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from util import *
 from constants import SELECTORS
+from waobject import WaObject
 
 
-class Group:
+class Group(WaObject):
     def __init__(self, browser=None):
-        self.browser = open_browser_if_not_opened(browser)
-        open_whatsapp_if_not_opened(self.browser)
+        super().__init__(browser)
 
-    def create_group(self, groupname, contacts, browser=None):
+    def create_group(self, groupname, contacts):
         print(f'Creating group "{groupname}" with contacts {contacts}', end="... ")
-        shouldreturnbrowser = False
-        if browser == None:
-            shouldreturnbrowser = True
-            browser = self.browser
-        wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS.MENU_ICON, browser).click()
-        wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS.NEW_GROUP, browser).click()
-        inputbox = wait_for_an_element(SELECTORS.CREATE_NEW_GROUP.TYPE_CONTACTS_INPUT_BOX, browser)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS.MENU_ICON).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS.NEW_GROUP,).click()
+        inputbox = self._wait_for_an_presence_of_element(SELECTORS.CREATE_NEW_GROUP.TYPE_CONTACTS_INPUT_BOX)
         inputbox.click()
         for name in contacts:
             inputbox.send_keys(name)
-            wait_for_an_element(SELECTORS.CREATE_NEW_GROUP.RESULT_CONTACT, browser)
+            self._wait_for_an_presence_of_element(SELECTORS.CREATE_NEW_GROUP.RESULT_CONTACT)
             inputbox.send_keys(Keys.TAB + Keys.ENTER)
-        wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.OK_CONTACTS_TYPE, browser).click()
-        wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.TYPE_GROUP_NAME, browser).send_keys(groupname)
-        wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.OK_GROUP_NAME_TYPE, browser).click()
-        wait_for_an_element(SELECTORS.CREATE_NEW_GROUP.ENCRYPTED_LOCK_SIGN, browser)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.OK_CONTACTS_TYPE).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.TYPE_GROUP_NAME).send_keys(groupname)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.OK_GROUP_NAME_TYPE).click()
+        self._wait_for_an_presence_of_element(SELECTORS.CREATE_NEW_GROUP.ENCRYPTED_LOCK_SIGN)
         print('✔ Done')
-        if shouldreturnbrowser:
-            return browser
 
-    def scrape_members_from_group(self, groupname, browser=None):
+    def scrape_members_from_group(self, groupname):
         print(f'Scrapping group members from group "{groupname}"', end="... ")
         members = []
-        if browser == None:
-            browser = self.browser
-        open_group_members_list(groupname, browser)
+        self._open_group_members_list(groupname)
         preactive = None
-        curractive = browser.switch_to.active_element
+        curractive = self.browser.switch_to.active_element
         while True:
             curractive.send_keys(Keys.ARROW_DOWN)
-            curractive = browser.switch_to.active_element
+            curractive = self.browser.switch_to.active_element
             if curractive == preactive:
                 break
             members.append(
                 curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
                     'innerText'))
             preactive = curractive
-        wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH, browser).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
         print('✔ Done')
         return members
 
-    def make_group_admins(self, groupname, members, browser=None):
+    def make_group_admins(self, groupname, members):
         print(f'Making members {str(members)} to be group admins of group "{groupname}"', end="... ")
-        if browser == None:
-            browser = self.browser
-        open_group_members_list(groupname, browser)
+        self._open_group_members_list(groupname)
         preactive = None
-        curractive = browser.switch_to.active_element
+        curractive = self.browser.switch_to.active_element
         while True:
             curractive.send_keys(Keys.ARROW_DOWN)
-            curractive = browser.switch_to.active_element
+            curractive = self.browser.switch_to.active_element
             if curractive == preactive:
                 break
             name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
@@ -78,12 +68,20 @@ class Group:
                     curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.ADMIN_ICON)
                 except:
                     curractive.click()
-                    wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.MAKE_ADMIN, browser).click()
+                    self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.MAKE_ADMIN).click()
             preactive = curractive
-        wait_for_an_element_in_other_element(SELECTORS.GROUPS.ADMIN_ICON, curractive)
-        wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH, browser).click()
+        self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS.ADMIN_ICON, curractive)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
         print('✔ Done')
 
+    def _open_group_members_list(self, groupname):
+        inputbox = self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR)
+        inputbox.send_keys(groupname)
+        self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR_DONE)
+        inputbox.send_keys(Keys.TAB)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.NAME).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.MEMBERS_SEARCH_ICON).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.SEARCH_CONTACTS_INPUT_BOX).click()
 # create_group('yeh', ["Navpreet Devpuri"])
 
 # print(scrape_members_from_group("PROGRAMMING"))

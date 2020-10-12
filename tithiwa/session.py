@@ -2,58 +2,45 @@ __all__ = ["session"]
 
 from util import *
 from constants import SELECTORS
+from waobject import WaObject
 
 
-class Session:
+class Session(WaObject):
 
     def __init__(self, browser=None, sessiondir=None):
+        super().__init__(browser)
         self.sessiondir = sessiondir
         if sessiondir == None:
             self.sessiondir = os.path.join(
                 __file__[:__file__.rfind("tithiwa")], "tithiwa", "sessions")
-        self.browser = open_browser_if_not_opened(browser)
-        open_whatsapp_if_not_opened(self.browser)
 
-    def generate_session(self, sessionfilename=None, sessiondir=None,
-                         browser=None, shouldclosebrowser=False, shouldshowfilelocation=True):
-        if browser == None:
-            browser = self.browser
-        if sessiondir == None:
-            sessiondir = self.sessiondir
+    def generate_session(self, sessionfilename=None, shouldclosebrowser=False,
+                         shouldshowfilelocation=True):
         os.makedirs(self.sessiondir, exist_ok=True)
         if sessionfilename == None:
-            sessionfilename = self._create_valid_session_file_name(sessiondir)
+            sessionfilename = self._create_valid_session_file_name(self.sessiondir)
         print("Waiting for QR code scan", end="... ")
-        while "WAToken1" not in browser.execute_script(
+        while "WAToken1" not in self.browser.execute_script(
                 "return window.localStorage;"):
             continue
         print("✔ Done")
-        session = browser.execute_script("return window.localStorage;")
-        sessionfilelocation = os.path.realpath(os.path.join(sessiondir, sessionfilename))
+        session = self.browser.execute_script("return window.localStorage;")
+        sessionfilelocation = os.path.realpath(os.path.join(self.sessiondir, sessionfilename))
         with open(sessionfilelocation, 'w',
                   encoding='utf-8') as sessionfile:
             sessionfile.write(str(session))
         print('Your session file is saved to: ' +
               sessionfilelocation)
         if shouldshowfilelocation:
-            show_file_location(sessiondir)
-        if not shouldclosebrowser:
-            return browser
-        browser.quit()
+            self._show_file_location(self.sessiondir)
+        if shouldclosebrowser:
+            self.browser.quit()
 
-    def open_session(self, sessionfilename=None,
-                     sessiondir=None,
-                     browser=None,
-                     wait=True
-                     ):
-        if browser == None:
-            browser = self.browser
-        if sessiondir == None:
-            sessiondir = self.sessiondir
+    def open_session(self, sessionfilename=None, wait=True):
         if sessionfilename == None:
-            sessionfilename = get_last_created_session_file(sessiondir)
+            sessionfilename = self._get_last_created_session_file(self.sessiondir)
         else:
-            sessionfilename = validate_session_file(sessionfilename, sessiondir)
+            sessionfilename = self._validate_session_file(sessionfilename, self.sessiondir)
         session = None
         with open(sessionfilename, "r", encoding="utf-8") as sessionfile:
             try:
@@ -61,7 +48,7 @@ class Session:
             except:
                 raise IOError('"' + sessionfilename + '" is invalid file.')
         print("Injecting session", end="... ")
-        browser.execute_script(
+        self.browser.execute_script(
             """
         var keys = Object.keys(arguments[0]);
         var values = Object.values(arguments[0]);
@@ -69,11 +56,10 @@ class Session:
         """,
             session,
         )
-        browser.refresh()
+        self.browser.refresh()
         if wait:
-            wait_for_an_element(SELECTORS.MAIN_SEARCH_BAR, browser)
+            self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR)
         print("✔ Done")
-        return browser
 
     def _create_valid_session_file_name(self, sessiondir):
         n = len(os.listdir(sessiondir))
@@ -85,6 +71,39 @@ class Session:
             sessionfilename += ".wa"
 
         return sessionfilename
+
+    def _get_last_created_session_file(self, sessiondir):
+        if not os.path.exists(sessiondir):
+            raise IOError('No session file is exists. Generate session file by using generate_session().')
+        files = os.listdir(sessiondir)
+        paths = [os.path.join(sessiondir, basename) for basename in files]
+        sessionfilename = max(paths, key=os.path.getctime)
+        if not os.path.exists(sessionfilename):
+            raise IOError('No session file is exists. Generate session file by using generate_session().')
+        return sessionfilename
+
+    def _validate_session_file(self, sessionfilename, sessiondir):
+        if sessionfilename[-3:] != ".wa":
+            sessionfilename += ".wa"
+        possible_paths = [
+            os.path.join(sessiondir, sessionfilename), sessionfilename
+        ]
+        possibleSessionfilePath = None
+        for path in possible_paths:
+            if os.path.exists(path):
+                possibleSessionfilePath = path
+        if possibleSessionfilePath == None:
+            raise IOError(
+                f'Session file "{sessionfilename}" is not exist. Generate that session file by using generate_session(\'{sessionfilename}\')')
+        return possibleSessionfilePath
+
+    def _show_file_location(self, path):
+        if platform.system() == "Windows":
+            os.startfile(path)
+        elif platform.system() == "Darwin":
+            subprocess.Popen(["open", path])
+        else:
+            subprocess.Popen(["xdg-open", path])
 
 # browser = generate_session("03")
 # browser.quit()

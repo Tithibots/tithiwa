@@ -1,7 +1,7 @@
 from tithiwa import Tithiwa
 
 tithiwabot = Tithiwa()
-tithiwabot.session.generate_session()
+# tithiwabot.session.generate_session()
 tithiwabot.session.open_session()
 memberlist = tithiwabot.group.scrape_members_from_group("PROGRAMMING")
 print(memberlist)
