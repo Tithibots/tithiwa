@@ -26,7 +26,7 @@ class Chatroom:
     @staticmethod
     def send_message_to_number(number, message, browser=None):
         tempbot = chatroom.Chatroom(browser)
-        tempbot.open_chat_by_number(number, message)
+        tempbot.send_message_to_number(number, message)
 
 
 class Group:
