@@ -3,13 +3,12 @@ __all__ = ["Tithiwa"]
 from chatroom import Chatroom
 from session import Session
 from group import Group
-from util import *
+from waobject import WaObject
 
 
-class Tithiwa:
+class Tithiwa(WaObject):
     def __init__(self, browser=None):
-        self.browser = open_browser_if_not_opened(browser)
-        open_whatsapp_if_not_opened(self.browser)
+        super().__init__(browser)
         self.session = Session(self.browser)
         self.chatroom = Chatroom(self.browser)
         self.group = Group(self.browser)
