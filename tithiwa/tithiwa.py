@@ -13,7 +13,6 @@ class Tithiwa(WaObject):
         self.chatroom = Chatroom(self.browser)
         self.group = Group(self.browser)
 
-    def quit(self):
-        self.browser.quit()
+
     # def __del__(self):
     #     self.browser.quit()

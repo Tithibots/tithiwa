@@ -7,7 +7,7 @@ from waobject import WaObject
 
 class Session(WaObject):
 
-    def __init__(self, browser=None, sessiondir=None):
+    def __init__(self, sessiondir=None, browser=None):
         super().__init__(browser)
         self.sessiondir = sessiondir
         if sessiondir == None:
@@ -88,6 +88,7 @@ class Session(WaObject):
         possible_paths = [
             os.path.join(sessiondir, sessionfilename), sessionfilename
         ]
+        print(possible_paths)
         possibleSessionfilePath = None
         for path in possible_paths:
             if os.path.exists(path):
