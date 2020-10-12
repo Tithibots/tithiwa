@@ -19,6 +19,8 @@ class Session(WaObject):
         os.makedirs(self.sessiondir, exist_ok=True)
         if sessionfilename == None:
             sessionfilename = self._create_valid_session_file_name(self.sessiondir)
+        else:
+            sessionfilename = self._add_file_extension(sessionfilename)
         print("Waiting for QR code scan", end="... ")
         while "WAToken1" not in self.browser.execute_script(
                 "return window.localStorage;"):
@@ -61,14 +63,17 @@ class Session(WaObject):
             self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR)
         print("✔ Done")
 
+    def _add_file_extension(self, sessionfilename):
+        return sessionfilename + ".wa" if sessionfilename[-3:] != ".wa" else sessionfilename
+
+
     def _create_valid_session_file_name(self, sessiondir):
         n = len(os.listdir(sessiondir))
         sessionfilename = "%02d" % n + ".wa"
         while os.path.exists(sessionfilename):
             n += 1
             sessionfilename = "%02d" % n + ".wa"
-        if sessionfilename[-3:] != ".wa":
-            sessionfilename += ".wa"
+        sessionfilename = self._add_file_extension(sessionfilename)
 
         return sessionfilename
 
@@ -88,7 +93,6 @@ class Session(WaObject):
         possible_paths = [
             os.path.join(sessiondir, sessionfilename), sessionfilename
         ]
-        print(possible_paths)
         possibleSessionfilePath = None
         for path in possible_paths:
             if os.path.exists(path):
