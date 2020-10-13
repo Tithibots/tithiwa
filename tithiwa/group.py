@@ -74,6 +74,26 @@ class Group(WaObject):
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
         print('✔ Done')
 
+    def remove_members_from_group(self, groupname, members):
+        print(f'Removing these members {str(members)} from the group "{groupname}"', end="... ")
+        self._open_group_members_list(groupname)
+        preactive = None
+        curractive = self.browser.switch_to.active_element
+        while True:
+            curractive.send_keys(Keys.ARROW_DOWN)
+            curractive = self.browser.switch_to.active_element
+            if curractive == preactive:
+                break
+            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
+                'innerText')
+            if name in members:
+                curractive.click()
+                self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.REMOVE).click()
+            preactive = curractive
+        self._wait_for_an_element_to_deattached(curractive)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
+        print('✔ Done')
+
     def _open_group_members_list(self, groupname):
         inputbox = self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR)
         inputbox.send_keys(groupname)
