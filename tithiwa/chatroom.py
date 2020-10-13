@@ -1,3 +1,5 @@
+__all__ = ["Chatroom"]
+
 from selenium import webdriver
 from time import sleep
 import sys

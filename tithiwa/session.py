@@ -1,4 +1,4 @@
-__all__ = ["session"]
+__all__ = ["Session"]
 
 from util import *
 from constants import SELECTORS
