@@ -2,15 +2,25 @@ import tkinter as tk
 from tithiwa import Tithiwa
 
 
-class Application(tk.Frame):
+class TithiwaGUI(tk.Frame):
+
     def __init__(self, master=None):
         super().__init__(master)
         self.master = master
         self.pack()
-        self.create_containers()
-        self.create_widgets()
+        self._create_containers()
+        self._create_widgets()
 
-    def create_containers(self):
+    def send_message(self):
+        tithiwabot = Tithiwa()
+        tithiwabot.session.generate_session()
+        number = self.txt_area_number.get()
+        message = self.txt_area_msg.get("1.0", "end-1c")
+        tithiwabot.chatroom.send_message_to_number(number, message)
+        self._clear()
+        tithiwabot.quit()
+
+    def _create_containers(self):
         # entry for number phone
         self.container1 = tk.Frame(self.master)
         self.container1["padx"] = 20
@@ -27,7 +37,7 @@ class Application(tk.Frame):
         self.container3["pady"] = 10
         self.container3.pack()  # mostrar na tela
 
-    def create_widgets(self):
+    def _create_widgets(self):
         self.font = ("Verdana", "10")
         self.lbl_number = tk.Label(self.container1,
                                    text="Give a number phone :")
@@ -60,21 +70,12 @@ class Application(tk.Frame):
                               width=12)
         self.quit.pack(side="bottom")
 
-    def send_message(self):
-        tithiwabot = Tithiwa()
-        tithiwabot.session.generate_session()
-        number = self.txt_area_number.get()
-        msg = self.txt_area_msg.get("1.0", "end-1c")
-        tithiwabot.chatroom.send_message_to_number(number, msg)
-        self.clear()
-        tithiwabot.quit()
-
-    def clear(self):
+    def _clear(self):
         self.txt_area_number.delete(0, "end")
         self.txt_area_msg.delete(1.0, "end")
 
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = Application(master=root)
+    app = TithiwaGUI(master=root)
     app.mainloop()
