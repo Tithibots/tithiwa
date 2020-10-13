@@ -23,3 +23,4 @@ class SELECTORS(object):
         CLOSE_CONTACTS_SEARCH = '._2HE5l .t4a8o'
         ADMIN_ICON = '.LwCwJ'
         MAKE_ADMIN = '.Ut_N0'
+        REMOVE = '.Ut_N0[title="Remove"]'
