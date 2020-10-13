@@ -74,7 +74,7 @@ class Group(WaObject):
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
         print('✔ Done')
 
-    def remove_members_from_gropu(self, groupname, members):
+    def remove_members_from_group(self, groupname, members):
         print(f'Removing these members {str(members)} from the group "{groupname}"', end="... ")
         self._open_group_members_list(groupname)
         preactive = None
@@ -87,13 +87,10 @@ class Group(WaObject):
             name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name in members:
-                try:
-                    curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.ADMIN_ICON[2])
-                except:
-                    curractive.click()
-                    self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.MAKE_ADMIN[2]).click()
+                curractive.click()
+                self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.REMOVE).click()
             preactive = curractive
-        self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS.ADMIN_ICON, curractive)
+        self._wait_for_an_element_to_deattached(curractive)
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
         print('✔ Done')
 
