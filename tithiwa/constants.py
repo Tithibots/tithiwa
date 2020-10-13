@@ -1,4 +1,4 @@
-__all__ = ["SELECTORS","MAIN_MENU_OPTIONS","CREATE_NEW_GROUP","GROUPS"]
+__all__ = ["SELECTORS"]
 
 class SELECTORS(object):
     MAIN_SEARCH_BAR = '._3FRCZ'
