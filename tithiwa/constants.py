@@ -1,3 +1,5 @@
+__all__ = ["SELECTORS"]
+
 class SELECTORS(object):
     MAIN_SEARCH_BAR = '._3FRCZ'
     MAIN_SEARCH_BAR_DONE = '.MfAhJ'
