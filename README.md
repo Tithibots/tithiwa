@@ -4,12 +4,41 @@ Automate Web WhatsApp with selenium.
 
 Full explained Videos on that project are coming soon. Stay tune with my youtube channel [Noobie techs](https://www.youtube.com/c/NoobieTechsTithi_mukherjee/)
 
+- [tithiwa - Web WhatsApp bot](#tithiwa---web-whatsapp-bot)
+  * [Automation ideas](#automation-ideas)
+  * [Installation](#installation)
+  * [Automation](#automation)
+      - [1. Session](#1-session)
+      - [2. Chatroom](#2-chatroom)
+      - [3. Group](#3-group)
+  * [Contribution](#contribution)
+
+## Automation ideas
+1. Generate sessions and open sessions ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/session.py#L16-L63)
+2. Open chatroom and send message ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/chatroom.py#L21-L33)
+3. Create new WhatsApp group ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L19-L33)
+4. Scrape members list from group ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L35-L52)
+5. Make given contacts as group admins of given group ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L54-L75)
+6. Remove given contacts from given group ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L77-L95)
+7. Send a message to a group with mentioning all group members ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L106-L118)
+8. Clear chats of all groups [Todo](https://github.com/Tithibots/tithiwa/issues/23) 
+9. Clear chats of all contacts [Todo](https://github.com/Tithibots/tithiwa/issues/24)
+10. Clear all chats both groups and contacts [Todo](https://github.com/Tithibots/tithiwa/issues/25)
+11. Auto-reply given messages to some given messages [Todo](https://github.com/Tithibots/tithiwa/issues/26)
+12. Scrap chat as text [Todo](https://github.com/Tithibots/tithiwa/issues/27)
+13. Track online status of given number [Todo](https://github.com/Tithibots/tithiwa/issues/28)
+14. Send given message to given contacts at some given time i.e schedule messages [Todo](https://github.com/Tithibots/tithiwa/issues/29)
+15. Exit from all groups [Todo](https://github.com/Tithibots/tithiwa/issues/35)
+16. Exit from given groups [Todo](https://github.com/Tithibots/tithiwa/issues/43)
+17. Change Web WhatsApp's settings [Todo](https://github.com/Tithibots/tithiwa/issues/39)
+18. Scape all contacts and send message containing URL to their own chatroom [Todo](https://github.com/Tithibots/tithiwa/issues/42)
+
 ## Installation
 `
 pip install tithiwa
 `
 
-## Automations
+## Automation
 
 Create bot 
 ```pythom
