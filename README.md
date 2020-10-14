@@ -20,7 +20,7 @@ Full explained Videos on that project are coming soon. Stay tune with my youtube
 4. Scrape members list from group ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L35-L52)
 5. Make given contacts as group admins of given group ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L54-L75)
 6. Remove given contacts from given group ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L77-L95)
-7. Send a message to a group with mentioning all group members ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L106-L118)
+7. Send a message to a group with mentioning all group members ✔ [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L97-L109)
 8. Clear chats of all groups [Todo](https://github.com/Tithibots/tithiwa/issues/23) 
 9. Clear chats of all contacts [Todo](https://github.com/Tithibots/tithiwa/issues/24)
 10. Clear all chats both groups and contacts [Todo](https://github.com/Tithibots/tithiwa/issues/25)
@@ -83,6 +83,12 @@ print(membersList) # ["contact1", "contact2", "contact2"]
 
 ## 3. Make some particular group members as group admins
 tithiwabot.group.make_group_admins("GroupName", ["contact1", "contact2"])
+
+## 4. Remove given contacts from given group 
+tithiwabot.group.remove_members_from_group("GroupName", ["contact1", "contact2"])
+
+## 5. Send a message to a group with mentioning all group members
+tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
 ```
 
 ## Contribution
