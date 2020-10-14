@@ -1,4 +1,9 @@
-__all__ = ["SELECTORS"]
+__all__ = ['MODULEDIR', 'SESSIONDIR',  'SELECTORS']
+
+import os
+
+MODULEDIR = os.path.dirname(__file__)
+SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
 
 class SELECTORS(object):
     MAIN_SEARCH_BAR = '._3FRCZ'
