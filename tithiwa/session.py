@@ -1,7 +1,7 @@
 __all__ = ["Session"]
 
 from util import *
-from constants import SELECTORS
+from constants import *
 from waobject import WaObject
 
 
@@ -11,8 +11,7 @@ class Session(WaObject):
         super().__init__(browser)
         self.sessiondir = sessiondir
         if sessiondir == None:
-            self.sessiondir = os.path.join(
-                __file__[:__file__.rfind("tithiwa")], "tithiwa", "sessions")
+            self.sessiondir = SESSIONDIR
 
     def generate_session(self, sessionfilename=None, shouldclosebrowser=False,
                          shouldshowfilelocation=True):
