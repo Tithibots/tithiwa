@@ -14,24 +14,24 @@ Full explained Videos on that project are coming soon. Stay tune with my youtube
   * [Contribution](#contribution)
 
 ## Automation ideas
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/session.py#L16-L63) Generate sessions and open sessions ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/chatroom.py#L21-L33) Open chatroom and send message ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L19-L33) Create new WhatsApp group ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L35-L52) Scrape members list from group ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L54-L75) Make given contacts as group admins of given group ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L77-L95) Remove given contacts from given group ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L97-L109) Send a message to a group with mentioning all group members ✔ 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/23) Clear chats of all groups  
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/24) Clear chats of all contacts 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/25) Clear all chats both groups and contacts 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/26) Auto-reply given messages to some given messages 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/27) Scrap chat as text 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/28) Track online status of given number 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/29) Send given message to given contacts at some given time i.e schedule messages 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/35) Exit from all groups 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/43) Exit from given groups 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/39) Change Web WhatsApp's settings 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/42) Scape all contacts and send message containing URL to their own chatroom 
+- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/session.py#L16-L63): Generate sessions and open sessions ✔ 
+- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/chatroom.py#L21-L33): Open chatroom and send message ✔ 
+- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L19-L33): Create new WhatsApp group ✔ 
+- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L35-L52): Scrape members list from group ✔ 
+- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L54-L75): Make given contacts as group admins of given group ✔ 
+- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L77-L95): Remove given contacts from given group ✔ 
+- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L97-L109): Send a message to a group with mentioning all group members ✔ 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/23): Clear chats of all groups  
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/24): Clear chats of all contacts 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/25): Clear all chats both groups and contacts 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/26): Auto-reply given messages to some given messages 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/27): Scrap chat as text 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/28): Track online status of given number 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/29): Send given message to given contacts at some given time i.e schedule messages 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/35): Exit from all groups 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/43): Exit from given groups 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/39): Change Web WhatsApp's settings 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/42): Scape all contacts and send message containing URL to their own chatroom 
 
 ## Installation
 `
