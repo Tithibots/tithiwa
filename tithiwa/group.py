@@ -108,18 +108,11 @@ class Group(WaObject):
             print(f'Exiting from group "{group}"', end="... ")
             found_group = self._find_group(group)
             if not found_group:
-                print(f'\u2718 Failed. Group not found.')
-                continue
-            found_group.click()
-            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.NAME).click()
-            exit_from_group_button = self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_FROM_GROUP)
-            if exit_from_group_button is None:
-                print(f'\u2718 Failed. You are not the member of the group.')
+                found_group.click()
+                self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.NAME).click()
+                self._exit_from_group()
             else:
-                exit_from_group_button.click()
-                self._wait_for_an_presence_of_element(SELECTORS.GROUPS.EXIT_DIALOG_BOX)
-                self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_BUTTON_EXIT_DIALOG_BOX).click()
-                print('✔ Done')
+                print(f'\u2718 Failed. Group not found.')
             self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
 
     def _open_group_members_list(self, groupname):
@@ -156,6 +149,16 @@ class Group(WaObject):
             return None
         else:
             return curractive
+
+    def _exit_from_group(self):
+        exit_from_group_button = self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_FROM_GROUP)
+        if exit_from_group_button is None:
+            print(f'\u2718 Failed. You are not the member of the group.')
+        else:
+            exit_from_group_button.click()
+            self._wait_for_an_presence_of_element(SELECTORS.GROUPS.EXIT_DIALOG_BOX)
+            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_BUTTON_EXIT_DIALOG_BOX).click()
+            print('✔ Done')
 
 # create_group('yeh', ["Navpreet Devpuri"])
 
