@@ -107,7 +107,7 @@ class Group(Chatroom):
         if self._search_and_open_chat_by_name(groupname):
             self._exit_from_group()
         else:
-            print(f'\u2718 Failed. Group not found.')
+            print(f'❌ Failed. Group not found.')
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
 
     def exit_from_all_groups(self):
@@ -150,7 +150,7 @@ class Group(Chatroom):
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
         if len(groupnames) != 0:
-            print(f'{groupnames} are not found.')
+            print(f'❌ Failed for {groupnames}, These groups are not found.')
 
     def _open_group_members_list(self, groupname):
         self._search_and_open_chat_by_name(groupname)
