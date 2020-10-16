@@ -107,7 +107,7 @@ class Group(WaObject):
         for group in groups:
             print(f'Exiting from group "{group}"', end="... ")
             found_group = self._find_group(group)
-            if not found_group:
+            if found_group:
                 found_group.click()
                 self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.NAME).click()
                 self._exit_from_group()
