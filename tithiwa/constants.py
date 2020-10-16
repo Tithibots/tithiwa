@@ -1,9 +1,10 @@
-__all__ = ['MODULEDIR', 'SESSIONDIR',  'SELECTORS']
+__all__ = ['MODULEDIR', 'SESSIONDIR', 'SELECTORS']
 
 import os
 
 MODULEDIR = os.path.dirname(__file__)
 SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
+
 
 class SELECTORS(object):
     MAIN_SEARCH_BAR = '._3FRCZ'
@@ -24,8 +25,12 @@ class SELECTORS(object):
         OK_GROUP_NAME_TYPE = '._3y5oW'
         ENCRYPTED_LOCK_SIGN = '._2VO5X'
 
-    class GROUPS(object):
+    class CHATROOM(object):
+        NAME_AND_INFO = '._33QME'
         NAME = '.DP7CM'
+        INFO = '._3-cMa._3Whw5'
+
+    class GROUPS(object):
         MEMBERS_SEARCH_ICON = '._3lS1C'
         SEARCH_CONTACTS_INPUT_BOX = '._9a59P ._3FRCZ'
         CONTACTS_SEARCH_NAME = '._3ko75'

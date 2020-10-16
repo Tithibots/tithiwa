@@ -1,8 +1,9 @@
-__all__ = ["Session","Chatroom","Group"]
+__all__ = ["Session", "Chatroom", "Group"]
 
 import chatroom
 import session
 import group
+
 
 class Session:
 
@@ -47,4 +48,3 @@ class Group:
     def make_group_admins(groupname, members, browser=None):
         tempbot = group.Group(browser)
         tempbot.make_group_admins(groupname, members)
-

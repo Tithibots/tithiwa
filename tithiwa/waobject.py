@@ -1,14 +1,11 @@
 __all__ = ["WaObject"]
 
 from selenium import webdriver
+from constants import SELECTORS
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
-
 from selenium.webdriver.support import expected_conditions as EC
-import os
-import platform
-import subprocess
 
 
 class WaObject:
@@ -77,3 +74,40 @@ class WaObject:
                 break
             finally:
                 pass
+
+
+
+    def _search_and_open_chat_by_name(self, name):
+        isfound = False
+        self._search_and_wait_for_complete(name)
+        preactive = None
+        curractive = self.browser.switch_to.active_element
+        while True:
+            curractive.send_keys(Keys.ARROW_DOWN)
+            curractive = self.browser.switch_to.active_element
+            if curractive == preactive:
+                break
+            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
+                'innerText')
+            if name == name:
+                isfound = True
+                break
+            preactive = curractive
+        self._wait_for_chat_to_open(name)
+        return isfound
+
+    def _search_and_open_chat_by_number(self, number):
+        self._search_and_wait_for_complete(number)
+        self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
+        self.browser.switch_to.active_element.click()
+
+    def _wait_for_chat_to_open(self, name):
+        while True:
+            nameofchat = self._wait_for_an_presence_of_element(SELECTORS.CHATROOM.NAME).get_attribute(
+                'innerText')
+            if nameofchat == name:
+                break
+    def _search_and_wait_for_complete(self, nameornumber):
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_SEARCH_ICON).click()
+        self.browser.switch_to.active_element.send_keys(nameornumber)
+        self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR_DONE)

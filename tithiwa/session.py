@@ -1,6 +1,8 @@
 __all__ = ["Session"]
 
-from util import *
+import os
+import platform
+import subprocess
 from constants import *
 from waobject import WaObject
 

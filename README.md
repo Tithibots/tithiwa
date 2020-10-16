@@ -33,7 +33,7 @@ Full explained Videos on that project are coming soon. Stay tune with my youtube
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/39): Change Web WhatsApp's settings 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/42): Scape all contacts and send message containing URL to their own chatroom 
 
-## Installation
+## Installation (pip contains older version i.e use clone to setup)
 `
 pip install tithiwa
 `
@@ -54,10 +54,10 @@ tithiwabot = Tithiwa()
 ### No need to scan QR code every time.
 
 ## 1.  Generate session file
-tithiwabot.session.generate_session("filename")
+tithiwabot.generate_session("filename")
 
 ## 2. Open session file
-tithiwabot.session.open_session("filename")
+tithiwabot.open_session("filename")
 
 input("Press Enter to exit.")
 ```
@@ -65,39 +65,37 @@ input("Press Enter to exit.")
 #### 2. Chatroom 
 ```python
 ## 1. Open chat
-tithiwabot.chatroom.open_chat_by_number("919592140593")
+tithiwabot.open_chat_by_number("919592140593")
 
 ## 2. Send message
-tithiwabot.chatroom.send_message_to_number("919592140593", "Hello, from Tithiwa")
+tithiwabot.send_message_to_number("919592140593", "Hello, from Tithiwa")
 ```
 #### 3. Group
 ```python
 
 ## 1. Create Groups
-tithiwabot.group.create_group("GroupName", ["contact1", "contact2", "contact2"])
+tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
 
 
 ## 2. Scrape list of group members 
-membersList = tithiwabot.group.scrape_members_from_group("GroupName")
+membersList = tithiwabot.scrape_members_from_group("GroupName")
 print(membersList) # ["contact1", "contact2", "contact2"]
 
 ## 3. Make some particular group members as group admins
-tithiwabot.group.make_group_admins("GroupName", ["contact1", "contact2"])
+tithiwabot.make_group_admins("GroupName", ["contact1", "contact2"])
 
 ## 4. Remove given contacts from given group 
-tithiwabot.group.remove_members_from_group("GroupName", ["contact1", "contact2"])
+tithiwabot.remove_members_from_group("GroupName", ["contact1", "contact2"])
 
 ## 5. Send a message to a group with mentioning all group members
 tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
 
 ## 6. Exit from given groups
-tithiwabot.group.exit_from_groups(["Group made by tithiwa", "Group made by tithiwa1"])
+tithiwabot.exit_from_groups(["Group made by tithiwa", "Group made by tithiwa1"])
 ```
 
 ## Contribution
 Setup package for development
 ```buildoutcfg
 git clone https://github.com/Maskgirl/tithiwa.git
-cd tithiwa
-pip install -e .
 ```
