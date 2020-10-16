@@ -8,6 +8,8 @@ SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
 class SELECTORS(object):
     MAIN_SEARCH_BAR = '._3FRCZ'
     MAIN_SEARCH_BAR_DONE = '.MfAhJ'
+    MAIN_SEARCH_BAR_SEARCH_ICON = '._3e4VU'
+    MAIN_SEARCH_BAR_BACK_ARROW = '._3e4VU'
     MESSAGE_INPUT_BOX = '#main footer ._3FRCZ'
 
     class MAIN_MENU_OPTIONS(object):
@@ -31,3 +33,8 @@ class SELECTORS(object):
         ADMIN_ICON = '.LwCwJ'
         MAKE_ADMIN = '.Ut_N0'
         REMOVE = '.Ut_N0[title="Remove"]'
+        EXIT_FROM_GROUP = '._3wAoe._3DSZk[title="Exit group"]'
+        EXIT_DIALOG_BOX = '._9a59P'
+        EXIT_BUTTON_EXIT_DIALOG_BOX = '.S7_rT.FV2Qy'
+        CLOSE_GROUP_INFO = '[data-testid="x"]'
+        NO_LONGER_A_PARTICIPANT = '._3ge3i'

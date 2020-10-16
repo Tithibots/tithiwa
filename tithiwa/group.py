@@ -1,14 +1,9 @@
 __all__ = ["Group"]
 
-from selenium import webdriver
-from time import sleep
-import sys
-import os
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from util import *
 from constants import SELECTORS
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from util import *
 from waobject import WaObject
 
 
@@ -108,6 +103,16 @@ class Group(WaObject):
         inputbox.send_keys(message_with_members_mention + Keys.ENTER)
         print('✔ Done')
 
+    def exit_from_groups(self, groups):
+        for group in groups:
+            print(f'Exiting from group "{group}"', end="... ")
+            if self._find_group_and_open_chat(group):
+                self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.NAME).click()
+                self._exit_from_group()
+            else:
+                print(f'\u2718 Failed. Group not found.')
+            self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
+
     def _open_group_members_list(self, groupname):
         inputbox = self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR)
         inputbox.send_keys(groupname)
@@ -116,6 +121,47 @@ class Group(WaObject):
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.NAME).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.MEMBERS_SEARCH_ICON).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.SEARCH_CONTACTS_INPUT_BOX).click()
+
+    def _find_group_and_open_chat(self, groupname):
+        isfound = False
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_SEARCH_ICON).click()
+        self.browser.switch_to.active_element.send_keys(groupname)
+        self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR_DONE)
+        preactive = None
+        curractive = self.browser.switch_to.active_element
+        while True:
+            curractive.send_keys(Keys.ARROW_DOWN)
+            curractive = self.browser.switch_to.active_element
+            if curractive == preactive:
+                break
+            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
+                'innerText')
+            if name == groupname:
+                isfound = True
+                break
+            preactive = curractive
+        self._wait_for_group_to_open(groupname)
+        return isfound
+
+    def _wait_for_group_to_open(self, groupname):
+        while True:
+            nameofgroup = self._wait_for_an_presence_of_element(SELECTORS.GROUPS.NAME).get_attribute(
+                'innerText')
+            if nameofgroup == groupname:
+                break
+
+
+    def _exit_from_group(self):
+        no_longer_a_participant = self._wait_for_an_presence_of_element(SELECTORS.GROUPS.NO_LONGER_A_PARTICIPANT)
+        if no_longer_a_participant is not None:
+            print(f'\u2718 Failed. You are not the member of the group.')
+            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_GROUP_INFO).click()
+        else:
+            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_FROM_GROUP).click()
+            self._wait_for_an_presence_of_element(SELECTORS.GROUPS.EXIT_DIALOG_BOX)
+            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_BUTTON_EXIT_DIALOG_BOX).click()
+            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_GROUP_INFO).click()
+            print('✔ Done')
 
 # create_group('yeh', ["Navpreet Devpuri"])
 
