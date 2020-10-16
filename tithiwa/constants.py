@@ -49,4 +49,4 @@ class SELECTORS(object):
 
 class STRINGS(object):
     CHECK_CHAR = '✔'
-    CROSS_CHAR = '✘'
+    CROSS_CHAR = '❌'
