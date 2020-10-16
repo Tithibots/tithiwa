@@ -29,7 +29,7 @@ Full explained Videos on that project are coming soon. Stay tune with my youtube
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/28): Track online status of given number 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/29): Send given message to given contacts at some given time i.e schedule messages 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/35): Exit from all groups 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/43): Exit from given groups 
+- [x] [Done](https://github.com/Tithibots/tithiwa/pull/44): Exit from given groups ✔
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/39): Change Web WhatsApp's settings 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/42): Scape all contacts and send message containing URL to their own chatroom 
 

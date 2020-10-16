@@ -68,3 +68,12 @@ class WaObject:
             pass
         finally:
             return element
+
+    def _wait_for_an_element_to_deattached(self, element):
+        while True:
+            try:
+                element.find_element()
+            except:
+                break
+            finally:
+                pass
