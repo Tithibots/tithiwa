@@ -1,4 +1,4 @@
-__all__ = ['MODULEDIR', 'SESSIONDIR', 'SELECTORS']
+__all__ = ['MODULEDIR', 'SESSIONDIR', 'SELECTORS', 'STRINGS']
 
 import os
 
@@ -12,6 +12,8 @@ class SELECTORS(object):
     MAIN_SEARCH_BAR_SEARCH_ICON = '._3e4VU'
     MAIN_SEARCH_BAR_BACK_ARROW = '._3e4VU'
     MESSAGE_INPUT_BOX = '#main footer ._3FRCZ'
+    TURN_ON_DESKTOP_NOTIFICATIONS = '.zKq5Y'
+    CLOSE_INFO = '[data-testid="x-alt"]'
 
     class MAIN_MENU_OPTIONS(object):
         MENU_ICON = '[data-testid=menu]'
@@ -29,6 +31,7 @@ class SELECTORS(object):
         NAME_AND_INFO = '._33QME'
         NAME = '.DP7CM'
         INFO = '._3-cMa._3Whw5'
+        CLOSE_INFO = '[data-testid="x"]'
 
     class GROUPS(object):
         MEMBERS_SEARCH_ICON = '._3lS1C'
@@ -41,5 +44,9 @@ class SELECTORS(object):
         EXIT_FROM_GROUP = '._3wAoe._3DSZk[title="Exit group"]'
         EXIT_DIALOG_BOX = '._9a59P'
         EXIT_BUTTON_EXIT_DIALOG_BOX = '.S7_rT.FV2Qy'
-        CLOSE_GROUP_INFO = '[data-testid="x"]'
         NO_LONGER_A_PARTICIPANT = '._3ge3i'
+        GROUP_NAME_IN_CHATS = '._3CneP > ._3ko75._5h6Y_._3Whw5'
+
+class STRINGS(object):
+    CHECK_CHAR = '✔'
+    CROSS_CHAR = '✘'

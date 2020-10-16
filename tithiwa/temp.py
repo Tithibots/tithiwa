@@ -1,11 +1,11 @@
 from tithiwa import Tithiwa
 
 tithiwabot = Tithiwa()
-tithiwabot.generate_session()
+# tithiwabot.generate_session()
 tithiwabot.open_session()
-# memberlist = tithiwabot.group.scrape_members_from_group("PROGRAMMING")
-# print(memberlist)
-# tithiwabot.group.create_group("Group made by tithiwa", ["Navpreet Devpuri", "TiDdi"])
+
+# tithiwabot.create_group("Group made by tithiwa6", ["Navpreet Devpuri"])
+tithiwabot.exit_from_all_groups()
 # tithiwabot.chatroom.send_message_to_number("919592140593", "Yess, from tithiwa")
 # tithiwabot.quit()
 

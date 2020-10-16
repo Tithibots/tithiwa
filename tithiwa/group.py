@@ -1,7 +1,7 @@
 __all__ = ["Group"]
 
 from time import sleep
-from constants import SELECTORS
+from constants import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from chatroom import Chatroom
@@ -24,7 +24,8 @@ class Group(Chatroom):
         self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.OK_CONTACTS_TYPE).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.TYPE_GROUP_NAME).send_keys(groupname)
         self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.OK_GROUP_NAME_TYPE).click()
-        self._wait_for_an_presence_of_element(SELECTORS.CREATE_NEW_GROUP.ENCRYPTED_LOCK_SIGN)
+        self._wait_for_chat_to_open(groupname)
+        self._close_info()
         print('✔ Done')
 
     def scrape_members_from_group(self, groupname):
@@ -74,17 +75,15 @@ class Group(Chatroom):
         self._open_group_members_list(groupname)
         preactive = None
         curractive = self.browser.switch_to.active_element
-        while True:
-            curractive.send_keys(Keys.ARROW_DOWN)
-            curractive = self.browser.switch_to.active_element
-            if curractive == preactive:
-                break
+        curractive.send_keys(Keys.ARROW_DOWN)
+        while curractive != preactive:
             name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name in members:
                 curractive.click()
                 self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.REMOVE).click()
             preactive = curractive
+            curractive = self.browser.switch_to.active_element
         self._wait_for_an_element_to_deattached(curractive)
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
         print('✔ Done')
@@ -103,33 +102,64 @@ class Group(Chatroom):
         inputbox.send_keys(message_with_members_mention + Keys.ENTER)
         print('✔ Done')
 
-    def exit_from_groups(self, groups):
-        for group in groups:
-            print(f'Exiting from group "{group}"', end="... ")
-            if self._search_and_open_chat_by_name(group):
-                self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM.NAME).click()
+    def exit_from_groups(self, groupnames):
+        for groupname in groupnames:
+            print(f'Exiting from group "{groupname}"', end="... ")
+            if self._search_and_open_chat_by_name(groupname):
                 self._exit_from_group()
             else:
                 print(f'\u2718 Failed. Group not found.')
             self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
 
+    def exit_from_all_groups(self):
+        self._wait_for_an_presence_of_element(SELECTORS.GROUPS.GROUP_NAME_IN_CHATS)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
+        preactive = None
+        self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
+        curractive = self.browser.switch_to.active_element
+        while curractive != preactive:
+            groupnameelement = None
+            try:
+                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.GROUP_NAME_IN_CHATS)
+            except:
+                pass
+            if groupnameelement != None:
+                groupname = groupnameelement.get_attribute('innerText')
+                self._wait_for_group_to_open_then_exit(groupname)
+            preactive = curractive
+            curractive.send_keys(Keys.ARROW_DOWN)
+            curractive = self.browser.switch_to.active_element
+
+
     def _open_group_members_list(self, groupname):
         self._search_and_open_chat_by_name(groupname)
-        self._open_info()
+        self._close_chatroom_info()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.MEMBERS_SEARCH_ICON).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.SEARCH_CONTACTS_INPUT_BOX).click()
 
+    def _wait_for_group_to_open_then_exit(self, groupname):
+        print(f'Exiting from group "{groupname}"', end="... ")
+        self._wait_for_chat_to_open(groupname)
+        self._exit_from_group()
+
     def _exit_from_group(self):
-        no_longer_a_participant = self._wait_for_an_presence_of_element(SELECTORS.GROUPS.NO_LONGER_A_PARTICIPANT)
-        if no_longer_a_participant is not None:
-            print(f'\u2718 Failed. You are not the member of the group.')
-            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_GROUP_INFO).click()
+        chatinfo = self._wait_for_an_presence_of_element(SELECTORS.CHATROOM.INFO).get_attribute('innerText')
+        if chatinfo.find('You') == -1:
+            print(f'{STRINGS.CHECK_CHAR} Done. You are already exited the group.')
+            # self._close_chatroom_info()
         else:
+            self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM.NAME).click()
             self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_FROM_GROUP).click()
             self._wait_for_an_presence_of_element(SELECTORS.GROUPS.EXIT_DIALOG_BOX)
             self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_BUTTON_EXIT_DIALOG_BOX).click()
-            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_GROUP_INFO).click()
+            self._close_chatroom_info()
+            self._close_info()
             print('✔ Done')
+
+    def _wait_for_group_info_to_load(self):
+        chatinfo = 'click here for group info'
+        while chatinfo == 'click here for group info':
+            chatinfo = self._wait_for_an_presence_of_element(SELECTORS.CHATROOM.INFO).get_attribute('innerText')
 
 # create_group('yeh', ["Navpreet Devpuri"])
 
