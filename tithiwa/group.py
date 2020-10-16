@@ -102,14 +102,13 @@ class Group(Chatroom):
         inputbox.send_keys(message_with_members_mention + Keys.ENTER)
         print('✔ Done')
 
-    def exit_from_groups(self, groupnames):
-        for groupname in groupnames:
-            print(f'Exiting from group "{groupname}"', end="... ")
-            if self._search_and_open_chat_by_name(groupname):
-                self._exit_from_group()
-            else:
-                print(f'\u2718 Failed. Group not found.')
-            self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
+    def exit_from_group(self, groupname):
+        print(f'Exiting from group "{groupname}"', end="... ")
+        if self._search_and_open_chat_by_name(groupname):
+            self._exit_from_group()
+        else:
+            print(f'\u2718 Failed. Group not found.')
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
 
     def exit_from_all_groups(self):
         self._wait_for_an_presence_of_element(SELECTORS.GROUPS.GROUP_NAME_IN_CHATS)
@@ -130,6 +129,28 @@ class Group(Chatroom):
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
 
+    def exit_from_groups(self, groupnames):
+        self._wait_for_an_presence_of_element(SELECTORS.GROUPS.GROUP_NAME_IN_CHATS)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
+        preactive = None
+        self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
+        curractive = self.browser.switch_to.active_element
+        while curractive != preactive:
+            groupnameelement = None
+            try:
+                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.GROUP_NAME_IN_CHATS)
+            except:
+                pass
+            if groupnameelement != None:
+                groupname = groupnameelement.get_attribute('innerText')
+                if groupname in groupnames:
+                    self._wait_for_group_to_open_then_exit(groupname)
+                    groupnames.remove(groupname)
+            preactive = curractive
+            curractive.send_keys(Keys.ARROW_DOWN)
+            curractive = self.browser.switch_to.active_element
+        if len(groupnames) != 0:
+            print(f'{groupnames} are not found.')
 
     def _open_group_members_list(self, groupname):
         self._search_and_open_chat_by_name(groupname)
