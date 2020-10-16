@@ -4,17 +4,10 @@ Automate Web WhatsApp with selenium.
 
 Full explained Videos on that project are coming soon. Stay tune with my youtube channel [Noobie techs](https://www.youtube.com/c/NoobieTechsTithi_mukherjee/)
 
-- [tithiwa - Web WhatsApp bot](#tithiwa---web-whatsapp-bot)
+Table of contents
   * [Automation ideas](#automation-ideas)
   * [Installation](#installation)
-  * [Automation](#automation)
-      - [1. Session](#1-session)
-      - [2. Chatroom](#2-chatroom)
-      - [3. Group](#3-group)
-  * [Contribution](#contribution)
-
-
-
+  * [Contribution and creativity points](#contribution)
 ## Automation ideas
 Create bot 
 ```python
@@ -75,13 +68,13 @@ tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/42): Scape all contacts and send message containing URL to their own chatroom 
 
 ## Installation 
-NOTE - pip contains older version i.e use clone to setup
+NOTE - pip contains older version i.e clone repo to use
 
 `
 pip install tithiwa
 `
-## Contribution
-Setup package for development
-```buildoutcfg
-git clone https://github.com/Maskgirl/tithiwa.git
-```
+## Contribution and creativity points
+Selenium automation creativity points 
+1. **Debugging** <br> We can create breakpoints to pause execution at any time then we can try to run some python code in the console to find a way to do something. That helps to develop efficiently. 
+2. **CTRL + Left mouse click** <br> We can see the definitions or references or usages of any function or variable in our IDE like PyCharm. That helps to understand the existing code base efficiently.
+Good luck :)
