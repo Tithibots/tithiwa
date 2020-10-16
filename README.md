@@ -13,14 +13,45 @@ Full explained Videos on that project are coming soon. Stay tune with my youtube
       - [3. Group](#3-group)
   * [Contribution](#contribution)
 
+
+
 ## Automation ideas
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/session.py#L16-L63): Generate sessions and open sessions ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/chatroom.py#L21-L33): Open chatroom and send message ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L19-L33): Create new WhatsApp group ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L35-L52): Scrape members list from group ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L54-L75): Make given contacts as group admins of given group ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L77-L95): Remove given contacts from given group ✔ 
-- [x] [Done](https://github.com/Tithibots/tithiwa/blob/main/tithiwa/group.py#L97-L109): Send a message to a group with mentioning all group members ✔ 
+Create bot 
+```python
+from tithiwa import Tithiwa
+tithiwabot = Tithiwa()
+```
+- [x] Done - `generate_session()`: Generate sessions and open sessions ✔ 
+```python
+tithiwabot.generate_session("filename")
+tithiwabot.open_session("filename")
+```
+- [x] Done - `open_session()`: Open chatroom and send message ✔ 
+```python
+tithiwabot.open_chat_by_number("919592140593")
+tithiwabot.send_message_to_number("919592140593", "Hello, from Tithiwa")
+```
+- [x] Done - `create_group()`: Create new WhatsApp group ✔ 
+```python
+tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
+```
+- [x] Done - `scrape_members_from_group()`: Scrape members list from group ✔ 
+```python
+membersList = tithiwabot.scrape_members_from_group("GroupName")
+print(membersList) # ["contact1", "contact2", "contact2"]
+```
+- [x] Done - `make_group_admins()`: Make given contacts as group admins of given group ✔ 
+```python
+tithiwabot.make_group_admins("GroupName", ["contact1", "contact2"])
+```
+- [x] Done - `remove_members_from_group()`: Remove given contacts from given group ✔ 
+```python
+tithiwabot.remove_members_from_group("GroupName", ["contact1", "contact2"])
+```
+- [x] Done - `send_message_with_mention_all_to_group()`: Send a message to a group with mentioning all group members ✔ 
+```python
+tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
+```
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/23): Clear chats of all groups  
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/24): Clear chats of all contacts 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/25): Clear all chats both groups and contacts 
@@ -28,75 +59,27 @@ Full explained Videos on that project are coming soon. Stay tune with my youtube
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/27): Scrap chat as text 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/28): Track online status of given number 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/29): Send given message to given contacts at some given time i.e schedule messages 
-- [x] [Done](https://github.com/Tithibots/tithiwa/commit/536409dc057b49bcbd5313a5a2285349d639ff51): Exit from all groups ✔
-- [x] [Done](https://github.com/Tithibots/tithiwa/pull/44): Exit from given groups ✔
+- [x] Done - `exit_from_group()`: Exit from group ✔
+```python
+tithiwabot.exit_from_group("GroupName1")
+```
+- [x] Done - `exit_from_all_groups()`: Exit from all groups ✔
+```python
+tithiwabot.exit_from_all_groups()
+```
+- [x] Done - `exit_from_groups()`: Exit from given groups ✔
+```python
+tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
+```
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/39): Change Web WhatsApp's settings 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/42): Scape all contacts and send message containing URL to their own chatroom 
 
-## Installation (pip contains older version i.e use clone to setup)
+## Installation 
+NOTE - pip contains older version i.e use clone to setup
+
 `
 pip install tithiwa
 `
-
-## Automation
-
-Create bot 
-```pythom
-from tithiwa import Tithiwa
-
-tithiwabot = Tithiwa()
-```
-
-
-#### 1. Session
-
-```python
-### No need to scan QR code every time.
-
-## 1.  Generate session file
-tithiwabot.generate_session("filename")
-
-## 2. Open session file
-tithiwabot.open_session("filename")
-
-input("Press Enter to exit.")
-```
-
-#### 2. Chatroom 
-```python
-## 1. Open chat
-tithiwabot.open_chat_by_number("919592140593")
-
-## 2. Send message
-tithiwabot.send_message_to_number("919592140593", "Hello, from Tithiwa")
-```
-#### 3. Group
-```python
-
-## 1. Create Groups
-tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
-
-
-## 2. Scrape list of group members 
-membersList = tithiwabot.scrape_members_from_group("GroupName")
-print(membersList) # ["contact1", "contact2", "contact2"]
-
-## 3. Make some particular group members as group admins
-tithiwabot.make_group_admins("GroupName", ["contact1", "contact2"])
-
-## 4. Remove given contacts from given group 
-tithiwabot.remove_members_from_group("GroupName", ["contact1", "contact2"])
-
-## 5. Send a message to a group with mentioning all group members
-tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
-
-## 6. Exit from given groups
-tithiwabot.exit_from_groups(["Group made by tithiwa", "Group made by tithiwa1"])
-
-## 7. Exit from all groups
-tithiwabot.exit_from_all_groups()
-```
-
 ## Contribution
 Setup package for development
 ```buildoutcfg
