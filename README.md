@@ -89,6 +89,9 @@ tithiwabot.group.remove_members_from_group("GroupName", ["contact1", "contact2"]
 
 ## 5. Send a message to a group with mentioning all group members
 tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
+
+## 6. Exit from given groups
+tithiwabot.group.exit_from_groups(["Group made by tithiwa", "Group made by tithiwa1"])
 ```
 
 ## Contribution

@@ -1,5 +1,6 @@
 __all__ = ["Group"]
 
+from time import sleep
 from constants import SELECTORS
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -149,7 +150,6 @@ class Group(WaObject):
                 'innerText')
             if nameofgroup == groupname:
                 break
-
 
     def _exit_from_group(self):
         no_longer_a_participant = self._wait_for_an_presence_of_element(SELECTORS.GROUPS.NO_LONGER_A_PARTICIPANT)
