@@ -77,4 +77,5 @@ pip install tithiwa
 Selenium automation creativity points 
 1. **Debugging** <br> We can create breakpoints to pause execution at any time then we can try to run some python code in the console to find a way to do something. That helps to develop efficiently. 
 2. **CTRL + Left mouse click** <br> We can see the definitions or references or usages of any function or variable in our IDE like PyCharm. That helps to understand the existing code base efficiently.
+3. **Inspect elements and console** <br> In chrome, we can inspect HTML elements and run javascript code inside console and by pressing UP key we can see the history about what codes we had run. That helps up to find better selectors and automations steps efficiently.
 Good luck :)
