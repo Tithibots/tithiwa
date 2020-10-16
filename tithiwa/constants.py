@@ -36,3 +36,5 @@ class SELECTORS(object):
         EXIT_FROM_GROUP = '._3wAoe._3DSZk[title="Exit group"]'
         EXIT_DIALOG_BOX = '._9a59P'
         EXIT_BUTTON_EXIT_DIALOG_BOX = '.S7_rT.FV2Qy'
+        CLOSE_GROUP_INFO = '[data-testid="x"]'
+        NO_LONGER_A_PARTICIPANT = '._3ge3i'
