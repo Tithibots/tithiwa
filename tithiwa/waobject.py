@@ -76,7 +76,7 @@ class WaObject:
     def _wait_for_an_element_to_deattached(self, element):
         while True:
             try:
-                element.find_element()
+                element.is_displayed()
             except:
                 break
             finally:
