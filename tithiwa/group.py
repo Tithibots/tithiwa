@@ -164,6 +164,7 @@ class Group(Chatroom):
         self._exit_from_group()
 
     def _exit_from_group(self):
+        self._wait_for_group_info_to_load()
         chatinfo = self._wait_for_an_presence_of_element(SELECTORS.CHATROOM.INFO).get_attribute('innerText')
         if chatinfo.find('You') == -1:
             print(f'{STRINGS.CHECK_CHAR} Done. You are already exited the group.')
@@ -180,7 +181,10 @@ class Group(Chatroom):
     def _wait_for_group_info_to_load(self):
         chatinfo = 'click here for group info'
         while chatinfo == 'click here for group info':
-            chatinfo = self._wait_for_an_presence_of_element(SELECTORS.CHATROOM.INFO).get_attribute('innerText')
+            try:
+                chatinfo = self._wait_for_an_presence_of_element(SELECTORS.CHATROOM.INFO).get_attribute('innerText')
+            except:
+                pass
 
 # create_group('yeh', ["Navpreet Devpuri"])
 
