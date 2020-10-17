@@ -1,4 +1,4 @@
-# navwa - Web WhatsApp bot
+# tithiwa - Web WhatsApp bot
 
 Automate Web WhatsApp with selenium.
 
