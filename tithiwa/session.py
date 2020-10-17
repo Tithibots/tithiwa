@@ -26,7 +26,7 @@ class Session(WaObject):
         while "WAToken1" not in self.browser.execute_script(
                 "return window.localStorage;"):
             continue
-        print("✔ Done")
+        print(f'{STRINGS.CHECK_CHAR} Done')
         session = self.browser.execute_script("return window.localStorage;")
         sessionfilelocation = os.path.realpath(os.path.join(self.sessiondir, sessionfilename))
         with open(sessionfilelocation, 'w',
@@ -62,7 +62,7 @@ class Session(WaObject):
         self.browser.refresh()
         if wait:
             self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR)
-        print("✔ Done")
+        print(f'{STRINGS.CHECK_CHAR} Done')
 
     def _add_file_extension(self, sessionfilename):
         return sessionfilename + ".wa" if sessionfilename[-3:] != ".wa" else sessionfilename
