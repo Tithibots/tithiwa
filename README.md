@@ -16,7 +16,7 @@ Selenium automation creativity points
 3. **Inspect elements and console** [Example](https://github.com/Tithibots/tithiwa/issues/50#issuecomment-710781167)<br> In chrome, we can inspect HTML elements and run javascript code inside console. That helps up to find better selectors and automations steps efficiently.
 
 NOTE: By pressing UP key we can see the history about what codes we had run during Python debugging and inside Chrome's console.<br> 
-NOTE: If you are running javascript code inside selenium's chromedriver then it will **NOT** keep history.<br>
+NOTE: If you are running javascript code inside selenium chromedriver's console then it will **NOT** keep history.<br>
 Good luck :)
   
 ## Automation ideas
