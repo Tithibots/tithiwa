@@ -25,12 +25,12 @@ Create bot
 from tithiwa import Tithiwa
 tithiwabot = Tithiwa()
 ```
-- [x] Done - `generate_session()`: Generate sessions and open sessions ✔ 
+- [x] Done - `generate_session() $ open_session()`: Generate sessions and open sessions ✔ 
 ```python
 tithiwabot.generate_session("filename")
 tithiwabot.open_session("filename")
 ```
-- [x] Done - `open_session()`: Open chatroom and send message ✔ 
+- [x] Done - `open_chat_by_number() & send_message_to_number()`: Open chatroom and send message ✔ 
 ```python
 tithiwabot.open_chat_by_number("919592140593")
 tithiwabot.send_message_to_number("919592140593", "Hello, from Tithiwa")
