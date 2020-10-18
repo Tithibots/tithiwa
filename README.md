@@ -1,4 +1,5 @@
 # tithiwa - Web WhatsApp bot
+<img src="./logo/tithiwa.png" alt="drawing" width="233"/>
 
 Automate Web WhatsApp with selenium.
 
