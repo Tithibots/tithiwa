@@ -1,6 +1,5 @@
+<img src="./logo/tithiwa.png" alt="logo" width="233"/>
 # tithiwa - Web WhatsApp bot
-<img src="./logo/tithiwa.png" alt="drawing" width="233"/>
-
 Automate Web WhatsApp with selenium.
 
 Full explained Videos on that project are coming soon. Stay tune with my youtube channel [Noobie techs](https://www.youtube.com/c/NoobieTechsTithi_mukherjee/)
