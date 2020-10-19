@@ -61,7 +61,7 @@ class Session(WaObject):
         )
         self.browser.refresh()
         if wait:
-            self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR)
+            self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR)
         print(f'{STRINGS.CHECK_CHAR} Done')
 
     def _add_file_extension(self, sessionfilename):

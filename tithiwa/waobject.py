@@ -39,9 +39,9 @@ class WaObject:
             self.browser.get("https://web.whatsapp.com/")
 
     def _wait_for_web_whatsapp_to_load(self):
-        self._wait_for_an_presence_of_element(SELECTORS.TURN_ON_DESKTOP_NOTIFICATIONS)
+        self._wait_for_presence_of_an_element(SELECTORS.TURN_ON_DESKTOP_NOTIFICATIONS)
 
-    def _wait_for_an_presence_of_element(self, selector):
+    def _wait_for_presence_of_an_element(self, selector):
         element = None
         try:
             element = WebDriverWait(self.browser, 34).until(
@@ -110,7 +110,7 @@ class WaObject:
         nameofchat = ''
         while True:
             try:
-                nameofchat = self._wait_for_an_presence_of_element(SELECTORS.CHATROOM.NAME).get_attribute(
+                nameofchat = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM.NAME).get_attribute(
                 'innerText')
             except:
                 pass
@@ -120,4 +120,4 @@ class WaObject:
     def _search_and_wait_for_complete(self, nameornumber):
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_SEARCH_ICON).click()
         self.browser.switch_to.active_element.send_keys(nameornumber)
-        self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR_DONE)
+        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR_DONE)
