@@ -67,7 +67,6 @@ class Session(WaObject):
     def _add_file_extension(self, sessionfilename):
         return sessionfilename + ".wa" if sessionfilename[-3:] != ".wa" else sessionfilename
 
-
     def _create_valid_session_file_name(self, sessiondir):
         n = len(os.listdir(sessiondir))
         sessionfilename = "%02d" % n + ".wa"
