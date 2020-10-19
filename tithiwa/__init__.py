@@ -1,5 +1,6 @@
 from tithiwa.tithiwa import Tithiwa
-from session import Session
-from chatroom import Chatroom
-from group import Group
-import flextithiwa
+from session import *
+from chatroom import *
+from group import *
+from constants import *
+from flextithiwa import *
