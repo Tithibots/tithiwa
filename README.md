@@ -34,7 +34,8 @@ tithiwabot.open_session("filename")
 ```
 - [x] Done - `open_chat_by_number() and send_message_to_number()`: Open chatroom and send message ✔ 
 ```python
-tithiwabot.open_chat_by_number("919592140593")
+tithiwabot.open_chat_by_name_or_number("919592140593")
+tithiwabot.open_chat_by_number_using_url("919592140593") # wa.me/919592140593
 tithiwabot.send_message_to_number("919592140593", "Hello, from Tithiwa")
 ```
 - [x] Done - `create_group()`: Create new WhatsApp group ✔ 
