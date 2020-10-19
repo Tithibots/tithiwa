@@ -82,6 +82,17 @@ class WaObject:
             finally:
                 pass
 
+    def _race_for_presence_of_two_elements(self, selector1, selector2):
+        elementandindex = None
+        try:
+            elementandindex = WebDriverWait(self.browser, 5).until(lambda device:
+                                                          [self.browser.find_element(selector1[0], selector1[1]), 0] or
+                                                          [self.browser.find_element(selector2[0], selector2[1]), 1])
+        except:
+            pass
+        finally:
+            return elementandindex[0], elementandindex[1]
+
     def _search_and_open_chat_by_name(self, name):
         isfound = False
         self._search_and_wait_for_complete(name)
