@@ -27,35 +27,35 @@ Create bot
 from tithiwa import Tithiwa
 tithiwabot = Tithiwa()
 ```
-- [x] Done - `generate_session() and open_session()`: Generate sessions and open sessions ✔ 
+- [x] Done: Generate sessions and open sessions ✔ 
 ```python
 tithiwabot.generate_session("filename")
 tithiwabot.open_session("filename")
 ```
-- [x] Done - `open_chat_by_number() and send_message_to_number()`: Open chatroom and send message ✔ 
+- [x] Done: Open chatroom and send message ✔ 
 ```python
 tithiwabot.open_chat_by_name_or_number("919592140593")
 tithiwabot.open_chat_by_number_using_url("919592140593") # wa.me/919592140593
 tithiwabot.send_message_to_number("919592140593", "Hello, from Tithiwa")
 ```
-- [x] Done - `create_group()`: Create new WhatsApp group ✔ 
+- [x] Done: Create new WhatsApp group ✔ 
 ```python
 tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
 ```
-- [x] Done - `scrape_members_from_group()`: Scrape members list from group ✔ 
+- [x] Done: Scrape members list from group ✔ 
 ```python
 membersList = tithiwabot.scrape_members_from_group("GroupName")
 print(membersList) # ["contact1", "contact2", "contact2"]
 ```
-- [x] Done - `make_group_admins()`: Make given contacts as group admins of given group ✔ 
+- [x] Done: Make given contacts as group admins of given group ✔ 
 ```python
 tithiwabot.make_group_admins("GroupName", ["contact1", "contact2"])
 ```
-- [x] Done - `remove_members_from_group()`: Remove given contacts from given group ✔ 
+- [x] Done: Remove given contacts from given group ✔ 
 ```python
 tithiwabot.remove_members_from_group("GroupName", ["contact1", "contact2"])
 ```
-- [x] Done - `send_message_with_mention_all_to_group()`: Send a message to a group with mentioning all group members ✔ 
+- [x] Done: Send a message to a group with mentioning all group members ✔ 
 ```python
 tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
 ```
@@ -66,15 +66,15 @@ tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/27): Scrap chat as text 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/28): Track online status of given number 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/29): Send given message to given contacts at some given time i.e schedule messages 
-- [x] Done - `exit_from_group()`: Exit from group ✔
+- [x] Done: Exit from group ✔
 ```python
 tithiwabot.exit_from_group("GroupName1")
 ```
-- [x] Done - `exit_from_all_groups()`: Exit from all groups ✔
+- [x] Done: Exit from all groups ✔
 ```python
 tithiwabot.exit_from_all_groups()
 ```
-- [x] Done - `exit_from_groups()`: Exit from given groups ✔
+- [x] Done: Exit from given groups ✔
 ```python
 tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
 ```
