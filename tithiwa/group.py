@@ -5,25 +5,26 @@ from constants import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from chatroom import Chatroom
+from waobject import WaObject
 
 
-class Group(Chatroom):
+class Group(Chatroom, WaObject):
     def __init__(self, browser=None):
         super().__init__(browser)
 
     def create_group(self, groupname, contacts):
         print(f'Creating group "{groupname}" with contacts {contacts}', end="... ")
-        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS.MENU_ICON).click()
-        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS.NEW_GROUP).click()
-        inputbox = self._wait_for_presence_of_an_element(SELECTORS.CREATE_NEW_GROUP.TYPE_CONTACTS_INPUT_BOX)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS__MENU_ICON).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS__NEW_GROUP).click()
+        inputbox = self._wait_for_presence_of_an_element(SELECTORS.CREATE_NEW_GROUP__TYPE_CONTACTS_INPUT_BOX)
         inputbox.click()
         for name in contacts:
             inputbox.send_keys(name)
-            self._wait_for_presence_of_an_element(SELECTORS.CREATE_NEW_GROUP.RESULT_CONTACT)
+            self._wait_for_presence_of_an_element(SELECTORS.CREATE_NEW_GROUP__RESULT_CONTACT)
             inputbox.send_keys(Keys.TAB + Keys.ENTER)
-        self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.OK_CONTACTS_TYPE).click()
-        self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.TYPE_GROUP_NAME).send_keys(groupname)
-        self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP.OK_GROUP_NAME_TYPE).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP__OK_CONTACTS_TYPE).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP__TYPE_GROUP_NAME).send_keys(groupname)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP__OK_GROUP_NAME_TYPE).click()
         self._wait_for_chat_to_open(groupname)
         self._close_info()
         print(f'{STRINGS.CHECK_CHAR} Done')
@@ -40,10 +41,10 @@ class Group(Chatroom):
             if curractive == preactive:
                 break
             members.append(
-                curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
+                curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                     'innerText'))
             preactive = curractive
-        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
         print(f'{STRINGS.CHECK_CHAR} Done')
         return members
 
@@ -57,17 +58,17 @@ class Group(Chatroom):
             curractive = self.browser.switch_to.active_element
             if curractive == preactive:
                 break
-            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
+            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name in members:
                 try:
-                    curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.ADMIN_ICON)
+                    curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__ADMIN_ICON)
                 except:
                     curractive.click()
-                    self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.MAKE_ADMIN).click()
+                    self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__MAKE_ADMIN).click()
             preactive = curractive
-        self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS.ADMIN_ICON, curractive)
-        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
+        self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS__ADMIN_ICON, curractive)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
         print(f'{STRINGS.CHECK_CHAR} Done')
 
     def remove_members_from_group(self, groupname, members):
@@ -77,15 +78,15 @@ class Group(Chatroom):
         curractive = self.browser.switch_to.active_element
         curractive.send_keys(Keys.ARROW_DOWN)
         while curractive != preactive:
-            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
+            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name in members:
                 curractive.click()
-                self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.REMOVE).click()
+                self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__REMOVE).click()
             preactive = curractive
             curractive = self.browser.switch_to.active_element
         self._wait_for_an_element_to_deattached(curractive)
-        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.CLOSE_CONTACTS_SEARCH).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
         print(f'{STRINGS.CHECK_CHAR} Done')
 
     def send_message_with_mention_all_to_group(self, groupname, message):
@@ -111,7 +112,7 @@ class Group(Chatroom):
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
 
     def exit_from_all_groups(self):
-        self._wait_for_presence_of_an_element(SELECTORS.GROUPS.GROUP_NAME_IN_CHATS)
+        self._wait_for_presence_of_an_element(SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
         preactive = None
         self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
@@ -119,7 +120,7 @@ class Group(Chatroom):
         while curractive != preactive:
             groupnameelement = None
             try:
-                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.GROUP_NAME_IN_CHATS)
+                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
             except:
                 pass
             if groupnameelement != None:
@@ -130,7 +131,7 @@ class Group(Chatroom):
             curractive = self.browser.switch_to.active_element
 
     def exit_from_groups(self, groupnames):
-        self._wait_for_presence_of_an_element(SELECTORS.GROUPS.GROUP_NAME_IN_CHATS)
+        self._wait_for_presence_of_an_element(SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
         preactive = None
         self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
@@ -138,7 +139,7 @@ class Group(Chatroom):
         while curractive != preactive:
             groupnameelement = None
             try:
-                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.GROUP_NAME_IN_CHATS)
+                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
             except:
                 pass
             if groupnameelement != None:
@@ -147,6 +148,7 @@ class Group(Chatroom):
                     self._wait_for_group_to_open_then_exit(groupname)
                     groupnames.remove(groupname)
             preactive = curractive
+            pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
         if len(groupnames) != 0:
@@ -155,8 +157,8 @@ class Group(Chatroom):
     def _open_group_members_list(self, groupname):
         self._search_and_open_chat_by_name(groupname)
         self._close_chatroom_info()
-        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.MEMBERS_SEARCH_ICON).click()
-        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.SEARCH_CONTACTS_INPUT_BOX).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__MEMBERS_SEARCH_ICON).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__SEARCH_CONTACTS_INPUT_BOX).click()
 
     def _wait_for_group_to_open_then_exit(self, groupname):
         print(f'Exiting from group "{groupname}"', end="... ")
@@ -165,15 +167,15 @@ class Group(Chatroom):
 
     def _exit_from_group(self):
         self._wait_for_group_info_to_load()
-        chatinfo = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM.INFO).get_attribute('innerText')
+        chatinfo = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__INFO).get_attribute('innerText')
         if chatinfo.find('You') == -1:
             print(f'{STRINGS.CHECK_CHAR} Done. You are already exited the group.')
             # self._close_chatroom_info()
         else:
-            self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM.NAME).click()
-            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_FROM_GROUP).click()
-            self._wait_for_presence_of_an_element(SELECTORS.GROUPS.EXIT_DIALOG_BOX)
-            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS.EXIT_BUTTON_EXIT_DIALOG_BOX).click()
+            self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
+            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__EXIT_FROM_GROUP).click()
+            self._wait_for_presence_of_an_element(SELECTORS.GROUPS__EXIT_DIALOG_BOX)
+            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__EXIT_BUTTON_EXIT_DIALOG_BOX).click()
             self._close_chatroom_info()
             self._close_info()
             print(f'{STRINGS.CHECK_CHAR} Done')
@@ -182,7 +184,7 @@ class Group(Chatroom):
         chatinfo = 'click here for group info'
         while chatinfo == 'click here for group info':
             try:
-                chatinfo = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM.INFO).get_attribute('innerText')
+                chatinfo = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__INFO).get_attribute('innerText')
             except:
                 pass
 

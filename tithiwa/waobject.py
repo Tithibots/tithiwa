@@ -103,7 +103,7 @@ class WaObject:
             curractive = self.browser.switch_to.active_element
             if curractive == preactive:
                 break
-            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
+            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name == name:
                 isfound = True
@@ -121,7 +121,7 @@ class WaObject:
         nameofchat = ''
         while True:
             try:
-                nameofchat = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM.NAME).get_attribute(
+                nameofchat = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME).get_attribute(
                 'innerText')
             except:
                 pass
