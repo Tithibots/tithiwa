@@ -1,10 +1,9 @@
-__all__ = ['MODULEDIR', 'SESSIONDIR', 'SELECTORS', 'STRINGS']
-
 import os
 
 MODULEDIR = os.path.dirname(__file__)
 SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
 
+DEFAULT_WAIT = 89
 
 class SELECTORS(object):
     MAIN_SEARCH_BAR = '._3FRCZ'
