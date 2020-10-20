@@ -1,7 +1,7 @@
 __all__ = ["WaObject"]
 
 from selenium import webdriver
-from constants import SELECTORS
+from constants import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -36,7 +36,7 @@ class WaObject:
     def _wait_for_presence_of_an_element(self, selector):
         element = None
         try:
-            element = WebDriverWait(self.browser, 34).until(
+            element = WebDriverWait(self.browser, DEFAULT_WAIT).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, selector))
             )
         except:
@@ -57,7 +57,7 @@ class WaObject:
     def _wait_for_an_element_to_be_clickable(self, selector):
         element = None
         try:
-            element = WebDriverWait(self.browser, 10).until(
+            element = WebDriverWait(self.browser, DEFAULT_WAIT).until(
                 EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
             )
         except:

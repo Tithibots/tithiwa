@@ -117,6 +117,7 @@ class Group(Chatroom, WaObject):
         preactive = None
         self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
         curractive = self.browser.switch_to.active_element
+        pregroupname = None
         while curractive != preactive:
             groupnameelement = None
             try:
@@ -125,35 +126,40 @@ class Group(Chatroom, WaObject):
                 pass
             if groupnameelement != None:
                 groupname = groupnameelement.get_attribute('innerText')
+                self._wait_for_an_element_to_deattached(pregroupname)
                 self._wait_for_group_to_open_then_exit(groupname)
             preactive = curractive
+            pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
 
-    def exit_from_groups(self, groupnames):
+    def exit_from_groups(self, groupnames, includesamename=True):
+        exitedgroups = []
         self._wait_for_presence_of_an_element(SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
         preactive = None
         self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
         curractive = self.browser.switch_to.active_element
+        pregroupname = None
         while curractive != preactive:
             groupnameelement = None
             try:
-                # self._wa
                 groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
             except:
                 pass
             if groupnameelement != None:
                 groupname = groupnameelement.get_attribute('innerText')
                 if groupname in groupnames:
+                    self._wait_for_an_element_to_deattached(pregroupname)
                     self._wait_for_group_to_open_then_exit(groupname)
-                    groupnames.remove(groupname)
+                    exitedgroups.append(groupname)
+                    if not includesamename:
+                        groupnames.remove(groupname)
             preactive = curractive
             pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
-        if len(groupnames) != 0:
-            print(f'{STRINGS.CROSS_CHAR} Failed for {groupnames}, These groups are not found.')
+        print(f'{STRINGS.CHECK_CHAR} You exited groups: {exitedgroups}.')
 
     def _open_group_members_list(self, groupname):
         self._search_and_open_chat_by_name(groupname)
