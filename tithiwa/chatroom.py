@@ -26,6 +26,10 @@ class Chatroom(WaObject):
         self._send_message(message)
         print(f'{STRINGS.CHECK_CHAR} Done')
 
+    def send_a_message_to_multiple_chats(self, names, message):
+        for name in names:
+            self.send_message_to_name_or_number(name, message)
+
     def _open_info(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
 
