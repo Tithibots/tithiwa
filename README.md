@@ -84,6 +84,7 @@ tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/54): Get currently opened Web WhatsApp's mobile number 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/55): Open chat to the same number as currently opened Web WhatsApp's number
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/56): join multiple groups by invite links
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/58): Send a message to multiple chats
 
 ## Installation 
 NOTE - pip contains older version i.e clone repo to use
