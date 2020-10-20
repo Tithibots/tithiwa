@@ -36,7 +36,7 @@ tithiwabot.open_session("filename")
 ```python
 tithiwabot.open_chat_by_name_or_number("919592140593")
 tithiwabot.open_chat_by_number_using_url("919592140593") # wa.me/919592140593
-tithiwabot.send_message_to_number("919592140593", "Hello, from Tithiwa")
+tithiwabot.send_message_to_name_or_number("919592140593", "Hello, from Tithiwa")
 ```
 - [x] Done: Create new WhatsApp group ✔ 
 ```python
