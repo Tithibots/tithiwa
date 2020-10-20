@@ -2,7 +2,7 @@ from tithiwa import Tithiwa
 
 tithiwabot = Tithiwa()
 # tithiwabot.generate_session()
-
+tithiwabot.open_session()
 print("Break")
 tithiwabot.create_group("Group made by tithiwa", ["Navpreet Devpuri"])
 # tithiwabot.create_group("Group made by tithiwa", ["Navpreet Devpuri"])

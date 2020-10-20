@@ -75,15 +75,24 @@ class WaObject:
                 pass
 
     def _race_for_presence_of_two_elements(self, selector1, selector2):
-        elementandindex = None
+        selector1orselector2 = selector1 + ", " + selector2
+        winnerelement = self._wait_for_presence_of_an_element(selector1orselector2)
+        element1 = None
         try:
-            elementandindex = WebDriverWait(self.browser, 5).until(lambda device:
-                                                          [self.browser.find_element(selector1[0], selector1[1]), 0] or
-                                                          [self.browser.find_element(selector2[0], selector2[1]), 1])
+            element1 = self.browser.find_element(By.CSS_SELECTOR, selector1)
         except:
             pass
-        finally:
-            return elementandindex[0], elementandindex[1]
+        element2 = None
+        try:
+            element2 = self.browser.find_element(By.CSS_SELECTOR, selector2)
+        except:
+            pass
+        if winnerelement == element1:
+            return winnerelement, 0
+        elif winnerelement == element2:
+            return winnerelement, 1
+        else:
+            return None, -1
 
     def _search_and_open_chat_by_name(self, name):
         isfound = False
@@ -114,7 +123,7 @@ class WaObject:
         while True:
             try:
                 nameofchat = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME).get_attribute(
-                'innerText')
+                    'innerText')
             except:
                 pass
             if nameofchat == name:

@@ -139,6 +139,7 @@ class Group(Chatroom, WaObject):
         while curractive != preactive:
             groupnameelement = None
             try:
+                # self._wa
                 groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
             except:
                 pass
@@ -166,11 +167,9 @@ class Group(Chatroom, WaObject):
         self._exit_from_group()
 
     def _exit_from_group(self):
-        self._wait_for_group_info_to_load()
-        chatinfo = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__INFO).get_attribute('innerText')
-        if chatinfo.find('You') == -1:
+        _, winnerindex = self._race_for_presence_of_two_elements(SELECTORS.GROUPS__NO_LONGER_A_PARTICIPANT, SELECTORS.MESSAGE_INPUT_BOX)
+        if winnerindex == 0:
             print(f'{STRINGS.CHECK_CHAR} Done. You are already exited the group.')
-            # self._close_chatroom_info()
         else:
             self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
             self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__EXIT_FROM_GROUP).click()
