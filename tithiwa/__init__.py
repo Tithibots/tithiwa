@@ -1,4 +1,4 @@
-from tithiwa import Tithiwa
+from tithiwa.tithiwa import Tithiwa
 from session import *
 from chatroom import *
 from group import *
