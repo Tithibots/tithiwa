@@ -163,7 +163,7 @@ class Group(Chatroom, WaObject):
 
     def _open_group_members_list(self, groupname):
         self._search_and_open_chat_by_name(groupname)
-        self._close_chatroom_info()
+        self._close_chat_info()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__MEMBERS_SEARCH_ICON).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__SEARCH_CONTACTS_INPUT_BOX).click()
 
@@ -181,7 +181,7 @@ class Group(Chatroom, WaObject):
             self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__EXIT_FROM_GROUP).click()
             self._wait_for_presence_of_an_element(SELECTORS.GROUPS__EXIT_DIALOG_BOX)
             self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__EXIT_BUTTON_EXIT_DIALOG_BOX).click()
-            self._close_chatroom_info()
+            self._close_chat_info()
             self._close_info()
             print(f'{STRINGS.CHECK_CHAR} Done')
 

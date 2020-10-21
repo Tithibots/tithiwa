@@ -30,10 +30,10 @@ class Chatroom(WaObject):
         for name in names:
             self.send_message_to_name_or_number(name, message)
 
-    def _open_info(self):
+    def _open_chat_info(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
 
-    def _close_chatroom_info(self):
+    def _close_chat_info(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__CLOSE_INFO).click()
 
     def _send_message(self, message):
