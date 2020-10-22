@@ -22,63 +22,6 @@ NOTE: If you are running javascript code inside selenium chromedriver's console 
 Good luck :)
   
 ## Automation ideas
-Create bot 
-```python
-from tithiwa import Tithiwa
-tithiwabot = Tithiwa()
-```
-- [x] Done: Generate sessions and open sessions ✔ 
-```python
-tithiwabot.generate_session("filename")
-tithiwabot.open_session("filename")
-```
-- [x] Done: Open chatroom and send message ✔ 
-```python
-tithiwabot.open_chat_to("919592140593")
-tithiwabot.open_chat_to_number_using_url("919592140593") # wa.me/919592140593
-tithiwabot.send_message_to("919592140593", "Hello, from Tithiwa")
-```
-- [x] Done: Send a message to multiple chats
-```python
-tithiwabot.send_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
-```
-- [x] Done: Send a message to multiple chats at given time 
-```python
-tithiwabot.send_message_at_time_to(["contact1", "contact2", "Group1"], "hi, from tithiwa at 9:36PM", "21:36:00")
-```
-- [x] Done: Create new WhatsApp group ✔ 
-```python
-tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
-```
-- [x] Done: Scrape members list from group ✔ 
-```python
-membersList = tithiwabot.scrape_members_from_group("GroupName")
-print(membersList) # ["contact1", "contact2", "contact2"]
-```
-- [x] Done: Make given contacts as group admins of given group ✔ 
-```python
-tithiwabot.make_group_admins("GroupName", ["contact1", "contact2"])
-```
-- [x] Done: Remove given contacts from given group ✔ 
-```python
-tithiwabot.remove_members_from_group("GroupName", ["contact1", "contact2"])
-```
-- [x] Done: Send a message to a group with mentioning all group members ✔ 
-```python
-tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
-```
-- [x] Done: Exit from group ✔
-```python
-tithiwabot.exit_from_group("GroupName1")
-```
-- [x] Done: Exit from all groups ✔
-```python
-tithiwabot.exit_from_all_groups()
-```
-- [x] Done: Exit from given groups ✔
-```python
-tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
-```
 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/23): Clear chats of all groups  
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/24): Clear chats of all contacts 
@@ -96,6 +39,53 @@ tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/61): Delete chats of all exited groups
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/62): Delete chats of all contacts
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/60): Get number from contact name
+
+```python
+from tithiwa import Tithiwa
+
+# Create bot 
+tithiwabot = Tithiwa()
+
+## Generate sessions and open sessions ✔ 
+tithiwabot.generate_session("filename")
+tithiwabot.open_session("filename")
+
+## Open chatroom and send message ✔ 
+tithiwabot.open_chat_to("919592140593")
+tithiwabot.open_chat_to_number_using_url("919592140593") # wa.me/919592140593
+tithiwabot.send_message_to("919592140593", "Hello, from Tithiwa")
+
+## Send a message to multiple chats
+tithiwabot.send_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
+
+## Send a message to multiple chats at given time 
+tithiwabot.send_message_at_time_to(["contact1", "contact2", "Group1"], "hi, from tithiwa at 9:36PM", "21:36:00")
+
+## Create new WhatsApp group ✔ 
+tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
+
+## Scrape members list from group ✔ 
+membersList = tithiwabot.scrape_members_from_group("GroupName")
+print(membersList) # ["contact1", "contact2", "contact2"]
+
+## Make given contacts as group admins of given group ✔ 
+tithiwabot.make_group_admins("GroupName", ["contact1", "contact2"])
+
+## Remove given contacts from given group ✔ 
+tithiwabot.remove_members_from_group("GroupName", ["contact1", "contact2"])
+
+## Send a message to a group with mentioning all group members ✔ 
+tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
+
+## Exit from group ✔
+tithiwabot.exit_from_group("GroupName1")
+
+## Exit from all groups ✔
+tithiwabot.exit_from_all_groups()
+
+## Exit from given groups ✔
+tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
+```
 
 ## Installation 
 NOTE - pip contains older version i.e clone repo to use
