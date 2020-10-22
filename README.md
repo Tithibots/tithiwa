@@ -83,7 +83,9 @@ tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/42): Scape all contacts and send message containing URL to their own chatroom 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/54): Get currently opened Web WhatsApp's mobile number 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/55): Open chat to the same number as currently opened Web WhatsApp's number
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/56): join multiple groups by invite links
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/56): Join multiple groups by invite links
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/61): Delete chats of all exited groups
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/62): Delete chats of all contacts
 - [x] Done: Send a message to multiple chats
 ```python
 tithiwabot.send_a_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
