@@ -25,6 +25,7 @@ class SELECTORS(object):
     CHATROOM__NAME = '.DP7CM'
     CHATROOM__INFO = '._3-cMa._3Whw5'
     CHATROOM__CLOSE_INFO = '[data-testid="x"]'
+    CHATROOM__OPTIONS = '[data-testid="menu"]'
     GROUPS__MEMBERS_SEARCH_ICON = '._3lS1C'
     GROUPS__SEARCH_CONTACTS_INPUT_BOX = '._9a59P ._3FRCZ'
     GROUPS__CONTACTS_SEARCH_NAME = '._3ko75'
