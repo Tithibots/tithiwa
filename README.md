@@ -34,13 +34,13 @@ tithiwabot.open_session("filename")
 ```
 - [x] Done: Open chatroom and send message ✔ 
 ```python
-tithiwabot.open_chat_by_name_or_number("919592140593")
-tithiwabot.open_chat_by_number_using_url("919592140593") # wa.me/919592140593
-tithiwabot.send_message_to_name_or_number("919592140593", "Hello, from Tithiwa")
+tithiwabot.open_chat_to("919592140593")
+tithiwabot.open_chat_to_number_using_url("919592140593") # wa.me/919592140593
+tithiwabot.send_message_to("919592140593", "Hello, from Tithiwa")
 ```
 - [x] Done: Send a message to multiple chats
 ```python
-tithiwabot.send_a_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
+tithiwabot.send_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
 ```
 - [x] Done: Create new WhatsApp group ✔ 
 ```python
