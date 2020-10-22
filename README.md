@@ -42,6 +42,10 @@ tithiwabot.send_message_to("919592140593", "Hello, from Tithiwa")
 ```python
 tithiwabot.send_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
 ```
+- [x] Done: Send a message to multiple chats at given time 
+```python
+tithiwabot.send_message_at_time_to(["contact1", "contact2", "Group1"], "hi, from tithiwa at 9:36PM", "21:36:00")
+```
 - [x] Done: Create new WhatsApp group ✔ 
 ```python
 tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
@@ -75,6 +79,7 @@ tithiwabot.exit_from_all_groups()
 ```python
 tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
 ```
+
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/23): Clear chats of all groups  
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/24): Clear chats of all contacts 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/25): Clear all chats both groups and contacts 
