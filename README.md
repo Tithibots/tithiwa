@@ -3,6 +3,7 @@
 # tithiwa - Web WhatsApp bot
 
 Automate Web WhatsApp with selenium.
+# Check Headless tithiwa [challenge](https://github.com/Tithibots/tithiwa/issues/64)
 
 Full explained Videos on that project are coming soon. Stay tune with our youtube channel [Noobie Techs](https://www.youtube.com/c/NoobieTechsTithi_mukherjee/)
 
@@ -11,7 +12,6 @@ Table of contents
   * [Automation ideas](#automation-ideas)
   * [Installation](#installation)
   
-Check Headless tithiwa [challenge](https://github.com/Tithibots/tithiwa/issues/64)
 ## Contribution and creativity points
 Selenium automation creativity points 
 1. **Debugging** [Example](https://github.com/Tithibots/tithiwa/issues/50#issuecomment-710778130)<br> We can create breakpoints to pause execution at any time then we can try to run some python code in the console to find a way to do something. That helps to develop efficiently.  
