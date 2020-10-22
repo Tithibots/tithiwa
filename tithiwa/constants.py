@@ -26,6 +26,7 @@ class SELECTORS(object):
     CHATROOM__INFO = '._3-cMa._3Whw5'
     CHATROOM__CLOSE_INFO = '[data-testid="x"]'
     CHATROOM__OPTIONS = '[data-testid="menu"]'
+    CONTACTS__NAME_IN_CHATS = '._357i8 > ._3ko75._5h6Y_._3Whw5'
     GROUPS__MEMBERS_SEARCH_ICON = '._3lS1C'
     GROUPS__SEARCH_CONTACTS_INPUT_BOX = '._9a59P ._3FRCZ'
     GROUPS__CONTACTS_SEARCH_NAME = '._3ko75'
@@ -37,7 +38,7 @@ class SELECTORS(object):
     GROUPS__EXIT_DIALOG_BOX = '._9a59P'
     GROUPS__EXIT_BUTTON_EXIT_DIALOG_BOX = '.S7_rT.FV2Qy'
     GROUPS__NO_LONGER_A_PARTICIPANT = '._3ge3i'
-    GROUPS__GROUP_NAME_IN_CHATS = '._3CneP > ._3ko75._5h6Y_._3Whw5'
+    GROUPS__NAME_IN_CHATS = '._3CneP > ._3ko75._5h6Y_._3Whw5'
 
 class STRINGS(object):
     CHECK_CHAR = '✔'

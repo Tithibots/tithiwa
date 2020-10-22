@@ -112,7 +112,7 @@ class Group(Chatroom, WaObject):
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
 
     def exit_from_all_groups(self):
-        self._wait_for_presence_of_an_element(SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
+        self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
         preactive = None
         self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
@@ -121,7 +121,7 @@ class Group(Chatroom, WaObject):
         while curractive != preactive:
             groupnameelement = None
             try:
-                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
+                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__NAME_IN_CHATS)
             except:
                 pass
             if groupnameelement != None:
@@ -135,7 +135,7 @@ class Group(Chatroom, WaObject):
 
     def exit_from_groups(self, groupnames, includesamename=True):
         exitedgroups = []
-        self._wait_for_presence_of_an_element(SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
+        self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
         preactive = None
         self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
@@ -144,7 +144,7 @@ class Group(Chatroom, WaObject):
         while curractive != preactive:
             groupnameelement = None
             try:
-                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__GROUP_NAME_IN_CHATS)
+                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__NAME_IN_CHATS)
             except:
                 pass
             if groupnameelement != None:
