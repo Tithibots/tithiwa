@@ -11,6 +11,7 @@ Table of contents
   * [Automation ideas](#automation-ideas)
   * [Installation](#installation)
   
+Check Headless tithiwa [challenge](https://github.com/Tithibots/tithiwa/issues/64)
 ## Contribution and creativity points
 Selenium automation creativity points 
 1. **Debugging** [Example](https://github.com/Tithibots/tithiwa/issues/50#issuecomment-710778130)<br> We can create breakpoints to pause execution at any time then we can try to run some python code in the console to find a way to do something. That helps to develop efficiently.  
