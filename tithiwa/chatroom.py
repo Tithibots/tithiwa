@@ -1,5 +1,6 @@
 __all__ = ["Chatroom"]
 
+import datetime
 from constants import *
 from waobject import WaObject
 from selenium.webdriver.common.keys import Keys
@@ -29,6 +30,17 @@ class Chatroom(WaObject):
     def send_a_message_to_multiple_chats(self, names, message):
         for name in names:
             self.send_message_to_name_or_number(name, message)
+
+    def send_message_to_name_or_number_at_time(self, nameornumberlist, message, time='03:00:00'):
+        h, m, s = map(int, time.split(':'))
+        given_time = str(datetime.time(hour=h, minute=m, second=s))
+        while True:
+            now = datetime.datetime.now()
+            time_now = "%0.2d:%0.2d:%0.2d" % (now.hour, now.minute, now.second)
+            print(given_time + " : ", time_now)
+            if given_time == time_now:
+                self.send_a_message_to_multiple_chats(nameornumberlist, message)
+                break
 
     def _open_chat_info(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
