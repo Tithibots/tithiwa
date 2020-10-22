@@ -38,6 +38,10 @@ tithiwabot.open_chat_by_name_or_number("919592140593")
 tithiwabot.open_chat_by_number_using_url("919592140593") # wa.me/919592140593
 tithiwabot.send_message_to_name_or_number("919592140593", "Hello, from Tithiwa")
 ```
+- [x] Done: Send a message to multiple chats
+```python
+tithiwabot.send_a_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
+```
 - [x] Done: Create new WhatsApp group ✔ 
 ```python
 tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
@@ -59,13 +63,6 @@ tithiwabot.remove_members_from_group("GroupName", ["contact1", "contact2"])
 ```python
 tithiwabot.send_message_with_mention_all_to_group("GroupName", "Hello All")
 ```
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/23): Clear chats of all groups  
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/24): Clear chats of all contacts 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/25): Clear all chats both groups and contacts 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/26): Auto-reply given messages to some given messages 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/27): Scrap chat as text 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/28): Track online status of given number 
-- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/29): Send given message to given contacts at some given time i.e schedule messages 
 - [x] Done: Exit from group ✔
 ```python
 tithiwabot.exit_from_group("GroupName1")
@@ -78,6 +75,13 @@ tithiwabot.exit_from_all_groups()
 ```python
 tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
 ```
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/23): Clear chats of all groups  
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/24): Clear chats of all contacts 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/25): Clear all chats both groups and contacts 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/26): Auto-reply given messages to some given messages 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/27): Scrap chat as text 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/28): Track online status of given number 
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/29): Send given message to given contacts at some given time i.e schedule messages 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/53): Join group by invite link
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/39): Change Web WhatsApp's settings 
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/42): Scape all contacts and send message containing URL to their own chatroom 
@@ -86,10 +90,7 @@ tithiwabot.exit_from_groups(["GroupName1", "GroupName2"])
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/56): Join multiple groups by invite links
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/61): Delete chats of all exited groups
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/62): Delete chats of all contacts
-- [x] Done: Send a message to multiple chats
-```python
-tithiwabot.send_a_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
-```
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/60): Get number from contact name
 
 ## Installation 
 NOTE - pip contains older version i.e clone repo to use
