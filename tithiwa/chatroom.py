@@ -32,12 +32,12 @@ class Chatroom(WaObject):
             self.send_message_to_name_or_number(name, message)
 
     def send_message_to_name_or_number_at_time(self, nameornumberlist, message, time='03:00:00'):
+        print(f'Sending message "{message}" to name or number "{nameornumberlist}" on time {time}...')
         h, m, s = map(int, time.split(':'))
         given_time = str(datetime.time(hour=h, minute=m, second=s))
         while True:
             now = datetime.datetime.now()
             time_now = "%0.2d:%0.2d:%0.2d" % (now.hour, now.minute, now.second)
-            print(given_time + " : ", time_now)
             if given_time == time_now:
                 self.send_a_message_to_multiple_chats(nameornumberlist, message)
                 break
