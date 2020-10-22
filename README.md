@@ -59,7 +59,9 @@ tithiwabot.send_message_to("919592140593", "Hello, from Tithiwa")
 tithiwabot.send_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
 
 ## Send a message to multiple chats at given time 
-tithiwabot.send_message_at_time_to(["contact1", "contact2", "Group1"], "hi, from tithiwa at 9:36PM", "21:36:00")
+tithiwabot.send_message_at_time_to(["contact1", "contact2", "Group1"],
+                                   "hi, from tithiwa at 9:36PM",
+                                   "21:36:00")
 
 ## Create new WhatsApp group ✔ 
 tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
