@@ -37,7 +37,7 @@ class WaObject:
         element = None
         try:
             element = WebDriverWait(self.browser, DEFAULT_WAIT).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+                EC.presence_of_element_located(selector)
             )
         except:
             pass
@@ -48,7 +48,7 @@ class WaObject:
         relement = None
         while True:
             try:
-                relement = element.find_element(By.CSS_SELECTOR, selector)
+                relement = element.find_element(selector[0], selector[1])
             except:
                 pass
             finally:
@@ -58,7 +58,7 @@ class WaObject:
         element = None
         try:
             element = WebDriverWait(self.browser, DEFAULT_WAIT).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
+                EC.element_to_be_clickable(selector)
             )
         except:
             pass
@@ -79,12 +79,12 @@ class WaObject:
         winnerelement = self._wait_for_presence_of_an_element(selector1orselector2)
         element1 = None
         try:
-            element1 = self.browser.find_element(By.CSS_SELECTOR, selector1)
+            element1 = self.browser.find_element(selector1[0], selector1[1])
         except:
             pass
         element2 = None
         try:
-            element2 = self.browser.find_element(By.CSS_SELECTOR, selector2)
+            element2 = self.browser.find_element(selector2[0], selector2[1])
         except:
             pass
         if winnerelement == element1:
@@ -104,7 +104,7 @@ class WaObject:
             curractive = self.browser.switch_to.active_element
             if curractive == preactive:
                 break
-            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
+            name = curractive.find_element(SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name == name:
                 isfound = True
