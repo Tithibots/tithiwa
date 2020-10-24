@@ -41,6 +41,8 @@ Good luck :)
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/62): Delete chats of all contacts
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/60): Get number from contact name
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/66): Get number of views to my status
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/67): Get number of name
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/68): Get number of about
 
 ```python
 from tithiwa import Tithiwa
