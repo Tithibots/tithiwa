@@ -40,6 +40,7 @@ Good luck :)
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/61): Delete chats of all exited groups
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/62): Delete chats of all contacts
 - [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/60): Get number from contact name
+- [ ] [Todo](https://github.com/Tithibots/tithiwa/issues/66): Get number of views to my status
 
 ```python
 from tithiwa import Tithiwa
