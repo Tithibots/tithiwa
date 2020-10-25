@@ -14,6 +14,7 @@ class SELECTORS(object):
     MESSAGE_INPUT_BOX = '#main footer ._3FRCZ'
     TURN_ON_DESKTOP_NOTIFICATIONS = '.zKq5Y'
     CLOSE_INFO = '[data-testid="x-alt"]'
+    BACK_MAIN = '.t4a8o'
 
     class MAIN_MENU_OPTIONS(object):
         MENU_ICON = '[data-testid=menu]'
