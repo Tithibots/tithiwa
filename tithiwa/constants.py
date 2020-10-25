@@ -18,6 +18,7 @@ class SELECTORS(object):
     class MAIN_MENU_OPTIONS(object):
         MENU_ICON = '[data-testid=menu]'
         NEW_GROUP = '[title="New group"]'
+        SETTINGS = '[title="Settings"]'
 
     class CREATE_NEW_GROUP(object):
         TYPE_CONTACTS_INPUT_BOX = '._17ePo'
