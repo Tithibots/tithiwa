@@ -49,6 +49,14 @@ class SELECTORS(object):
         NO_LONGER_A_PARTICIPANT = '._3ge3i'
         GROUP_NAME_IN_CHATS = '._3CneP > ._3ko75._5h6Y_._3Whw5'
 
+    class SETTINGS(object):
+        OK_BUTTON = '.S7_rT.FV2Qy'
+        THEME = '[title="Theme"]'
+
+
 class STRINGS(object):
     CHECK_CHAR = '✔'
     CROSS_CHAR = '❌'
+    THEME_LIGHT = 'light'
+    THEME_DARK = 'dark'
+    THEME_SYSTEM = 'system'
