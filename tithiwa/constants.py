@@ -1,5 +1,7 @@
 import os
 
+from selenium.webdriver.common.by import By
+
 MODULEDIR = os.path.dirname(__file__)
 SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
 
@@ -25,6 +27,7 @@ class SELECTORS(object):
     CHATROOM__NAME_AND_INFO = (By.CSS_SELECTOR, '._33QME')
     CHATROOM__NAME = (By.CSS_SELECTOR, '.DP7CM')
     CHATROOM__INFO = (By.CSS_SELECTOR, '._3-cMa._3Whw5')
+    CHATROOM__INFO__NUMBER = (By.CSS_SELECTOR, '._9l3wT')
     CHATROOM__CLOSE_INFO = (By.CSS_SELECTOR, '[data-testid="x"]')
     CHATROOM__OPTIONS = (By.CSS_SELECTOR, '[data-testid="menu"]')
     CONTACTS__NAME_IN_CHATS = (By.CSS_SELECTOR, '._357i8 > ._3ko75._5h6Y_._3Whw5')
