@@ -16,30 +16,32 @@ class Session(WaObject):
             self.sessiondir = SESSIONDIR
 
     def generate_session(self, sessionfilename=None, shouldclosebrowser=False,
-                         shouldshowfilelocation=True):
+                         shouldshowfilelocation=True, _shouldoutput=True):
         os.makedirs(self.sessiondir, exist_ok=True)
         if sessionfilename == None:
             sessionfilename = self._create_valid_session_file_name(self.sessiondir)
         else:
             sessionfilename = self._add_file_extension(sessionfilename)
-        print("Waiting for QR code scan", end="... ")
+        if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
+            print("Waiting for QR code scan", end="... ")
         while "WAToken1" not in self.browser.execute_script(
                 "return window.localStorage;"):
             continue
-        print(f'{STRINGS.CHECK_CHAR} Done')
+        if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
         session = self.browser.execute_script("return window.localStorage;")
         sessionfilelocation = os.path.realpath(os.path.join(self.sessiondir, sessionfilename))
         with open(sessionfilelocation, 'w',
                   encoding='utf-8') as sessionfile:
             sessionfile.write(str(session))
-        print('Your session file is saved to: ' +
-              sessionfilelocation)
+        if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
+            print('Your session file is saved to: ' + sessionfilelocation)
         if shouldshowfilelocation:
             self._show_file_location(self.sessiondir)
         if shouldclosebrowser:
             self.browser.quit()
 
-    def open_session(self, sessionfilename=None, wait=True):
+    def open_session(self, sessionfilename=None, wait=True, _shouldoutput=True):
         if sessionfilename == None:
             sessionfilename = self._get_last_created_session_file(self.sessiondir)
         else:
@@ -50,7 +52,8 @@ class Session(WaObject):
                 session = eval(sessionfile.read())
             except:
                 raise IOError('"' + sessionfilename + '" is invalid file.')
-        print("Injecting session", end="... ")
+        if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
+            print("Injecting session", end="... ")
         self.browser.execute_script(
             """
         var keys = Object.keys(arguments[0]);
@@ -62,7 +65,8 @@ class Session(WaObject):
         self.browser.refresh()
         if wait:
             self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR)
-        print(f'{STRINGS.CHECK_CHAR} Done')
+        if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
 
     def _add_file_extension(self, sessionfilename):
         return sessionfilename + ".wa" if sessionfilename[-3:] != ".wa" else sessionfilename

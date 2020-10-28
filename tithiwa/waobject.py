@@ -15,8 +15,12 @@ class WaObject:
         self._open_whatsapp_if_not_opened()
         # self._wait_for_web_whatsapp_to_load()
 
-    def quit(self):
+    def quit(self, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Quiting tithiwa', end="...")
         self.browser.quit()
+        if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
 
     def _close_info(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.CLOSE_INFO).click()

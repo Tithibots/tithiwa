@@ -6,6 +6,7 @@ MODULEDIR = os.path.dirname(__file__)
 SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
 
 DEFAULT_WAIT = 89
+DEFAULT_SHOULD_OUTPUT = True
 
 class SELECTORS(object):
     MAIN_SEARCH_BAR = (By.CSS_SELECTOR, '._3FRCZ')

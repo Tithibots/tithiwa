@@ -12,8 +12,9 @@ class Group(Chatroom, WaObject):
     def __init__(self, browser=None):
         super().__init__(browser)
 
-    def create_group(self, groupname, contacts):
-        print(f'Creating group "{groupname}" with contacts {contacts}', end="... ")
+    def create_group(self, groupname, contacts, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Creating group "{groupname}" with contacts {contacts}', end="... ")
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS__MENU_ICON).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS__NEW_GROUP).click()
         inputbox = self._wait_for_presence_of_an_element(SELECTORS.CREATE_NEW_GROUP__TYPE_CONTACTS_INPUT_BOX)
@@ -27,10 +28,12 @@ class Group(Chatroom, WaObject):
         self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP__OK_GROUP_NAME_TYPE).click()
         self._wait_for_chat_to_open(groupname)
         self._close_info()
-        print(f'{STRINGS.CHECK_CHAR} Done')
+        if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
 
-    def scrape_members_from_group(self, groupname):
-        print(f'Scrapping group members from group "{groupname}"', end="... ")
+    def scrape_members_from_group(self, groupname, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Scrapping group members from group "{groupname}"', end="... ")
         members = []
         self._open_group_members_list(groupname)
         preactive = None
@@ -45,11 +48,13 @@ class Group(Chatroom, WaObject):
                     'innerText'))
             preactive = curractive
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
-        print(f'{STRINGS.CHECK_CHAR} Done')
+        if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
         return members
 
-    def make_group_admins(self, groupname, members):
-        print(f'Making members {str(members)} to be group admins of group "{groupname}"', end="... ")
+    def make_group_admins(self, groupname, members, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Making members {str(members)} to be group admins of group "{groupname}"', end="... ")
         self._open_group_members_list(groupname)
         preactive = None
         curractive = self.browser.switch_to.active_element
@@ -69,10 +74,12 @@ class Group(Chatroom, WaObject):
             preactive = curractive
         self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS__ADMIN_ICON, curractive)
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
-        print(f'{STRINGS.CHECK_CHAR} Done')
+        if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
 
-    def remove_members_from_group(self, groupname, members):
-        print(f'Removing these members {str(members)} from the group "{groupname}"', end="... ")
+    def remove_members_from_group(self, groupname, members, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Removing these members {str(members)} from the group "{groupname}"', end="... ")
         self._open_group_members_list(groupname)
         preactive = None
         curractive = self.browser.switch_to.active_element
@@ -87,11 +94,13 @@ class Group(Chatroom, WaObject):
             curractive = self.browser.switch_to.active_element
         self._wait_for_an_element_to_deattached(curractive)
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
-        print(f'{STRINGS.CHECK_CHAR} Done')
+        if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
 
-    def send_message_with_mention_all_to_group(self, groupname, message):
+    def send_message_with_mention_all_to_group(self, groupname, message, _shouldoutput=(True, True)):
         members_in_group = self.scrape_members_from_group(groupname=groupname)
-        print(f'Sending message "{message}" to group "{groupname}" with mentioning all members...', end="... ")
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Sending message "{message}" to group "{groupname}" with mentioning all members...', end="... ")
         message_with_members_mention = ""
         for member in members_in_group:
             # Need below condition to avoid mentioning ourself, as scrape_members_from_group gives "You" also a member
@@ -101,17 +110,20 @@ class Group(Chatroom, WaObject):
         message_with_members_mention += message
         inputbox = self._wait_for_an_element_to_be_clickable(SELECTORS.MESSAGE_INPUT_BOX)
         inputbox.send_keys(message_with_members_mention + Keys.ENTER)
-        print(f'{STRINGS.CHECK_CHAR} Done')
+        if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
 
-    def exit_from_group(self, groupname):
-        print(f'Exiting from group "{groupname}"', end="... ")
+    def exit_from_group(self, groupname, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Exiting from group "{groupname}"', end="... ")
         if self._search_and_open_chat_by_name(groupname):
-            self._exit_from_group()
+            self._exit_from_group(_shouldoutput[1])
         else:
-            print(f'{STRINGS.CROSS_CHAR} Failed. Group not found.')
+            if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+                print(f'{STRINGS.CROSS_CHAR} Failed. Group not found.')
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
 
-    def exit_from_all_groups(self):
+    def exit_from_all_groups(self, _shouldoutput=(True, True)):
         self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
         preactive = None
@@ -127,13 +139,13 @@ class Group(Chatroom, WaObject):
             if groupnameelement != None:
                 groupname = groupnameelement.get_attribute('innerText')
                 self._wait_for_an_element_to_deattached(pregroupname)
-                self._wait_for_group_to_open_then_exit(groupname)
+                self._wait_for_group_to_open_then_exit(groupname, _shouldoutput)
             preactive = curractive
             pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
 
-    def exit_from_groups(self, groupnames, includesamename=True):
+    def exit_from_groups(self, groupnames, includesamename=True, _shouldoutput=(True, True)):
         exitedgroups = []
         self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
@@ -151,7 +163,7 @@ class Group(Chatroom, WaObject):
                 groupname = groupnameelement.get_attribute('innerText')
                 if groupname in groupnames:
                     self._wait_for_an_element_to_deattached(pregroupname)
-                    self._wait_for_group_to_open_then_exit(groupname)
+                    self._wait_for_group_to_open_then_exit(groupname, _shouldoutput)
                     exitedgroups.append(groupname)
                     if not includesamename:
                         groupnames.remove(groupname)
@@ -159,7 +171,8 @@ class Group(Chatroom, WaObject):
             pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
-        print(f'{STRINGS.CHECK_CHAR} You exited groups: {exitedgroups}.')
+        if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} You exited groups: {exitedgroups}.')
 
     def _open_group_members_list(self, groupname):
         self._search_and_open_chat_by_name(groupname)
@@ -167,15 +180,17 @@ class Group(Chatroom, WaObject):
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__MEMBERS_SEARCH_ICON).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__SEARCH_CONTACTS_INPUT_BOX).click()
 
-    def _wait_for_group_to_open_then_exit(self, groupname):
-        print(f'Exiting from group "{groupname}"', end="... ")
+    def _wait_for_group_to_open_then_exit(self, groupname, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Exiting from group "{groupname}"', end="... ")
         self._wait_for_chat_to_open(groupname)
-        self._exit_from_group()
+        self._exit_from_group(_shouldoutput[1])
 
-    def _exit_from_group(self):
+    def _exit_from_group(self, _shouldoutput1=True):
         _, winnerindex = self._race_for_presence_of_two_elements(SELECTORS.GROUPS__NO_LONGER_A_PARTICIPANT, SELECTORS.MESSAGE_INPUT_BOX)
         if winnerindex == 0:
-            print(f'{STRINGS.CHECK_CHAR} Done. You are already exited the group.')
+            if _shouldoutput1 and DEFAULT_SHOULD_OUTPUT:
+                print(f'{STRINGS.CHECK_CHAR} Done. You are already exited the group.')
         else:
             self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
             self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__EXIT_FROM_GROUP).click()
@@ -183,7 +198,8 @@ class Group(Chatroom, WaObject):
             self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__EXIT_BUTTON_EXIT_DIALOG_BOX).click()
             self._close_chat_info()
             self._close_info()
-            print(f'{STRINGS.CHECK_CHAR} Done')
+            if _shouldoutput1 and DEFAULT_SHOULD_OUTPUT:
+                print(f'{STRINGS.CHECK_CHAR} Done')
 
     def _wait_for_group_info_to_load(self):
         chatinfo = 'click here for group info'
