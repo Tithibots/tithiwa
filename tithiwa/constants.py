@@ -1,57 +1,51 @@
-__all__ = ['MODULEDIR', 'SESSIONDIR', 'SELECTORS', 'STRINGS']
-
 import os
+
+from selenium.webdriver.common.by import By
 
 MODULEDIR = os.path.dirname(__file__)
 SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
 
+DEFAULT_WAIT = 89
 
 class SELECTORS(object):
-    MAIN_SEARCH_BAR = '._3FRCZ'
-    MAIN_SEARCH_BAR_DONE = '.MfAhJ'
-    MAIN_SEARCH_BAR_SEARCH_ICON = '._3e4VU'
-    MAIN_SEARCH_BAR_BACK_ARROW = '._3e4VU'
-    MESSAGE_INPUT_BOX = '#main footer ._3FRCZ'
-    TURN_ON_DESKTOP_NOTIFICATIONS = '.zKq5Y'
-    CLOSE_INFO = '[data-testid="x-alt"]'
+    MAIN_SEARCH_BAR = (By.CSS_SELECTOR, '._3FRCZ')
+    MAIN_SEARCH_BAR_DONE = (By.CSS_SELECTOR, '.MfAhJ')
+    MAIN_SEARCH_BAR_SEARCH_ICON = (By.CSS_SELECTOR, '._3e4VU')
+    MAIN_SEARCH_BAR_BACK_ARROW = (By.CSS_SELECTOR, '._3e4VU')
+    MESSAGE_INPUT_BOX = (By.CSS_SELECTOR, '#main footer ._3FRCZ')
+    TURN_ON_DESKTOP_NOTIFICATIONS = (By.CSS_SELECTOR, '.zKq5Y')
+    CLOSE_INFO = (By.CSS_SELECTOR, '[data-testid="x-alt"]')
     BACK_MAIN = '.t4a8o'
-
-    class MAIN_MENU_OPTIONS(object):
-        MENU_ICON = '[data-testid=menu]'
-        NEW_GROUP = '[title="New group"]'
-        SETTINGS = '[title="Settings"]'
-
-    class CREATE_NEW_GROUP(object):
-        TYPE_CONTACTS_INPUT_BOX = '._17ePo'
-        RESULT_CONTACT = '._210SC'
-        OK_CONTACTS_TYPE = '[data-testid="arrow-forward"]'
-        TYPE_GROUP_NAME = '._3FRCZ'
-        OK_GROUP_NAME_TYPE = '._3y5oW'
-        ENCRYPTED_LOCK_SIGN = '._2VO5X'
-
-    class CHATROOM(object):
-        NAME_AND_INFO = '._33QME'
-        NAME = '.DP7CM'
-        INFO = '._3-cMa._3Whw5'
-        CLOSE_INFO = '[data-testid="x"]'
-
-    class GROUPS(object):
-        MEMBERS_SEARCH_ICON = '._3lS1C'
-        SEARCH_CONTACTS_INPUT_BOX = '._9a59P ._3FRCZ'
-        CONTACTS_SEARCH_NAME = '._3ko75'
-        CLOSE_CONTACTS_SEARCH = '._2HE5l .t4a8o'
-        ADMIN_ICON = '.LwCwJ'
-        MAKE_ADMIN = '.Ut_N0'
-        REMOVE = '.Ut_N0[title="Remove"]'
-        EXIT_FROM_GROUP = '._3wAoe._3DSZk[title="Exit group"]'
-        EXIT_DIALOG_BOX = '._9a59P'
-        EXIT_BUTTON_EXIT_DIALOG_BOX = '.S7_rT.FV2Qy'
-        NO_LONGER_A_PARTICIPANT = '._3ge3i'
-        GROUP_NAME_IN_CHATS = '._3CneP > ._3ko75._5h6Y_._3Whw5'
-
-    class SETTINGS(object):
-        OK_BUTTON = '.S7_rT.FV2Qy'
-        THEME = '[title="Theme"]'
+    MAIN_MENU_OPTIONS__MENU_ICON = (By.CSS_SELECTOR, '[data-testid=menu]')
+    MAIN_MENU_OPTIONS__NEW_GROUP = (By.CSS_SELECTOR, '[title="New group"]')
+    MAIN_MENU_OPTIONS__SETTINGS = '[title="Settings"]'
+    CREATE_NEW_GROUP__TYPE_CONTACTS_INPUT_BOX = (By.CSS_SELECTOR, '._17ePo')
+    CREATE_NEW_GROUP__RESULT_CONTACT = (By.CSS_SELECTOR, '._210SC')
+    CREATE_NEW_GROUP__OK_CONTACTS_TYPE = (By.CSS_SELECTOR, '[data-testid="arrow-forward"]')
+    CREATE_NEW_GROUP__TYPE_GROUP_NAME = (By.CSS_SELECTOR, '._3FRCZ')
+    CREATE_NEW_GROUP__OK_GROUP_NAME_TYPE = (By.CSS_SELECTOR, '._3y5oW')
+    CREATE_NEW_GROUP__ENCRYPTED_LOCK_SIGN = (By.CSS_SELECTOR, '._2VO5X')
+    CHATROOM__NAME_AND_INFO = (By.CSS_SELECTOR, '._33QME')
+    CHATROOM__NAME = (By.CSS_SELECTOR, '.DP7CM')
+    CHATROOM__INFO = (By.CSS_SELECTOR, '._3-cMa._3Whw5')
+    CHATROOM__INFO__NUMBER = (By.CSS_SELECTOR, '._9l3wT')
+    CHATROOM__CLOSE_INFO = (By.CSS_SELECTOR, '[data-testid="x"]')
+    CHATROOM__OPTIONS = (By.CSS_SELECTOR, '[data-testid="menu"]')
+    CONTACTS__NAME_IN_CHATS = (By.CSS_SELECTOR, '._357i8 > ._3ko75._5h6Y_._3Whw5')
+    GROUPS__MEMBERS_SEARCH_ICON = (By.CSS_SELECTOR, '._3lS1C')
+    GROUPS__SEARCH_CONTACTS_INPUT_BOX = (By.CSS_SELECTOR, '._9a59P ._3FRCZ')
+    GROUPS__CONTACTS_SEARCH_NAME = (By.CSS_SELECTOR, '._3ko75')
+    GROUPS__CLOSE_CONTACTS_SEARCH = (By.CSS_SELECTOR, '._2HE5l .t4a8o')
+    GROUPS__ADMIN_ICON = (By.CSS_SELECTOR, '.LwCwJ')
+    GROUPS__MAKE_ADMIN = (By.CSS_SELECTOR, '.Ut_N0')
+    GROUPS__REMOVE = (By.CSS_SELECTOR, '.Ut_N0[title="Remove"]')
+    GROUPS__EXIT_FROM_GROUP = (By.CSS_SELECTOR, '._3wAoe._3DSZk[title="Exit group"]')
+    GROUPS__EXIT_DIALOG_BOX = (By.CSS_SELECTOR, '._9a59P')
+    GROUPS__EXIT_BUTTON_EXIT_DIALOG_BOX = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
+    GROUPS__NO_LONGER_A_PARTICIPANT = (By.CSS_SELECTOR, '._3ge3i')
+    GROUPS__NAME_IN_CHATS = (By.CSS_SELECTOR, '._3CneP > ._3ko75._5h6Y_._3Whw5')
+    SETTINGS__OK_BUTTON = '.S7_rT.FV2Qy'
+    SETTINGS__THEME = '[title="Theme"]'
 
 
 class STRINGS(object):

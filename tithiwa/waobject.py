@@ -1,7 +1,7 @@
 __all__ = ["WaObject"]
 
 from selenium import webdriver
-from constants import SELECTORS
+from constants import *
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -14,14 +14,6 @@ class WaObject:
         self.browser = self._open_browser_if_not_opened()
         self._open_whatsapp_if_not_opened()
         # self._wait_for_web_whatsapp_to_load()
-
-    def _handle_new_browser_init(self, browser):
-        self.intitbrowser = self.browser
-        if browser != None:
-            self.browser = browser
-
-    def _handle_new_browser_del(self):
-        self.browser = self.intitbrowser
 
     def quit(self):
         self.browser.quit()
@@ -39,13 +31,13 @@ class WaObject:
             self.browser.get("https://web.whatsapp.com/")
 
     def _wait_for_web_whatsapp_to_load(self):
-        self._wait_for_an_presence_of_element(SELECTORS.TURN_ON_DESKTOP_NOTIFICATIONS)
+        self._wait_for_presence_of_an_element(SELECTORS.TURN_ON_DESKTOP_NOTIFICATIONS)
 
-    def _wait_for_an_presence_of_element(self, selector):
+    def _wait_for_presence_of_an_element(self, selector):
         element = None
         try:
-            element = WebDriverWait(self.browser, 34).until(
-                EC.presence_of_element_located((By.CSS_SELECTOR, selector))
+            element = WebDriverWait(self.browser, DEFAULT_WAIT).until(
+                EC.presence_of_element_located(selector)
             )
         except:
             pass
@@ -56,7 +48,7 @@ class WaObject:
         relement = None
         while True:
             try:
-                relement = element.find_element(By.CSS_SELECTOR, selector)
+                relement = element.find_element(*selector)
             except:
                 pass
             finally:
@@ -65,8 +57,8 @@ class WaObject:
     def _wait_for_an_element_to_be_clickable(self, selector):
         element = None
         try:
-            element = WebDriverWait(self.browser, 10).until(
-                EC.element_to_be_clickable((By.CSS_SELECTOR, selector))
+            element = WebDriverWait(self.browser, DEFAULT_WAIT).until(
+                EC.element_to_be_clickable(selector)
             )
         except:
             pass
@@ -82,6 +74,26 @@ class WaObject:
             finally:
                 pass
 
+    def _race_for_presence_of_two_elements(self, selector1, selector2):
+        selector1orselector2 = selector1 + ", " + selector2
+        winnerelement = self._wait_for_presence_of_an_element(selector1orselector2)
+        element1 = None
+        try:
+            element1 = self.browser.find_element(*selector1)
+        except:
+            pass
+        element2 = None
+        try:
+            element2 = self.browser.find_element(*selector2)
+        except:
+            pass
+        if winnerelement == element1:
+            return winnerelement, 0
+        elif winnerelement == element2:
+            return winnerelement, 1
+        else:
+            return None, -1
+
     def _search_and_open_chat_by_name(self, name):
         isfound = False
         self._search_and_wait_for_complete(name)
@@ -92,7 +104,7 @@ class WaObject:
             curractive = self.browser.switch_to.active_element
             if curractive == preactive:
                 break
-            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS.CONTACTS_SEARCH_NAME).get_attribute(
+            name = curractive.find_element(*SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name == name:
                 isfound = True
@@ -110,8 +122,8 @@ class WaObject:
         nameofchat = ''
         while True:
             try:
-                nameofchat = self._wait_for_an_presence_of_element(SELECTORS.CHATROOM.NAME).get_attribute(
-                'innerText')
+                nameofchat = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME).get_attribute(
+                    'innerText')
             except:
                 pass
             if nameofchat == name:
@@ -120,4 +132,4 @@ class WaObject:
     def _search_and_wait_for_complete(self, nameornumber):
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_SEARCH_ICON).click()
         self.browser.switch_to.active_element.send_keys(nameornumber)
-        self._wait_for_an_presence_of_element(SELECTORS.MAIN_SEARCH_BAR_DONE)
+        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR_DONE)
