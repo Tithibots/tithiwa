@@ -40,8 +40,19 @@ class WaObject:
     def _wait_for_presence_of_an_element(self, selector):
         element = None
         try:
-            element = WebDriverWait(self.browser, DEFAULT_WAIT).until(
+            element = WebDriverWait(self.browser, INTEGERS.DEFAULT_WAIT).until(
                 EC.presence_of_element_located(selector)
+            )
+        except:
+            pass
+        finally:
+            return element
+
+    def _wait_for_presence_of_all_elements(self, selector):
+        element = None
+        try:
+            element = WebDriverWait(self.browser, INTEGERS.DEFAULT_WAIT).until(
+                EC.presence_of_all_elements_located(selector)
             )
         except:
             pass
@@ -61,7 +72,7 @@ class WaObject:
     def _wait_for_an_element_to_be_clickable(self, selector):
         element = None
         try:
-            element = WebDriverWait(self.browser, DEFAULT_WAIT).until(
+            element = WebDriverWait(self.browser, INTEGERS.DEFAULT_WAIT).until(
                 EC.element_to_be_clickable(selector)
             )
         except:

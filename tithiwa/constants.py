@@ -5,9 +5,9 @@ from selenium.webdriver.common.by import By
 MODULEDIR = os.path.dirname(__file__)
 SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
 
-DEFAULT_WAIT = 89
-DEFAULT_SHOULD_OUTPUT = True
 
+DEFAULT_SHOULD_OUTPUT = True
+DEFAULT_WAIT = 89
 class SELECTORS(object):
     MAIN_SEARCH_BAR = (By.CSS_SELECTOR, '._3FRCZ')
     MAIN_SEARCH_BAR_DONE = (By.CSS_SELECTOR, '.MfAhJ')
@@ -47,6 +47,10 @@ class SELECTORS(object):
     GROUPS__NAME_IN_CHATS = (By.CSS_SELECTOR, '._3CneP > ._3ko75._5h6Y_._3Whw5')
     SETTINGS__OK_BUTTON = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
     SETTINGS__THEME = (By.CSS_SELECTOR, '[title="Theme"]')
+    SETTINGS__NOTIFICATIONS = (By.CSS_SELECTOR, '[title="Notifications"]')
+    SETTINGS__NOTIFICATIONS_OPTIONS = (By.CSS_SELECTOR, '._2XWkx')
+    SETTINGS__NOTIFICATIONS_TURN_OFF_OPTIONS = (By.CSS_SELECTOR, '._1OFu5')
+    SETTINGS__NOTIFICATIONS_MUTE_OR_UNMUTE = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
 
 
 class STRINGS(object):
@@ -55,3 +59,10 @@ class STRINGS(object):
     THEME_LIGHT = 'light'
     THEME_DARK = 'dark'
     THEME_SYSTEM = 'system'
+
+class INTEGERS(object):
+    TURN_OFF_NOTIFICATIONS_FOR_8_HOURS = 0
+    TURN_OFF_NOTIFICATIONS_FOR_1_WEEK = 1
+    TURN_OFF_NOTIFICATIONS_FOR_ALWAYS = 2
+    DEFAULT_WAIT = 89
+
