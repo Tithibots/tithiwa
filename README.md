@@ -59,10 +59,13 @@ tithiwabot.open_chat_to("919592140593")
 tithiwabot.open_chat_to_number_using_url("919592140593") # wa.me/919592140593
 tithiwabot.send_message_to("919592140593", "Hello, from Tithiwa")
 
-## Send a message to multiple chats
+## Get number from contact name ✔ 
+print(tithiwabot.get_mobile_number_of("Contact1"))
+
+## Send a message to multiple chats ✔ 
 tithiwabot.send_message_to_multiple_chats("hello", ["contact1", "contact2", "Group1"])
 
-## Send a message to multiple chats at given time 
+## Send a message to multiple chats at given time ✔ 
 tithiwabot.send_message_at_time_to(["contact1", "contact2", "Group1"],
                                    "hi, from tithiwa at 9:36PM",
                                    "21:36:00")
@@ -71,8 +74,7 @@ tithiwabot.send_message_at_time_to(["contact1", "contact2", "Group1"],
 tithiwabot.create_group("GroupName", ["contact1", "contact2", "contact2"])
 
 ## Scrape members list from group ✔ 
-membersList = tithiwabot.scrape_members_from_group("GroupName")
-print(membersList) # ["contact1", "contact2", "contact2"]
+print(tithiwabot.scrape_members_from_group("GroupName")) # ["contact1", "contact2", "contact2"]
 
 ## Make given contacts as group admins of given group ✔ 
 tithiwabot.make_group_admins("GroupName", ["contact1", "contact2"])
