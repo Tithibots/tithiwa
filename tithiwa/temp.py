@@ -1,12 +1,10 @@
 from tithiwa import Tithiwa
 
 tithiwabot = Tithiwa()
-tithiwabot.generate_session()
-# tithiwabot.open_session()
-tithiwabot.send_message_at_time_to(["contact1", "contact2", "Group1"],
-                                   "hi, from tithiwa at 9:36PM",
-                                   "21:36:00")
-
+# tithiwabot.generate_session()
+tithiwabot.open_session()
+number = tithiwabot.get_mobile_number_of("Navpreet Devpuri")
+print(number)
 # tithiwabot.create_group("Group made by tithiwa", ["Navpreet Devpuri"])
 # tithiwabot.create_group("Group made by tithiwa", ["Navpreet Devpuri"])
 # tithiwabot.create_group("Group made by tithiwa", ["Navpreet Devpuri"])
