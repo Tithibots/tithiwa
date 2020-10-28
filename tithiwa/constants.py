@@ -7,7 +7,6 @@ SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
 
 DEFAULT_WAIT = 89
 
-
 class SELECTORS(object):
     MAIN_SEARCH_BAR = (By.CSS_SELECTOR, '._3FRCZ')
     MAIN_SEARCH_BAR_DONE = (By.CSS_SELECTOR, '.MfAhJ')
@@ -16,8 +15,10 @@ class SELECTORS(object):
     MESSAGE_INPUT_BOX = (By.CSS_SELECTOR, '#main footer ._3FRCZ')
     TURN_ON_DESKTOP_NOTIFICATIONS = (By.CSS_SELECTOR, '.zKq5Y')
     CLOSE_INFO = (By.CSS_SELECTOR, '[data-testid="x-alt"]')
+    BACK_MAIN = '.t4a8o'
     MAIN_MENU_OPTIONS__MENU_ICON = (By.CSS_SELECTOR, '[data-testid=menu]')
     MAIN_MENU_OPTIONS__NEW_GROUP = (By.CSS_SELECTOR, '[title="New group"]')
+    MAIN_MENU_OPTIONS__SETTINGS = '[title="Settings"]'
     CREATE_NEW_GROUP__TYPE_CONTACTS_INPUT_BOX = (By.CSS_SELECTOR, '._17ePo')
     CREATE_NEW_GROUP__RESULT_CONTACT = (By.CSS_SELECTOR, '._210SC')
     CREATE_NEW_GROUP__OK_CONTACTS_TYPE = (By.CSS_SELECTOR, '[data-testid="arrow-forward"]')
@@ -43,8 +44,13 @@ class SELECTORS(object):
     GROUPS__EXIT_BUTTON_EXIT_DIALOG_BOX = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
     GROUPS__NO_LONGER_A_PARTICIPANT = (By.CSS_SELECTOR, '._3ge3i')
     GROUPS__NAME_IN_CHATS = (By.CSS_SELECTOR, '._3CneP > ._3ko75._5h6Y_._3Whw5')
+    SETTINGS__OK_BUTTON = '.S7_rT.FV2Qy'
+    SETTINGS__THEME = '[title="Theme"]'
 
 
 class STRINGS(object):
     CHECK_CHAR = '✔'
     CROSS_CHAR = '❌'
+    THEME_LIGHT = 'light'
+    THEME_DARK = 'dark'
+    THEME_SYSTEM = 'system'
