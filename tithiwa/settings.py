@@ -1,5 +1,5 @@
-from constants import *
-from waobject import WaObject
+from .constants import *
+from .waobject import WaObject
 
 class Settings(WaObject):
 

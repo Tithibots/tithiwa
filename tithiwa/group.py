@@ -1,11 +1,11 @@
 __all__ = ["Group"]
 
 from time import sleep
-from constants import *
+from .constants import *
+from .chatroom import Chatroom
+from .waobject import WaObject
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from chatroom import Chatroom
-from waobject import WaObject
 
 
 class Group(Chatroom, WaObject):
@@ -187,7 +187,8 @@ class Group(Chatroom, WaObject):
         self._exit_from_group(_shouldoutput[1])
 
     def _exit_from_group(self, _shouldoutput1=True):
-        _, winnerindex = self._race_for_presence_of_two_elements(SELECTORS.GROUPS__NO_LONGER_A_PARTICIPANT, SELECTORS.MESSAGE_INPUT_BOX)
+        _, winnerindex = self._race_for_presence_of_two_elements(SELECTORS.GROUPS__NO_LONGER_A_PARTICIPANT,
+                                                                 SELECTORS.MESSAGE_INPUT_BOX)
         if winnerindex == 0:
             if _shouldoutput1 and DEFAULT_SHOULD_OUTPUT:
                 print(f'{STRINGS.CHECK_CHAR} Done. You are already exited the group.')

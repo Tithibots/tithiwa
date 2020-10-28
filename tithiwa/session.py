@@ -1,10 +1,11 @@
 __all__ = ["Session"]
 
+from .constants import *
+from .waobject import WaObject
 import os
 import platform
 import subprocess
-from constants import *
-from waobject import WaObject
+
 
 
 class Session(WaObject):

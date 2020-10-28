@@ -1,8 +1,8 @@
 __all__ = ["Chatroom"]
 
 import datetime
-from constants import *
-from waobject import WaObject
+from .constants import *
+from .waobject import WaObject
 from selenium.webdriver.common.keys import Keys
 
 

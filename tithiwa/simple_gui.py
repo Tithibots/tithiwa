@@ -1,5 +1,5 @@
 import tkinter as tk
-from tithiwa import Tithiwa
+from .main import Tithiwa
 
 
 class TithiwaGUI(tk.Frame):

@@ -1,8 +1,8 @@
 __all__ = ["Session", "Chatroom", "Group"]
 
-import chatroom
-import session
-import group
+from . import chatroom
+from . import session
+from . import group
 
 
 class Session:

@@ -1,8 +1,8 @@
 __all__ = ["Contact"]
 
-from chatroom import Chatroom
-from constants import *
-from waobject import WaObject
+from .chatroom import Chatroom
+from .constants import *
+from .waobject import WaObject
 
 class Contact(Chatroom, WaObject):
 

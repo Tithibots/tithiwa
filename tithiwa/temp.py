@@ -1,7 +1,8 @@
 from tithiwa import *
 
+
 tithiwabot = Tithiwa()
-# tithiwabot.generate_session()
+# # tithiwabot.generate_session()
 tithiwabot.open_session()
 tithiwabot.choose_theme("dark")
 # tithiwabot.create_group("Group made by tithiwa", ["Navpreet Devpuri"])
