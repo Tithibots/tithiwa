@@ -152,36 +152,6 @@ class WaObject:
     def _press_back_button(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.BACK_BUTTON).click()
 
-    def _get_my_name(self):
-        driver = webdriver.Chrome(ChromeDriverManager().install())
-        driver.get("https://web.whatsapp.com/")
-        wait = WebDriverWait(driver, 5000)
-        wait.until(EC.presence_of_element_located((By.XPATH, '//*[@id="side"]/div[1]/div/label')))
-
-        storage = LocalStorage(driver)
-        arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', '_', '+', '=', '/', '%', '@']
-
-        for x in range(storage.__len__()):
-            key = storage.nth_key(x)
-            value = storage.nth_value(key)
-            if value[1:3] == "en":
-                continue
-            elif value[1:8] == "android":
-                continue
-            elif value[1:4] == "iOS":
-                continue
-            elif value[0] == '"':
-                str = value
-                cnt = 0
-                for ch in str:
-                    flag = 0
-                    for i in arr:
-                        if ch == i:
-                            flag = 1
-                            break
-                    if flag == 1:
-                        break
-                    cnt = cnt + 1
-                if cnt == len(str):
-                    return value
-        driver.close()
+    def get_my_name(self):
+        self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__PROFILE).click()
+        return self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[0].get_attribute('innerText')
