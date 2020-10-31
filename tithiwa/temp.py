@@ -1,10 +1,9 @@
 from tithiwa import *
 
-
 tithiwabot = Tithiwa()
 # # tithiwabot.generate_session()
 tithiwabot.open_session()
-print(tithiwabot.get_my_name())
+print("'" + tithiwabot.get_my_name() + "', '" + tithiwabot.get_my_about() + "'")
 tithiwabot.block(["alka", "amr", "9592140593"])
 # tithiwabot.setting_notifications(is_sounds=False, is_desktop_alerts=False, is_show_previews=False, is_turn_off_desktop_notifications=True)
 # tithiwabot.create_group("Group made by tithiwa", ["Navpreet Devpuri"])

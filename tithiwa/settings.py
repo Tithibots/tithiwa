@@ -16,7 +16,8 @@ class Settings(WaObject):
             print(f'{STRINGS.CHECK_CHAR} Done')
 
     def setting_notifications(self, is_sounds=True, is_desktop_alerts=True, is_show_previews=True,
-                              is_turn_off_desktop_notifications=False, turn_off_desktop_notifications_for=INTEGERS.TURN_OFF_NOTIFICATIONS_FOR_ALWAYS,
+                              is_turn_off_desktop_notifications=False,
+                              turn_off_desktop_notifications_for=INTEGERS.TURN_OFF_NOTIFICATIONS_FOR_ALWAYS,
                               _shouldoutput=(True, True)):
         if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
             print(f'Setting notifications', end="...")
@@ -43,7 +44,7 @@ class Settings(WaObject):
             print(f'Setting notifications', end="...")
         self._open_settings()
         self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__BLOCKED).click()
-
+        
         self._press_back_button()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')

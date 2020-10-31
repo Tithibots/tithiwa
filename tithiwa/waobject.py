@@ -151,15 +151,24 @@ class WaObject:
 
     def _press_back_button(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.BACK_BUTTON).click()
-        
+
+    def _wait_until_innerText_is_empty_of_an_element(self, element):
+        text = element.get_attribute('innerText')
+        while text == '':
+            text = element.get_attribute('innerText')
+        return text
+
     def get_my_about(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__PROFILE).click()
-        about = self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[1].get_attribute('innerText')
+
+        about = self._wait_until_innerText_is_empty_of_an_element(
+            self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[1])
         self._press_back_button()
         return about
-      
+
     def get_my_name(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__PROFILE).click()
-        name = self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[1].get_attribute('innerText')
+        name = self._wait_until_innerText_is_empty_of_an_element(
+            self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[0])
         self._press_back_button()
         return name
