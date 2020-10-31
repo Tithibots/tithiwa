@@ -148,3 +148,6 @@ class WaObject:
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_SEARCH_ICON).click()
         self.browser.switch_to.active_element.send_keys(nameornumber)
         self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR_DONE)
+
+    def get_my_about(self):
+        self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__PROFILE).click()
