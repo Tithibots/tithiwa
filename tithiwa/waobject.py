@@ -49,15 +49,15 @@ class WaObject:
             return element
 
     def _wait_for_presence_of_all_elements(self, selector):
-        element = None
+        elements = None
         try:
-            element = WebDriverWait(self.browser, INTEGERS.DEFAULT_WAIT).until(
+            elements = WebDriverWait(self.browser, INTEGERS.DEFAULT_WAIT).until(
                 EC.presence_of_all_elements_located(selector)
             )
         except:
             pass
         finally:
-            return element
+            return elements
 
     def _wait_for_presence_of_an_element_in_other_element(self, selector, element):
         relement = None
@@ -149,5 +149,9 @@ class WaObject:
         self.browser.switch_to.active_element.send_keys(nameornumber)
         self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR_DONE)
 
+    def _press_back_button(self):
+        self._wait_for_an_element_to_be_clickable(SELECTORS.BACK_BUTTON).click()
+        
     def get_my_about(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__PROFILE).click()
+
