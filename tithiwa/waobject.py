@@ -154,8 +154,12 @@ class WaObject:
         
     def get_my_about(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__PROFILE).click()
-        return self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[1].get_attribute('innerText')
+        about = self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[1].get_attribute('innerText')
+        self._press_back_button()
+        return about
       
     def get_my_name(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__PROFILE).click()
-        return self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[0].get_attribute('innerText')
+        name = self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[1].get_attribute('innerText')
+        self._press_back_button()
+        return name

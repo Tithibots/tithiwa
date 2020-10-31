@@ -4,7 +4,7 @@ from .waobject import WaObject
 
 class Settings(WaObject):
 
-    def setting_theme(self, theme: str, _shouldoutput=(True, True)):
+    def set_theme(self, theme: str, _shouldoutput=(True, True)):
         if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
             print(f'Setting "{theme}" theme', end="...")
         self._open_settings()
@@ -16,7 +16,7 @@ class Settings(WaObject):
             print(f'{STRINGS.CHECK_CHAR} Done')
 
     def setting_notifications(self, is_sounds=True, is_desktop_alerts=True, is_show_previews=True,
-                              is_turn_off_desktop_notifications=False, turn_off_desktop_notifications_for=2,
+                              is_turn_off_desktop_notifications=False, turn_off_desktop_notifications_for=INTEGERS.TURN_OFF_NOTIFICATIONS_FOR_ALWAYS,
                               _shouldoutput=(True, True)):
         if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
             print(f'Setting notifications', end="...")
@@ -38,6 +38,16 @@ class Settings(WaObject):
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
 
+    def block(self, namesornumbers, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Setting notifications', end="...")
+        self._open_settings()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__BLOCKED).click()
+
+        self._press_back_button()
+        if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
+
     def _setting_notifications_select(self, istrue, element):
         if istrue:
             if element.get_attribute('aria-checked') == 'false':
@@ -49,4 +59,3 @@ class Settings(WaObject):
     def _open_settings(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS__MENU_ICON).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS__SETTINGS).click()
-
