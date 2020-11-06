@@ -5,9 +5,10 @@ from selenium.webdriver.common.by import By
 MODULEDIR = os.path.dirname(__file__)
 SESSIONDIR = os.path.join(MODULEDIR, 'sessions')
 
-
 DEFAULT_SHOULD_OUTPUT = True
 DEFAULT_WAIT = 89
+
+
 class SELECTORS(object):
     MAIN_SEARCH_BAR = (By.CSS_SELECTOR, '._3FRCZ')
     MAIN_SEARCH_BAR_DONE = (By.CSS_SELECTOR, '.MfAhJ')
@@ -50,6 +51,7 @@ class SELECTORS(object):
     SETTINGS__THEME = (By.CSS_SELECTOR, 'div[title="Theme"]')
     SETTINGS__NOTIFICATIONS = (By.CSS_SELECTOR, 'div[title="Notifications"]')
     SETTINGS__BLOCKED = (By.CSS_SELECTOR, 'div[title="Blocked"]')
+    SETTINGS__ADD_BLOCKED_CONTACT = (By.CSS_SELECTOR, 'div[title="Add blocked contact"]')
     SETTINGS__NOTIFICATIONS_OPTIONS = (By.CSS_SELECTOR, '._2XWkx')
     SETTINGS__NOTIFICATIONS_TURN_OFF_OPTIONS = (By.CSS_SELECTOR, '._1OFu5')
     SETTINGS__NOTIFICATIONS_MUTE_OR_UNMUTE = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
@@ -62,6 +64,7 @@ class STRINGS(object):
     THEME_LIGHT = 'light'
     THEME_DARK = 'dark'
     THEME_SYSTEM = 'system'
+
 
 class INTEGERS(object):
     TURN_OFF_NOTIFICATIONS_FOR_8_HOURS = 0
