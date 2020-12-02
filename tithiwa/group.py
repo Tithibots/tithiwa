@@ -97,6 +97,31 @@ class Group(Chatroom, WaObject):
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
 
+    def remove_group_admins(self, groupname, members, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Removing members {str(members)} from being admins of group "{groupname}"', end="... ")
+        self._open_group_members_list(groupname)
+        preactive = None
+        curractive = self.browser.switch_to.active_element
+        while True:
+            curractive.send_keys(Keys.ARROW_DOWN)
+            curractive = self.browser.switch_to.active_element
+            if curractive == preactive:
+                break
+            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
+                'innerText')
+            if name in members:
+                try:
+                    curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__ADMIN_ICON)
+                except:
+                    curractive.click()
+                    self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__REMOVE_ADMIN).click()
+            preactive = curractive
+        self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS__ADMIN_ICON, curractive)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
+        if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+            print(f'{STRINGS.CHECK_CHAR} Done')
+            
     def send_message_with_mention_all_to_group(self, groupname, message, _shouldoutput=(True, True)):
         members_in_group = self.scrape_members_from_group(groupname=groupname)
         if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
