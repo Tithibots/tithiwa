@@ -43,7 +43,7 @@ class SELECTORS(object):
     GROUPS__CLOSE_CONTACTS_SEARCH = (By.CSS_SELECTOR, '._2HE5l .t4a8o')
     GROUPS__ADMIN_ICON = (By.CSS_SELECTOR, '.LwCwJ')
     GROUPS__MAKE_ADMIN = (By.CSS_SELECTOR, '.Ut_N0')
-    GROUPS__REMOVE_ADMIN = (By.CSS_SELECTOR, '._1OwwW ._3oTCZ')
+    GROUPS__REMOVE_ADMIN = (By.CSS_SELECTOR, '._1OwwW ._3oTCZ[title="Dismiss as admin"]')
     GROUPS__REMOVE = (By.CSS_SELECTOR, 'div[title="Remove"]')
     GROUPS__EXIT_FROM_GROUP = (By.CSS_SELECTOR, '._3wAoe._3DSZk[title="Exit group"]')
     GROUPS__EXIT_DIALOG_BOX = (By.CSS_SELECTOR, '._9a59P')
