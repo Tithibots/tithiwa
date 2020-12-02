@@ -57,3 +57,4 @@ class Contact(Chatroom, WaObject):
         self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__DELETE_CHAT)
         self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__DELETE_CHAT).click()
         self._close_info()
+        
