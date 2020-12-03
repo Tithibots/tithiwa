@@ -117,11 +117,12 @@ class Group(Chatroom, WaObject):
                     curractive.click()
                     self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__REMOVE_ADMIN).click()
             preactive = curractive
-        self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS__ADMIN_ICON, curractive)
+        # self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS__ADMIN_ICON, curractive)
+        self._close_info()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
-            
+
     def send_message_with_mention_all_to_group(self, groupname, message, _shouldoutput=(True, True)):
         members_in_group = self.scrape_members_from_group(groupname=groupname)
         if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
