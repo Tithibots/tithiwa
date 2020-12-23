@@ -9,37 +9,40 @@ DEFAULT_SHOULD_OUTPUT = True
 
 
 class SELECTORS(object):
-    MAIN_SEARCH_BAR = (By.CSS_SELECTOR, 'div[dir="ltr"]')
-    MAIN_SEARCH_BAR_DONE = (By.CSS_SELECTOR, '[data-testid="x-alt"]')
-    MAIN_SEARCH_BAR_SEARCH_ICON = (By.CSS_SELECTOR, '[data-testid="search"]')
-    MAIN_SEARCH_BAR_BACK_ARROW = (By.CSS_SELECTOR, '[data-testid="search"]')
-    MESSAGE_INPUT_BOX = (By.CSS_SELECTOR, '#main footer ._3FRCZ')
-    TURN_ON_DESKTOP_NOTIFICATIONS = (By.CSS_SELECTOR, '.zKq5Y')
-    CLOSE_INFO = (By.CSS_SELECTOR, '[data-testid="x-alt"]')
-    BACK_BUTTON = (By.CSS_SELECTOR, '.t4a8o')
-    NAME_AND_ABOUT = (By.CSS_SELECTOR, '._2FVVk._3WjMU')
+    QR_CODE = (By.CSS_SELECTOR, 'div[data-ref]')
+    MAIN_SEARCH_BAR = (By.CSS_SELECTOR, '#side [contenteditable="true"]')
+    MAIN_SEARCH_BAR__DONE = (By.CSS_SELECTOR, 'span[data-testid="x-alt"]')
+    MAIN_SEARCH_BAR__SEARCH_ICON = (By.CSS_SELECTOR, 'span[data-testid="search"]')
+    MAIN_SEARCH_BAR__BACK_ARROW = (By.CSS_SELECTOR, 'span[data-testid="search"]')
+    MAIN_SEARCH_BAR__RESULT_NAMES = (By.CSS_SELECTOR, 'span[title]')
+    MESSAGE_INPUT_BOX = (By.CSS_SELECTOR, '#main [contenteditable="true"]')
+    CLOSE_INFO = (By.CSS_SELECTOR, 'span[data-testid="x-alt"]')
+    BACK_BUTTON = (By.CSS_SELECTOR, 'span[data-testid="back"]')
+    NAME_AND_ABOUT = (By.CSS_SELECTOR, '[contenteditable="false"]')
     MAIN_MENU_OPTIONS__MENU_ICON = (By.CSS_SELECTOR, '[data-testid=menu]')
     MAIN_MENU_OPTIONS__NEW_GROUP = (By.CSS_SELECTOR, '[title="New group"]')
     MAIN_MENU_OPTIONS__SETTINGS = (By.CSS_SELECTOR, '[title="Settings"]')
-    CREATE_NEW_GROUP__TYPE_CONTACTS_INPUT_BOX = (By.CSS_SELECTOR, '._17ePo')
-    CREATE_NEW_GROUP__RESULT_CONTACT = (By.CSS_SELECTOR, '._210SC')
+    MAIN_MENU_OPTIONS__PROFILE = (By.CSS_SELECTOR, '[title="Profile"]')
+    CREATE_NEW_GROUP__TYPE_CONTACTS_INPUT_BOX = (By.CSS_SELECTOR, '[placeholder="Type contact name"]')
+    CREATE_NEW_GROUP__RESULT_BOX = (By.CSS_SELECTOR, 'header + div div[style^="height"]')
     CREATE_NEW_GROUP__OK_CONTACTS_TYPE = (By.CSS_SELECTOR, '[data-testid="arrow-forward"]')
-    CREATE_NEW_GROUP__TYPE_GROUP_NAME = (By.CSS_SELECTOR, '._1Rerq ._3FRCZ')
-    CREATE_NEW_GROUP__OK_GROUP_NAME_TYPE = (By.CSS_SELECTOR, '._3y5oW')
-    CREATE_NEW_GROUP__ENCRYPTED_LOCK_SIGN = (By.CSS_SELECTOR, '._2VO5X')
-    CHATROOM__NAME_AND_INFO = (By.CSS_SELECTOR, '._33QME')
-    CHATROOM__NAME = (By.CSS_SELECTOR, '.DP7CM')
-    CHATROOM__INFO = (By.CSS_SELECTOR, '._3-cMa._3Whw5')
-    CHATROOM__INFO_NUMBER = (By.CSS_SELECTOR, '._3Whw5 > ._1X4JR')
-    CHATROOM__CLOSE_INFO = (By.CSS_SELECTOR, '[data-testid="x"]')
+    CREATE_NEW_GROUP__TYPE_GROUP_NAME = (By.CSS_SELECTOR, '[contenteditable="true"]')
+    CREATE_NEW_GROUP__OK_GROUP_NAME_TYPE = (By.CSS_SELECTOR, '[data-testid="checkmark-medium"]')
+    CHATROOM__NAME = (By.CSS_SELECTOR, '#main header span[dir="auto"]')
+    CHATROOM__INFO = (By.CSS_SELECTOR, '#main > header > div > div > span')
+    CHATROOM__INFO_NUMBER = (By.CSS_SELECTOR, 'span[class*="invisible-space"][dir="auto"] span[class*="_"]')
+    CHATROOM__CLOSE_INFO = (
+    By.CSS_SELECTOR, 'div[style="height: 100%; transform: translateX(0%);"] span[data-testid="x"]')
     CHATROOM__OPTIONS = (By.CSS_SELECTOR, '[data-testid="menu"]')
     CHATROOM__INFO_DELETE_CHAT = (By.CSS_SELECTOR, '._1OwwW ._3oTCZ[title="Delete chat"]')
-    CHATROOM__DELETE_CHAT = (By.CSS_SELECTOR, '._30EVj .gMRg5')
-    CONTACTS__NAME_IN_CHATS = (By.CSS_SELECTOR, '._357i8 > ._3ko75._5h6Y_._3Whw5')
-    GROUPS__MEMBERS_SEARCH_ICON = (By.CSS_SELECTOR, '._3lS1C')
-    GROUPS__SEARCH_CONTACTS_INPUT_BOX = (By.CSS_SELECTOR, '._9a59P ._3FRCZ')
-    GROUPS__CONTACTS_SEARCH_NAME = (By.CSS_SELECTOR, '._3ko75')
-    GROUPS__CLOSE_CONTACTS_SEARCH = (By.CSS_SELECTOR, '._2HE5l .t4a8o')
+    CHATROOM__DELETE_CHAT = (By.CSS_SELECTOR, 'li div[title="Delete chat"]')
+    CONTACTS__NAME_IN_CHATS = (By.CSS_SELECTOR, '#side div[aria-label^="Chat list"] div span span[dir="auto"][title]')
+    GROUPS__MEMBERS_SEARCH_ICON = (By.CSS_SELECTOR, 'div[role="button"] span[data-testid="search"]')
+    GROUPS__SEARCH_CONTACTS_INPUT_BOX = (
+        By.CSS_SELECTOR, 'div[data-animate-modal-body="true"] label div[contenteditable="true"]')
+    GROUPS__CONTACTS_SEARCH_NAME = (
+        By.CSS_SELECTOR, 'div > span[title], div > span span[title]')  # div[data-animate-modal-body="true"]
+    GROUPS__CLOSE_CONTACTS_SEARCH = (By.CSS_SELECTOR, 'div[data-animate-modal-backdrop="true"] span[data-testid="x"]')
     GROUPS__ADMIN_ICON = (By.CSS_SELECTOR, '.LwCwJ')
     GROUPS__MAKE_ADMIN = (By.CSS_SELECTOR, '.Ut_N0')
     GROUPS__REMOVE_ADMIN = (By.CSS_SELECTOR, '._1OwwW ._3oTCZ[title="Dismiss as admin"]')
@@ -48,7 +51,7 @@ class SELECTORS(object):
     GROUPS__EXIT_DIALOG_BOX = (By.CSS_SELECTOR, '._9a59P')
     GROUPS__EXIT_BUTTON_EXIT_DIALOG_BOX = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
     GROUPS__NO_LONGER_A_PARTICIPANT = (By.CSS_SELECTOR, '._3ge3i')
-    GROUPS__NAME_IN_CHATS = (By.CSS_SELECTOR, '._3CneP > ._3ko75._5h6Y_._3Whw5')
+    GROUPS__NAME_IN_CHATS = (By.CSS_SELECTOR, '#side div[aria-label^="Chat list"] div > span[dir="auto"][title]')
     SETTINGS__OK_BUTTON = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
     SETTINGS__THEME = (By.CSS_SELECTOR, 'div[title="Theme"]')
     SETTINGS__NOTIFICATIONS = (By.CSS_SELECTOR, 'div[title="Notifications"]')
@@ -72,7 +75,7 @@ class INTEGERS(object):
     TURN_OFF_NOTIFICATIONS_FOR_8_HOURS = 0
     TURN_OFF_NOTIFICATIONS_FOR_1_WEEK = 1
     TURN_OFF_NOTIFICATIONS_FOR_ALWAYS = 2
-    DEFAULT_WAIT = 144
+    DEFAULT_WAIT = 13
 
 
 _SETUP_SESSION = '''
@@ -128,7 +131,6 @@ return res;
 '''
 
 PUT_SESSION = _SETUP_SESSION + '''
-localStorage.clear();
 await new Promise((resolve, reject) => {
    var request = db.transaction(["user"], "readwrite")
    .objectStore("user")
@@ -154,7 +156,11 @@ function add(key, value) {
     });
 }
 a = arguments[0].split("\\nnavi");
-for (i = 0; i < a.length; i += 2) {
+for (i = 0; i < a.length - 1; i += 2) {
     await add(a[i], a[i + 1]);
+}
+localStorage.clear();
+for (i = 0; i < a.length - 1; i += 2) {
+    localStorage.setItem(a[i], a[i+1])
 }
 '''

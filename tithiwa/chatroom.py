@@ -13,7 +13,7 @@ class Chatroom(WaObject):
     def open_chat_to(self, nameornumber, _shouldoutput=(True, True)):
         if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
             print(f'Opening chatroom to "{nameornumber}"', end="... ")
-        self._search_and_open_chat_by_name(nameornumber)
+        self._search_and_open_chat_by_number(nameornumber)
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
 

@@ -1,8 +1,11 @@
 __all__ = ["Contact"]
 
+from selenium.webdriver.common.keys import Keys
+
 from .chatroom import Chatroom
 from .constants import *
 from .waobject import WaObject
+
 
 class Contact(Chatroom, WaObject):
 
@@ -17,6 +20,7 @@ class Contact(Chatroom, WaObject):
         number = self._wait_for_mobile_number_to_appear()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
+        self._close_chat_info()
         return number
 
     def _wait_for_mobile_number_to_appear(self):
@@ -57,4 +61,3 @@ class Contact(Chatroom, WaObject):
         self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__DELETE_CHAT)
         self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__DELETE_CHAT).click()
         self._close_info()
-        

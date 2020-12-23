@@ -119,19 +119,20 @@ class WaObject:
             curractive = self.browser.switch_to.active_element
             if curractive == preactive:
                 break
-            name = curractive.find_element(*SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
-                'innerText')
-            if name == name:
+            curr_name = curractive.find_element(*SELECTORS.MAIN_SEARCH_BAR__RESULT_NAMES).get_attribute('innerText')
+            if curr_name == name:
                 isfound = True
                 break
             preactive = curractive
         self._wait_for_chat_to_open(name)
+        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR__BACK_ARROW).click()
         return isfound
 
     def _search_and_open_chat_by_number(self, number):
         self._search_and_wait_for_complete(number)
         self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
         self.browser.switch_to.active_element.click()
+        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR__BACK_ARROW).click()
 
     def _wait_for_chat_to_open(self, name):
         nameofchat = ''
@@ -145,9 +146,9 @@ class WaObject:
                 break
 
     def _search_and_wait_for_complete(self, nameornumber):
-        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_SEARCH_ICON).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR__SEARCH_ICON).click()
         self.browser.switch_to.active_element.send_keys(nameornumber)
-        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR_DONE)
+        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR__DONE)
 
     def _press_back_button(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.BACK_BUTTON).click()
@@ -158,16 +159,35 @@ class WaObject:
             text = element.get_attribute('innerText')
         return text
 
-    def get_my_about(self):
-        self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__PROFILE).click()
+    def _open_about(self):
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS__MENU_ICON).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_MENU_OPTIONS__PROFILE).click()
 
+    def _wait_for_attribute_change(self, selector, attribute, previous_value=None):
+        class _wait_for_attribute_change_class(object):
+            def __init__(self):
+                self.pre_value = previous_value
+
+            def __call__(self, driver):
+                try:
+                    element_attribute = EC._find_element(driver, selector).get_attribute(attribute)
+                    if self.pre_value is None:
+                        self.pre_value = element_attribute
+                    return element_attribute != self.pre_value
+                except:
+                    return False
+
+        WebDriverWait(self.browser, INTEGERS.DEFAULT_WAIT).until(_wait_for_attribute_change_class())
+
+    def get_my_about(self):
+        self._open_about()
         about = self._wait_until_innerText_is_empty_of_an_element(
             self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[1])
         self._press_back_button()
         return about
 
     def get_my_name(self):
-        self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__PROFILE).click()
+        self._open_about()
         name = self._wait_until_innerText_is_empty_of_an_element(
             self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[0])
         self._press_back_button()

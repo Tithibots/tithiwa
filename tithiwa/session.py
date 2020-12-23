@@ -24,7 +24,7 @@ class Session(WaObject):
             sessionfilename = self._add_file_extension(sessionfilename)
         if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
             print("Waiting for QR code scan", end="... ")
-        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR_SEARCH_ICON)
+        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR__SEARCH_ICON)
         if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
         session = self.browser.execute_script(GET_SESSION)
@@ -52,7 +52,7 @@ class Session(WaObject):
                 raise IOError('"' + sessionfilename + '" is invalid file.')
         if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
             print("Injecting session", end="... ")
-        # print(session)
+        self._wait_for_presence_of_an_element(SELECTORS.QR_CODE)
         self.browser.execute_script(
             PUT_SESSION,
             session,

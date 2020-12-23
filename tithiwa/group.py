@@ -20,8 +20,10 @@ class Group(Chatroom, WaObject):
         inputbox = self._wait_for_presence_of_an_element(SELECTORS.CREATE_NEW_GROUP__TYPE_CONTACTS_INPUT_BOX)
         inputbox.click()
         for name in contacts:
+            # pre_style = self._wait_for_presence_of_an_element(SELECTORS.CREATE_NEW_GROUP__RESULT_BOX).get_attribute(
+            #     "style")
             inputbox.send_keys(name)
-            self._wait_for_presence_of_an_element(SELECTORS.CREATE_NEW_GROUP__RESULT_CONTACT)
+            # self._wait_for_attribute_change(SELECTORS.CREATE_NEW_GROUP__RESULT_BOX, "style", pre_style)
             inputbox.send_keys(Keys.TAB + Keys.ENTER)
         self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP__OK_CONTACTS_TYPE).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.CREATE_NEW_GROUP__TYPE_GROUP_NAME).send_keys(groupname)
@@ -44,10 +46,11 @@ class Group(Chatroom, WaObject):
             if curractive == preactive:
                 break
             members.append(
-                curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
+                curractive.find_element(*SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                     'innerText'))
             preactive = curractive
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
+        self._close_chat_info()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
         return members
@@ -63,7 +66,7 @@ class Group(Chatroom, WaObject):
             curractive = self.browser.switch_to.active_element
             if curractive == preactive:
                 break
-            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
+            name = curractive.find_element(*SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name in members:
                 try:
@@ -147,7 +150,7 @@ class Group(Chatroom, WaObject):
         else:
             if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
                 print(f'{STRINGS.CROSS_CHAR} Failed. Group not found.')
-        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR_BACK_ARROW).click()
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR__BACK_ARROW).click()
 
     def exit_from_all_groups(self, _shouldoutput=(True, True)):
         self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
@@ -202,7 +205,7 @@ class Group(Chatroom, WaObject):
 
     def _open_group_members_list(self, groupname):
         self._search_and_open_chat_by_name(groupname)
-        self._close_chat_info()
+        self._open_chat_info()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__MEMBERS_SEARCH_ICON).click()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__SEARCH_CONTACTS_INPUT_BOX).click()
 
