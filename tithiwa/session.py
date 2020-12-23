@@ -7,7 +7,6 @@ import platform
 import subprocess
 
 
-
 class Session(WaObject):
 
     def __init__(self, sessiondir=None, browser=None):
@@ -25,12 +24,10 @@ class Session(WaObject):
             sessionfilename = self._add_file_extension(sessionfilename)
         if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
             print("Waiting for QR code scan", end="... ")
-        while "WAToken1" not in self.browser.execute_script(
-                "return window.localStorage;"):
-            continue
+        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR_SEARCH_ICON)
         if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
-        session = self.browser.execute_script("return window.localStorage;")
+        session = self.browser.execute_script(GET_SESSION)
         sessionfilelocation = os.path.realpath(os.path.join(self.sessiondir, sessionfilename))
         with open(sessionfilelocation, 'w',
                   encoding='utf-8') as sessionfile:
@@ -50,17 +47,14 @@ class Session(WaObject):
         session = None
         with open(sessionfilename, "r", encoding="utf-8") as sessionfile:
             try:
-                session = eval(sessionfile.read())
+                session = sessionfile.read()
             except:
                 raise IOError('"' + sessionfilename + '" is invalid file.')
         if _shouldoutput and DEFAULT_SHOULD_OUTPUT:
             print("Injecting session", end="... ")
+        # print(session)
         self.browser.execute_script(
-            """
-        var keys = Object.keys(arguments[0]);
-        var values = Object.values(arguments[0]);
-        for(i=0;i<keys.length;++i) window.localStorage.setItem(keys[i], values[i]);
-        """,
+            PUT_SESSION,
             session,
         )
         self.browser.refresh()
