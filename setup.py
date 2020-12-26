@@ -24,7 +24,7 @@ setup(
     },
     url="https://github.com/Maskgirl/tithiwa",
     author="Navpreet Devpuri and Sulagna Mukherjee",
-    author_email="navpreetdevpuri@gmail.com",
+    author_email="NavpreetDevpuri@gmail.com",
     install_requires=[
         "selenium",
     ],
