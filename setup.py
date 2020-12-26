@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="tithiwa",
-    version="0.0.13",
+    version="0.1.29",
     description="tithiwa - Web WhatsApp bot: Automate Web WhatsApp with selenium in python.",
     py_modules=["chatroom", "constants", "flextithiwa", "group", "session", "messages", "tithiwa"],
     packages=find_packages(),
@@ -23,8 +23,8 @@ setup(
         ],
     },
     url="https://github.com/Maskgirl/tithiwa",
-    author="Sulagna Mukherjee and Navpreet Devpuri",
-    author_email="tithimukherjee12@gmail.com and navpreetdevpuri@gmail.com",
+    author="Navpreet Devpuri and Sulagna Mukherjee",
+    author_email="navpreetdevpuri@gmail.com",
     install_requires=[
         "selenium",
     ],
