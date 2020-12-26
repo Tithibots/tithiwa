@@ -9,6 +9,8 @@ DEFAULT_SHOULD_OUTPUT = True
 
 
 class SELECTORS(object):
+    OVERLAY = (By.CSS_SELECTOR, 'div[class^="overlay"]')
+    OVERLAY_OK = (By.CSS_SELECTOR, 'div[class^="overlay"] div[role="button"]:nth-child(2)')
     QR_CODE = (By.CSS_SELECTOR, 'div[data-ref]')
     MAIN_SEARCH_BAR = (By.CSS_SELECTOR, '#side [contenteditable="true"]')
     MAIN_SEARCH_BAR__DONE = (By.CSS_SELECTOR, 'span[data-testid="x-alt"]')
@@ -32,35 +34,35 @@ class SELECTORS(object):
     CHATROOM__INFO = (By.CSS_SELECTOR, '#main > header > div > div > span')
     CHATROOM__INFO_NUMBER = (By.CSS_SELECTOR, 'span[class*="invisible-space"][dir="auto"] span[class*="_"]')
     CHATROOM__CLOSE_INFO = (
-    By.CSS_SELECTOR, 'div[style="height: 100%; transform: translateX(0%);"] span[data-testid="x"]')
+        By.CSS_SELECTOR, 'div[style="height: 100%; transform: translateX(0%);"] span[data-testid="x"]')
     CHATROOM__OPTIONS = (By.CSS_SELECTOR, '[data-testid="menu"]')
     CHATROOM__INFO_DELETE_CHAT = (By.CSS_SELECTOR, '._1OwwW ._3oTCZ[title="Delete chat"]')
     CHATROOM__DELETE_CHAT = (By.CSS_SELECTOR, 'li div[title="Delete chat"]')
+    CHATROOM__FOOTER = (By.CSS_SELECTOR, 'footer')
     CONTACTS__NAME_IN_CHATS = (By.CSS_SELECTOR, '#side div[aria-label^="Chat list"] div span span[dir="auto"][title]')
     GROUPS__MEMBERS_SEARCH_ICON = (By.CSS_SELECTOR, 'div[role="button"] span[data-testid="search"]')
     GROUPS__SEARCH_CONTACTS_INPUT_BOX = (
         By.CSS_SELECTOR, 'div[data-animate-modal-body="true"] label div[contenteditable="true"]')
     GROUPS__CONTACTS_SEARCH_NAME = (
-        By.CSS_SELECTOR, 'div > span[title], div > span span[title]')  # div[data-animate-modal-body="true"]
+        By.CSS_SELECTOR, 'div > span[title="You"], div > span span[title]')  # div[data-animate-modal-body="true"]
     GROUPS__CLOSE_CONTACTS_SEARCH = (By.CSS_SELECTOR, 'div[data-animate-modal-backdrop="true"] span[data-testid="x"]')
-    GROUPS__ADMIN_ICON = (By.CSS_SELECTOR, '.LwCwJ')
-    GROUPS__MAKE_ADMIN = (By.CSS_SELECTOR, '.Ut_N0')
-    GROUPS__REMOVE_ADMIN = (By.CSS_SELECTOR, '._1OwwW ._3oTCZ[title="Dismiss as admin"]')
+    # GROUPS__ADMIN_ICON = (By.CSS_SELECTOR, '.LwCwJ')
+    GROUPS__MAKE_ADMIN = (By.CSS_SELECTOR, 'li > div[title="Make group admin"]')
+    GROUPS__REMOVE_ADMIN = (By.CSS_SELECTOR, 'div[title="Dismiss as admin"]')
     GROUPS__REMOVE = (By.CSS_SELECTOR, 'div[title="Remove"]')
-    GROUPS__EXIT_FROM_GROUP = (By.CSS_SELECTOR, '._3wAoe._3DSZk[title="Exit group"]')
-    GROUPS__EXIT_DIALOG_BOX = (By.CSS_SELECTOR, '._9a59P')
-    GROUPS__EXIT_BUTTON_EXIT_DIALOG_BOX = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
-    GROUPS__NO_LONGER_A_PARTICIPANT = (By.CSS_SELECTOR, '._3ge3i')
+    GROUPS__EXIT_FROM_GROUP = (By.CSS_SELECTOR, 'div[title="Exit group"]')
+    # GROUPS__EXIT_DIALOG_BOX_EXIT_BUTTON = (By.CSS_SELECTOR, 'div[class^="overlay"] div[role="button"]:nth-child(2)')
+    # GROUPS__NO_LONGER_A_PARTICIPANT = (By.CSS_SELECTOR, '._3ge3i')
     GROUPS__NAME_IN_CHATS = (By.CSS_SELECTOR, '#side div[aria-label^="Chat list"] div > span[dir="auto"][title]')
-    SETTINGS__OK_BUTTON = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
+    SETTINGS__OK_BUTTON = (By.CSS_SELECTOR, 'div[class^="overlay"] div[role="button"]:nth-child(2)')
     SETTINGS__THEME = (By.CSS_SELECTOR, 'div[title="Theme"]')
     SETTINGS__NOTIFICATIONS = (By.CSS_SELECTOR, 'div[title="Notifications"]')
     SETTINGS__BLOCKED = (By.CSS_SELECTOR, 'div[title="Blocked"]')
     SETTINGS__ADD_BLOCKED_CONTACT = (By.CSS_SELECTOR, 'div[title="Add blocked contact"]')
-    SETTINGS__NOTIFICATIONS_OPTIONS = (By.CSS_SELECTOR, '._2XWkx')
-    SETTINGS__NOTIFICATIONS_TURN_OFF_OPTIONS = (By.CSS_SELECTOR, '._1OFu5')
-    SETTINGS__NOTIFICATIONS_MUTE_OR_UNMUTE = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
-    SETTINGS__PROFILE = (By.CSS_SELECTOR, '._1V82l')
+    SETTINGS__NOTIFICATIONS_OPTIONS = (By.CSS_SELECTOR, 'div[role="checkbox"]')
+    SETTINGS__NOTIFICATIONS_TURN_OFF_OPTIONS = (By.CSS_SELECTOR, 'div[class^="overlay"] input')
+    # SETTINGS__NOTIFICATIONS_MUTE_OR_UNMUTE = (By.CSS_SELECTOR, '.S7_rT.FV2Qy')
+    # SETTINGS__PROFILE = (By.CSS_SELECTOR, '._1V82l')
 
 
 class STRINGS(object):

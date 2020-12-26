@@ -10,6 +10,7 @@ class Settings(WaObject):
         self._open_settings()
         self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__THEME).click()
         self._wait_for_an_element_to_be_clickable((By.CSS_SELECTOR, f'[value="{theme}"]')).click()
+        self._wait_for_presence_of_an_element(SELECTORS.OVERLAY)
         self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__OK_BUTTON).click()
         self._press_back_button()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
@@ -29,12 +30,13 @@ class Settings(WaObject):
         if is_desktop_alerts and is_show_previews:
             self._setting_notifications_select(is_show_previews, options[2])
         self._setting_notifications_select(is_turn_off_desktop_notifications, options[3])
+        self._wait_for_presence_of_an_element(SELECTORS.OVERLAY)
         if is_turn_off_desktop_notifications:
             options = self._wait_for_presence_of_all_elements(SELECTORS.SETTINGS__NOTIFICATIONS_TURN_OFF_OPTIONS)
             options[turn_off_desktop_notifications_for].click()
-            self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__NOTIFICATIONS_MUTE_OR_UNMUTE).click()
+            self._wait_for_an_element_to_be_clickable(SELECTORS.OVERLAY_OK).click()
         else:
-            self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__NOTIFICATIONS_MUTE_OR_UNMUTE).click()
+            self._wait_for_an_element_to_be_clickable(SELECTORS.OVERLAY_OK).click()
         self._press_back_button()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
@@ -44,7 +46,7 @@ class Settings(WaObject):
             print(f'Setting notifications', end="...")
         self._open_settings()
         self._wait_for_an_element_to_be_clickable(SELECTORS.SETTINGS__BLOCKED).click()
-        
+
         self._press_back_button()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')

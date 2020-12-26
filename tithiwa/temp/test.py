@@ -24,8 +24,8 @@ time_to_send = "15:45:00"
 # tithiwabot.create_group(group_name, [contact for contact in contacts_or_groups])
 
 print(tithiwabot.scrape_members_from_group(group_name))  # ["contact1", "contact2", "contact2"]
-
-# tithiwabot.make_group_admins(group_name, [contact for contact in contacts_or_groups])
+print()
+tithiwabot.make_group_admins(group_name, [contact for contact in contacts_or_groups])
 #
 # tithiwabot.remove_members_from_group(group_name, [contact for contact in contacts_or_groups])
 #

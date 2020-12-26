@@ -69,14 +69,14 @@ class Group(Chatroom, WaObject):
             name = curractive.find_element(*SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name in members:
-                try:
-                    curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__ADMIN_ICON)
-                except:
+                if curractive.get_attribute("innerText").find("\nGroup admin") == -1:
                     curractive.click()
                     self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__MAKE_ADMIN).click()
             preactive = curractive
-        self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS__ADMIN_ICON, curractive)
+        # self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS__ADMIN_ICON, curractive)
+        self._close_info()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
+        self._close_chat_info()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
 
@@ -97,6 +97,7 @@ class Group(Chatroom, WaObject):
             curractive = self.browser.switch_to.active_element
         self._wait_for_an_element_to_deattached(curractive)
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
+        self._close_chat_info()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
 
@@ -114,15 +115,14 @@ class Group(Chatroom, WaObject):
             name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name in members:
-                try:
-                    curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__ADMIN_ICON)
-                except:
+                if curractive.get_attribute("innerText").find("\nGroup admin") != -1:
                     curractive.click()
                     self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__REMOVE_ADMIN).click()
             preactive = curractive
         # self._wait_for_presence_of_an_element_in_other_element(SELECTORS.GROUPS__ADMIN_ICON, curractive)
         self._close_info()
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
+        self._close_chat_info()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
             print(f'{STRINGS.CHECK_CHAR} Done')
 
@@ -216,16 +216,15 @@ class Group(Chatroom, WaObject):
         self._exit_from_group(_shouldoutput[1])
 
     def _exit_from_group(self, _shouldoutput1=True):
-        _, winnerindex = self._race_for_presence_of_two_elements(SELECTORS.GROUPS__NO_LONGER_A_PARTICIPANT,
-                                                                 SELECTORS.MESSAGE_INPUT_BOX)
-        if winnerindex == 0:
+        footertext = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__FOOTER).get_attribute('innerText')
+        if footertext != 'Type a message':
             if _shouldoutput1 and DEFAULT_SHOULD_OUTPUT:
                 print(f'{STRINGS.CHECK_CHAR} Done. You are already exited the group.')
         else:
             self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
             self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__EXIT_FROM_GROUP).click()
-            self._wait_for_presence_of_an_element(SELECTORS.GROUPS__EXIT_DIALOG_BOX)
-            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__EXIT_BUTTON_EXIT_DIALOG_BOX).click()
+            self._wait_for_presence_of_an_element(SELECTORS.OVERLAY)
+            self._wait_for_an_element_to_be_clickable(SELECTORS.OVERLAY_OK).click()
             self._close_chat_info()
             self._close_info()
             if _shouldoutput1 and DEFAULT_SHOULD_OUTPUT:
