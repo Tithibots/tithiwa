@@ -204,3 +204,6 @@ class WaObject:
             self._wait_for_presence_of_all_elements(SELECTORS.NAME_AND_ABOUT)[0])
         self._press_back_button()
         return name
+
+    def get_my_number(self):
+        return self.browser.execute_script("return localStorage['last-wid'].slice(0, -6);")
