@@ -85,17 +85,20 @@ class Group(Chatroom, WaObject):
             print(f'Removing these members {str(members)} from the group "{groupname}"', end="... ")
         self._open_group_members_list(groupname)
         preactive = None
+        self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
         curractive = self.browser.switch_to.active_element
-        curractive.send_keys(Keys.ARROW_DOWN)
         while curractive != preactive:
-            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
+            print(curractive == preactive)
+            name = curractive.find_element(*SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name in members:
                 curractive.click()
                 self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__REMOVE).click()
+                self._close_info()
             preactive = curractive
+            curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
-        self._wait_for_an_element_to_deattached(curractive)
+        # self._wait_for_an_element_to_deattached(curractive)
         self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__CLOSE_CONTACTS_SEARCH).click()
         self._close_chat_info()
         if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
@@ -112,7 +115,7 @@ class Group(Chatroom, WaObject):
             curractive = self.browser.switch_to.active_element
             if curractive == preactive:
                 break
-            name = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
+            name = curractive.find_element(*SELECTORS.GROUPS__CONTACTS_SEARCH_NAME).get_attribute(
                 'innerText')
             if name in members:
                 if curractive.get_attribute("innerText").find("\nGroup admin") != -1:

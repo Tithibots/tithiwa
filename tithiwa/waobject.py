@@ -1,5 +1,7 @@
 __all__ = ["WaObject"]
 
+from time import sleep
+
 from selenium import webdriver
 from .constants import *
 from selenium.webdriver.common.by import By
@@ -65,9 +67,19 @@ class WaObject:
             try:
                 relement = element.find_element(*selector)
             except:
-                pass
-            finally:
-                return relement
+                continue
+            return relement
+
+    def _wait_for_presence_of_an_element_in_active_element(self, selector):
+        relement = None
+        while True:
+            try:
+                curractive = self.browser.switch_to.active_element
+                relement = curractive.find_element(*selector)
+                sleep(0.5)
+            except:
+                continue
+            return relement
 
     def _wait_for_an_element_to_be_clickable(self, selector):
         element = None

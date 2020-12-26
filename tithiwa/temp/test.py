@@ -4,8 +4,8 @@ tithiwabot = Tithiwa()
 # tithiwabot.generate_session("00")
 tithiwabot.open_session()
 
-contacts_or_groups = ["navpreet devpuri"]
-group_name = "test1"
+contacts_or_groups = ["Navpreet Devpuri"]
+group_name = "test2"
 time_to_send = "15:45:00"
 
 # tithiwabot.open_chat_to("919592140593")
@@ -23,16 +23,17 @@ time_to_send = "15:45:00"
 
 # tithiwabot.create_group(group_name, [contact for contact in contacts_or_groups])
 
-print(tithiwabot.scrape_members_from_group(group_name))  # ["contact1", "contact2", "contact2"]
-print()
+# print(tithiwabot.scrape_members_from_group(group_name))  # ["contact1", "contact2", "contact2"]
+# tithiwabot.remove_members_from_group("test2", ["Navpreet Devpuri"])
+# print()
 tithiwabot.make_group_admins(group_name, [contact for contact in contacts_or_groups])
 #
 # tithiwabot.remove_members_from_group(group_name, [contact for contact in contacts_or_groups])
 #
-# tithiwabot.send_message_with_mention_all_to_group(group_name, "Hello All")
+tithiwabot.send_message_with_mention_all_to_group(group_name, "Hello All")
 #
-# tithiwabot.exit_from_group(group_name)
+tithiwabot.exit_from_group(group_name)
 #
-# tithiwabot.exit_from_all_groups()
+tithiwabot.exit_from_all_groups()
 #
-# tithiwabot.exit_from_groups([group_name])
+tithiwabot.exit_from_groups([group_name])
