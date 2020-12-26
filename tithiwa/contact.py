@@ -23,6 +23,9 @@ class Contact(Chatroom, WaObject):
         self._close_chat_info()
         return number
 
+    def open_chat_to_myself(self):
+        self.open_chat_to_number_using_url(self.get_my_number())
+
     def _wait_for_mobile_number_to_appear(self):
         number = ''
         while number == '':
