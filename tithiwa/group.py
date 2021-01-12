@@ -240,6 +240,15 @@ class Group(Chatroom, WaObject):
                 chatinfo = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__INFO).get_attribute('innerText')
             except:
                 pass
+    def join_group(self,url):
+        url  =self.url
+        code_pos = url.index('com/')
+        code_pos += 4
+        code = url[code_pos:]
+        group_url = 'https://web.whatsapp.com/accept?code='+ code
+        driver.get(group_url)
+        time.sleep(10)
+        driver.find_element_by_xpath('//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[2]/div[2]/div/div').click()
 
 # create_group('yeh', ["Navpreet Devpuri"])
 
