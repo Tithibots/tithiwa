@@ -241,7 +241,6 @@ class Group(Chatroom, WaObject):
             except:
                 pass
     def join_group(self,url):
-        url  =self.url
         code_pos = url.index('com/')
         code_pos += 4
         code = url[code_pos:]
