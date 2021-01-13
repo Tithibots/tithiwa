@@ -245,9 +245,9 @@ class Group(Chatroom, WaObject):
         code_pos += 4
         code = url[code_pos:]
         group_url = 'https://web.whatsapp.com/accept?code='+ code
-        driver.get(group_url)
-        time.sleep(10)
-        driver.find_element_by_xpath('//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[2]/div[2]/div/div').click()
+        self.browser(group_url)
+        self._wait_for_presence_of_an_element('#app > div > span:nth-child(2) > div > div > div > div > div > div > div._2SGGH > div._30EVj.gMRg5 > div > div')
+        self.browser.find_element_by_xpath('//*[@id="app"]/div/span[2]/div/div/div/div/div/div/div[2]/div[2]/div/div').click()
 
 # create_group('yeh', ["Navpreet Devpuri"])
 
