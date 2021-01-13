@@ -54,6 +54,8 @@ class SELECTORS(object):
     # GROUPS__EXIT_DIALOG_BOX_EXIT_BUTTON = (By.CSS_SELECTOR, 'div[class^="overlay"] div[role="button"]:nth-child(2)')
     # GROUPS__NO_LONGER_A_PARTICIPANT = (By.CSS_SELECTOR, '._3ge3i')
     GROUPS__NAME_IN_CHATS = (By.CSS_SELECTOR, '#side div[aria-label^="Chat list"] div > span[dir="auto"][title]')
+    GROUPS__GROUP_ICON_IN_POP_UP = (By.CSS_SELECTOR, '.overlay span[data-testid="default-group"]')
+    GROUPS__JOIN_BUTTON = (By.CSS_SELECTOR, '.overlay div[role="button"]:nth-child(2)')
     SETTINGS__OK_BUTTON = (By.CSS_SELECTOR, 'div[class^="overlay"] div[role="button"]:nth-child(2)')
     SETTINGS__THEME = (By.CSS_SELECTOR, 'div[title="Theme"]')
     SETTINGS__NOTIFICATIONS = (By.CSS_SELECTOR, 'div[title="Notifications"]')
@@ -77,7 +79,7 @@ class INTEGERS(object):
     TURN_OFF_NOTIFICATIONS_FOR_8_HOURS = 0
     TURN_OFF_NOTIFICATIONS_FOR_1_WEEK = 1
     TURN_OFF_NOTIFICATIONS_FOR_ALWAYS = 2
-    DEFAULT_WAIT = 13
+    DEFAULT_WAIT = 89
 
 
 _SETUP_SESSION = '''

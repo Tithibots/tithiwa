@@ -241,7 +241,26 @@ class Group(Chatroom, WaObject):
             except:
                 pass
 
-# create_group('yeh', ["Navpreet Devpuri"])
+    def join_group(self, url, _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'joining group from link: "{url}"', end="... ")
+        group_code = url[url.rfind("/") + 1:]
+        group_url = f'https://web.whatsapp.com/accept?code={group_code}'
+        self.browser.get(group_url)
+        self._wait_for_web_whatsapp_to_load()
+        race_result = self._race_for_presence_of_two_elements(SELECTORS.GROUPS__GROUP_ICON_IN_POP_UP,
+                                                              SELECTORS.CHATROOM__NAME)
+        if race_result[1] == 0:
+            pop_up = self._wait_for_presence_of_an_element(SELECTORS.GROUPS__GROUP_ICON_IN_POP_UP)
+            self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__JOIN_BUTTON).click()
+            self._wait_for_an_element_to_deattached(pop_up)
+            if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+                print(f'{STRINGS.CHECK_CHAR} Done')
+        else:
+            if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
+                print(f'{STRINGS.CHECK_CHAR} You already joined it. Done')
+
+    # create_group('yeh', ["Navpreet Devpuri"])
 
 # print(scrape_members_from_group("PROGRAMMING"))
 #

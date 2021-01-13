@@ -37,7 +37,7 @@ class WaObject:
             self.browser.get("https://web.whatsapp.com/")
 
     def _wait_for_web_whatsapp_to_load(self):
-        self._wait_for_presence_of_an_element(SELECTORS.TURN_ON_DESKTOP_NOTIFICATIONS)
+        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR)
 
     def _wait_for_presence_of_an_element(self, selector):
         element = None
@@ -102,7 +102,7 @@ class WaObject:
                 pass
 
     def _race_for_presence_of_two_elements(self, selector1, selector2):
-        selector1orselector2 = selector1 + ", " + selector2
+        selector1orselector2 = (By.CSS_SELECTOR, selector1[1] + ", " + selector2[1])
         winnerelement = self._wait_for_presence_of_an_element(selector1orselector2)
         element1 = None
         try:
