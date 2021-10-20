@@ -57,3 +57,11 @@ class Chatroom(WaObject):
 
     def _send_message(self, message):
         self._wait_for_an_element_to_be_clickable(SELECTORS.MESSAGE_INPUT_BOX).send_keys(message + Keys.ENTER)
+
+    def send_message_at_time(self, nameornumber, message, dateandtime):
+        while(True):
+            current_datetime = str(datetime.datetime.now())[:-7]
+            if current_datetime == dateandtime:
+                self.send_message_to(nameornumber, message)
+                break
+
