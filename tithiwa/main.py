@@ -4,7 +4,6 @@ from .session import Session
 from .settings import Settings
 from .group import Group
 from .contact import Contact
-from time import sleep
 from .constants import *
 from selenium.webdriver.common.keys import Keys
 
@@ -20,8 +19,13 @@ class Tithiwa(Session, Settings, Group, Contact):
         curractive = self.browser.switch_to.active_element
         pregroupname = None
         while curractive != preactive:
-            sleep(0.5)
-            self.browser.find_element_by_xpath("/html/body/div[1]/div[1]/div[1]/div[4]/div[1]/header/div[3]/div/div[2]/div/div/span").click()
+            while True:
+                try:
+                    self.browser.find_element_by_xpath("/html/body/div[1]/div[1]/div[1]/div[4]/div[1]/header/div[3]/div/div[2]/div/div/span").click()
+                    break
+                except:
+                    pass
+            
             for i in range(3):
                 self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
             self.browser.switch_to.active_element.send_keys(Keys.ENTER)
