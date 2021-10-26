@@ -37,17 +37,18 @@ class Chatroom(WaObject):
         for nameornumber in namesornumbers:
             self.send_message_to(nameornumber, message)
 
-    def send_message_at_time_to(self, nameornumberlist, message, time='03:00:00', _shouldoutput=(True, True)):
+    def send_message_at_time_to(self, message_to_contact_dictionary, time='03:00:00', _shouldoutput=(True, True)):
         if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
-            print(f'Sending message "{message}" to "{nameornumberlist}" on time {time}...')
+            print(f'Sending message at time {time}...')
         h, m, s = map(int, time.split(':'))
         given_time = str(datetime.time(hour=h, minute=m, second=s))
         while True:
             now = datetime.datetime.now()
             time_now = "%0.2d:%0.2d:%0.2d" % (now.hour, now.minute, now.second)
             if given_time == time_now:
-                self.send_message_to_multiple_chats(nameornumberlist, message)
-                break
+                for i in message_to_contact_dictionary:
+                    self.send_message_to(i, message_to_contact_dictionary[i])
+
 
     def _open_chat_info(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
