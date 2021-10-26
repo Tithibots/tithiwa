@@ -109,6 +109,18 @@ class Session(WaObject):
         else:
             subprocess.Popen(["xdg-open", path])
 
+    def _is_logged_in(self):
+         if "WAToken1" not in self.browser.execute_script(
+                "return window.localStorage;"):
+            return False
+        else:
+            return True
+
+    def _wait_util_logged_in(self):
+        self._wait_for_presence_of_an_element(SELECTORS.MAIN_SEARCH_BAR__SEARCH_ICON)
+        return True
+    
+
 # browser = generate_session("03")
 # browser.quit()
 # open_session("03")
