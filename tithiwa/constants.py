@@ -31,6 +31,7 @@ class SELECTORS(object):
     CREATE_NEW_GROUP__TYPE_GROUP_NAME = (By.CSS_SELECTOR, '[contenteditable="true"]')
     CREATE_NEW_GROUP__OK_GROUP_NAME_TYPE = (By.CSS_SELECTOR, '[data-testid="checkmark-medium"]')
     CHATROOM__NAME = (By.CSS_SELECTOR, '#main header span[dir="auto"]')
+    CHATROOM__ONLINE = (By.CSS_SELECTOR, '[title="online"]')
     CHATROOM__INFO = (By.CSS_SELECTOR, '#main > header > div > div > span')
     CHATROOM__INFO_NUMBER = (By.CSS_SELECTOR, 'span[class*="invisible-space"][dir="auto"] span[class*="_"]')
     CHATROOM__CLOSE_INFO = (

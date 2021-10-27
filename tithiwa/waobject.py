@@ -50,6 +50,17 @@ class WaObject:
         finally:
             return element
 
+    def _check_for_presence_of_an_element(self, selector, seconds):
+        element = None
+        try:
+            element = WebDriverWait(self.browser, seconds).until(
+                EC.presence_of_element_located(selector)
+            )
+        except:
+            pass
+        finally:
+            return element
+
     def _wait_for_presence_of_all_elements(self, selector):
         elements = None
         try:
