@@ -110,7 +110,7 @@ class Session(WaObject):
             subprocess.Popen(["xdg-open", path])
 
     def _is_logged_in(self):
-         if "WAToken1" not in self.browser.execute_script(
+        if "WAToken1" not in self.browser.execute_script(
                 "return window.localStorage;"):
             return False
         else:
