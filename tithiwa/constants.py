@@ -36,9 +36,10 @@ class SELECTORS(object):
     CHATROOM__INFO_NUMBER = (By.CSS_SELECTOR, 'span[class*="invisible-space"][dir="auto"] span[class*="_"]')
     CHATROOM__CLOSE_INFO = (
         By.CSS_SELECTOR, 'div[style="height: 100%; transform: translateX(0%);"] span[data-testid="x"]')
-    CHATROOM__OPTIONS = (By.CSS_SELECTOR, '[data-testid="menu"]')
+    CHATROOM__OPTIONS = (By.CSS_SELECTOR, '#main span[data-testid="menu"]')
     CHATROOM__INFO_DELETE_CHAT = (By.CSS_SELECTOR, '._1OwwW ._3oTCZ[title="Delete chat"]')
     CHATROOM__DELETE_CHAT = (By.CSS_SELECTOR, 'li div[title="Delete chat"]')
+    CHATROOM__CLEAR_MESSAGES = (By.CSS_SELECTOR, 'li div[aria-label="Clear messages"]')
     CHATROOM__FOOTER = (By.CSS_SELECTOR, 'footer')
     CONTACTS__NAME_IN_CHATS = (By.CSS_SELECTOR, '#side div[aria-label^="Chat list"] div span span[dir="auto"][title]')
     GROUPS__MEMBERS_SEARCH_ICON = (By.CSS_SELECTOR, 'div[role="button"] span[data-testid="search"]')
