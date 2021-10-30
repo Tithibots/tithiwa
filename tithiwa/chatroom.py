@@ -65,6 +65,8 @@ class Chatroom(WaObject):
             self._wait_for_presence_of_an_element(SELECTORS.OVERLAY)
             self._wait_for_an_element_to_be_clickable(SELECTORS.OVERLAY_OK).click()      
             
+            self._close_info()
+            
             preactive = curractive
             pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
             curractive.send_keys(Keys.ARROW_DOWN)
