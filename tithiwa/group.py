@@ -1,6 +1,5 @@
 __all__ = ["Group"]
 
-from time import sleep
 from .constants import *
 from .chatroom import Chatroom
 from .waobject import WaObject
@@ -260,6 +259,45 @@ class Group(Chatroom, WaObject):
             if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
                 print(f'{STRINGS.CHECK_CHAR} You already joined it. Done')
 
+    def delete_chats_of_all_exited_groups(self):
+        self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
+        preactive = None
+        self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
+        curractive = self.browser.switch_to.active_element
+        pregroupname = None
+        count = 0
+        while curractive != preactive:
+            footertext = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__FOOTER).get_attribute('innerText')
+            if footertext == r"You can't send messages to this group because you're no longer a participant.":
+                self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
+                self._wait_for_an_element_to_be_clickable(SELECTORS.GROUPS__DELETE_GROUP).click()
+                self._wait_for_presence_of_an_element(SELECTORS.OVERLAY)
+                self._wait_for_an_element_to_be_clickable(SELECTORS.OVERLAY_OK).click()
+                self._close_chat_info()
+                self._close_info()
+
+                self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
+                self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
+                preactive = None
+                if count != 0:
+                    for i in range(count):
+                        self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
+                    count -= 1
+                else:
+                    self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
+                curractive = self.browser.switch_to.active_element
+                pregroupname = None
+                continue
+            
+            preactive = curractive
+            pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
+            curractive.send_keys(Keys.ARROW_DOWN)
+            curractive = self.browser.switch_to.active_element
+            count += 1
+
+
+    
     # create_group('yeh', ["Navpreet Devpuri"])
 
 # print(scrape_members_from_group("PROGRAMMING"))
