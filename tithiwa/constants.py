@@ -31,6 +31,7 @@ class SELECTORS(object):
     CREATE_NEW_GROUP__TYPE_GROUP_NAME = (By.CSS_SELECTOR, '[contenteditable="true"]')
     CREATE_NEW_GROUP__OK_GROUP_NAME_TYPE = (By.CSS_SELECTOR, '[data-testid="checkmark-medium"]')
     CHATROOM__NAME = (By.CSS_SELECTOR, '#main header span[dir="auto"]')
+    CHATROOM__ONLINE = (By.CSS_SELECTOR, '[title="online"]')
     CHATROOM__INFO = (By.CSS_SELECTOR, '#main > header > div > div > span')
     CHATROOM__INFO_NUMBER = (By.CSS_SELECTOR, 'span[class*="invisible-space"][dir="auto"] span[class*="_"]')
     CHATROOM__CLOSE_INFO = (
@@ -52,6 +53,7 @@ class SELECTORS(object):
     GROUPS__REMOVE_ADMIN = (By.CSS_SELECTOR, 'div[title="Dismiss as admin"]')
     GROUPS__REMOVE = (By.CSS_SELECTOR, 'div[title="Remove"]')
     GROUPS__EXIT_FROM_GROUP = (By.CSS_SELECTOR, 'div[title="Exit group"]')
+    GROUPS__DELETE_GROUP = (By.CSS_SELECTOR, 'div[title="Delete group"]')
     # GROUPS__EXIT_DIALOG_BOX_EXIT_BUTTON = (By.CSS_SELECTOR, 'div[class^="overlay"] div[role="button"]:nth-child(2)')
     # GROUPS__NO_LONGER_A_PARTICIPANT = (By.CSS_SELECTOR, '._3ge3i')
     GROUPS__NAME_IN_CHATS = (By.CSS_SELECTOR, '#side div[aria-label^="Chat list"] div > span[dir="auto"][title]')

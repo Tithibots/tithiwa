@@ -4,8 +4,7 @@ import datetime
 from .constants import *
 from .waobject import WaObject
 from selenium.webdriver.common.keys import Keys
-
-
+from time import sleep, time
 class Chatroom(WaObject):
     def __init__(self, browser=None):
         super().__init__(browser)
@@ -37,7 +36,7 @@ class Chatroom(WaObject):
         for nameornumber in namesornumbers:
             self.send_message_to(nameornumber, message)
 
-    def send_message_at_time_to(self, nameornumberlist, message, time='03:00:00', _shouldoutput=(True, True)):
+    def send_message_at_time(self, nameornumberlist, message, time='03:00:00', _shouldoutput=(True, True)):
         if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
             print(f'Sending message "{message}" to "{nameornumberlist}" on time {time}...')
         h, m, s = map(int, time.split(':'))
@@ -68,7 +67,19 @@ class Chatroom(WaObject):
             pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
-            
+    
+    def send_messages_at_time(self, message_to_contact_dictionary, time='03:00:00', _shouldoutput=(True, True)):
+        if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
+            print(f'Sending message at time {time}...')
+        h, m, s = map(int, time.split(':'))
+        given_time = str(datetime.time(hour=h, minute=m, second=s))
+        while True:
+            now = datetime.datetime.now()
+            time_now = "%0.2d:%0.2d:%0.2d" % (now.hour, now.minute, now.second)
+            if given_time == time_now:
+                for i in message_to_contact_dictionary:
+                    self.send_message_to(i, message_to_contact_dictionary[i])
+
     def _open_chat_info(self):
         self._wait_for_an_element_to_be_clickable(SELECTORS.CHATROOM__NAME).click()
 
@@ -78,3 +89,25 @@ class Chatroom(WaObject):
     def _send_message(self, message):
         self._wait_for_an_element_to_be_clickable(SELECTORS.MESSAGE_INPUT_BOX).send_keys(message + Keys.ENTER)
 
+    def _get_online_status(self):
+        return self._check_for_presence_of_an_element(SELECTORS.CHATROOM__ONLINE)
+
+    def get_online_status_of(self, nameornumber):
+        self.open_chat_to(nameornumber)
+        return self._get_online_status()
+
+    def _track_online_status(self, nameornumber):
+        with open(f'{nameornumber}.txt', 'a+') as f:
+            while True:
+                isonline = self._check_for_presence_of_an_element(SELECTORS.CHATROOM__ONLINE, 1)
+                if isonline:
+                    f.write(f'{time()}: {1}')
+                else:
+                    f.write(f'{time()}: {0}')
+                f.flush()
+                sleep(1)
+
+    def track_online_status_of(self, nameornumber):
+        self.open_chat_to(nameornumber)
+        self._track_online_status(nameornumber)
+        
