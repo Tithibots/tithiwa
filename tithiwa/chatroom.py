@@ -58,10 +58,7 @@ class Chatroom(WaObject):
         pregroupname = None
         while curractive != preactive:
             self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__OPTIONS)
-            
-            for i in range(3):
-                self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
-            self.browser.switch_to.active_element.send_keys(Keys.ENTER)
+            self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__CLEAR_MESSAGES).click()
             self._wait_for_presence_of_an_element(SELECTORS.OVERLAY)
             self._wait_for_an_element_to_be_clickable(SELECTORS.OVERLAY_OK).click()      
             
