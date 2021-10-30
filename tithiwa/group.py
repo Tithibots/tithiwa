@@ -1,6 +1,5 @@
 __all__ = ["Group"]
 
-from time import sleep
 from .constants import *
 from .chatroom import Chatroom
 from .waobject import WaObject
@@ -295,7 +294,6 @@ class Group(Chatroom, WaObject):
             pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
-            sleep(0.5)
             count += 1
 
 
