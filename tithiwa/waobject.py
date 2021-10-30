@@ -50,6 +50,13 @@ class WaObject:
         finally:
             return element
 
+    def _check_for_presence_of_an_element(self, selector):
+        try:
+            element =  self.browser.find_element(*selector)
+            return True
+        except:
+            return False
+
     def _wait_for_presence_of_all_elements(self, selector):
         elements = None
         try:

@@ -4,8 +4,7 @@ import datetime
 from .constants import *
 from .waobject import WaObject
 from selenium.webdriver.common.keys import Keys
-
-
+from time import sleep, time
 class Chatroom(WaObject):
     def __init__(self, browser=None):
         super().__init__(browser)
@@ -71,3 +70,25 @@ class Chatroom(WaObject):
     def _send_message(self, message):
         self._wait_for_an_element_to_be_clickable(SELECTORS.MESSAGE_INPUT_BOX).send_keys(message + Keys.ENTER)
 
+    def _get_online_status(self):
+        return self._check_for_presence_of_an_element(SELECTORS.CHATROOM__ONLINE)
+
+    def get_online_status_of(self, nameornumber):
+        self.open_chat_to(nameornumber)
+        return self._get_online_status()
+
+    def _track_online_status(self, nameornumber):
+        with open(f'{nameornumber}.txt', 'a+') as f:
+            while True:
+                isonline = self._check_for_presence_of_an_element(SELECTORS.CHATROOM__ONLINE, 1)
+                if isonline:
+                    f.write(f'{time()}: {1}')
+                else:
+                    f.write(f'{time()}: {0}')
+                f.flush()
+                sleep(1)
+
+    def track_online_status_of(self, nameornumber):
+        self.open_chat_to(nameornumber)
+        self._track_online_status(nameornumber)
+        
