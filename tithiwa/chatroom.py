@@ -99,7 +99,7 @@ class Chatroom(WaObject):
     def _track_online_status(self, nameornumber):
         with open(f'{nameornumber}.txt', 'a+') as f:
             while True:
-                isonline = self._check_for_presence_of_an_element(SELECTORS.CHATROOM__ONLINE, 1)
+                isonline = self._check_for_presence_of_an_element(SELECTORS.CHATROOM__ONLINE)
                 if isonline:
                     f.write(f'{time()}: {1}')
                 else:
