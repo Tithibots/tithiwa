@@ -176,6 +176,30 @@ class Group(Chatroom, WaObject):
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
 
+    def clear_chat_from_all_groups(self, _shouldoutput=(True, True)):
+        self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
+        preactive = None
+        self.browser.switch_to.active_element.send_keys(Keys.ARROW_DOWN)
+        curractive = self.browser.switch_to.active_element
+        pregroupname = None
+        while curractive != preactive:
+            groupnameelement = None
+            try:
+                groupnameelement = curractive.find_element(By.CSS_SELECTOR, SELECTORS.GROUPS__NAME_IN_CHATS)
+            except:
+                pass
+            if groupnameelement != None:
+                groupname = groupnameelement.get_attribute('innerText')
+                self._wait_for_an_element_to_deattached(pregroupname)
+                self._wait_for_chat_to_open(groupname)
+                self._clear_chat()
+
+            preactive = curractive
+            pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
+            curractive.send_keys(Keys.ARROW_DOWN)
+            curractive = self.browser.switch_to.active_element
+
     def exit_from_groups(self, groupnames, includesamename=True, _shouldoutput=(True, True)):
         exitedgroups = []
         self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)

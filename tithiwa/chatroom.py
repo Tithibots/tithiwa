@@ -47,7 +47,15 @@ class Chatroom(WaObject):
             if given_time == time_now:
                 self.send_message_to_multiple_chats(nameornumberlist, message)
                 break
-                
+
+    def _clear_chat(self):
+        self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__OPTIONS)
+        self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__CLEAR_MESSAGES).click()
+        self._wait_for_presence_of_an_element(SELECTORS.OVERLAY)
+        self._wait_for_an_element_to_be_clickable(SELECTORS.OVERLAY_OK).click()
+
+        self._close_info()
+
     def clear_all_chats(self):
         self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
@@ -56,18 +64,12 @@ class Chatroom(WaObject):
         curractive = self.browser.switch_to.active_element
         pregroupname = None
         while curractive != preactive:
-            self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__OPTIONS)
-            self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__CLEAR_MESSAGES).click()
-            self._wait_for_presence_of_an_element(SELECTORS.OVERLAY)
-            self._wait_for_an_element_to_be_clickable(SELECTORS.OVERLAY_OK).click()      
-            
-            self._close_info()
-            
+            self._clear_chat()
             preactive = curractive
             pregroupname = self._wait_for_presence_of_an_element(SELECTORS.CHATROOM__NAME)
             curractive.send_keys(Keys.ARROW_DOWN)
             curractive = self.browser.switch_to.active_element
-    
+
     def send_messages_at_time(self, message_to_contact_dictionary, time='03:00:00', _shouldoutput=(True, True)):
         if _shouldoutput[0] and DEFAULT_SHOULD_OUTPUT:
             print(f'Sending message at time {time}...')
