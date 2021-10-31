@@ -259,6 +259,10 @@ class Group(Chatroom, WaObject):
             if _shouldoutput[1] and DEFAULT_SHOULD_OUTPUT:
                 print(f'{STRINGS.CHECK_CHAR} You already joined it. Done')
 
+    def join_groups(self, urls, _shouldoutput=(True, True)):
+        for url in urls:
+            self.join_group(url)
+
     def delete_chats_of_all_exited_groups(self):
         self._wait_for_presence_of_an_element(SELECTORS.GROUPS__NAME_IN_CHATS)
         self._wait_for_an_element_to_be_clickable(SELECTORS.MAIN_SEARCH_BAR).click()
